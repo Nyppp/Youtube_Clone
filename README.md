@@ -4,4 +4,3 @@
 - **노윤표** ([Nyppp](https://github.com/Nyppp))
 - **김진욱** ([Jaykim98z](https://github.com/Jaykim98z))
 - **방준철** ([bangjjun](https://github.com/bangjjun))
-- **서보경** ([Seobogyung](https://github.com/Seobogyung))
