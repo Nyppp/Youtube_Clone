@@ -9,13 +9,20 @@
     border-bottom: 1px solid #303030;
 }
 .Top-Menu-All {
+    color: #ffffff;
     width: 53px;
     height: 32px;
     border-radius: 32px;
     text-align: center;
+    text-decoration: none;
+    border: 0.3px solid #AAAAAA;
     padding: 8px 12px 8px 12px;
-    background-color: #ffffff;
+    background-color: #303030;
     font-size: 14px;
+}
+.Top-Menu-All:focus {
+    background-color: #ffffff;
+    color: #030303;
 }
 .Top-Menu-Item {
     color: #ffffff;
@@ -23,8 +30,13 @@
     height: 32px;
     border-radius: 32px;
     text-align: center;
+    text-decoration: none;
     border: 0.3px solid #AAAAAA;
     padding: 8px 12px 8px 12px;
     background-color: #303030;
     font-size: 14px;
+}
+.Top-Menu-Item:focus {
+    background-color: #ffffff;
+    color: #030303;
 }
