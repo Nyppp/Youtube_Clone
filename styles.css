@@ -28,6 +28,10 @@ nav {
     background-position: center center;
     background-repeat: no-repeat;
 }
+#Hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+}
 #Logo {
     width: 120px;
     height: 20px;
@@ -85,6 +89,10 @@ nav {
     padding: 8px;
     margin-left: 10px;
 }
+#VoiceSearch:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+}
 .Profile {
     display: flex;
     gap: 10px;
@@ -102,6 +110,10 @@ nav {
     background-image: url(resources/images/nav/profile/create.png);
     background-size: 20px 14px;
 }
+#Create:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+}
 #Apps {
     width: 40px;
     height: 40px;
@@ -111,6 +123,10 @@ nav {
     border: none;
     background-image: url(resources/images/nav/profile/apps.png);
 }
+#Apps:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+}
 #Notifications {
     width: 40px;
     height: 40px;
@@ -119,6 +135,10 @@ nav {
     background-repeat: no-repeat;
     border: none;
     background-image: url(resources/images/nav/profile/notifications.png);
+}
+#Notifications:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
 }
 #User {
     width: 32px;
