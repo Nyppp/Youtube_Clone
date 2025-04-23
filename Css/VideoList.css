@@ -1,0 +1,50 @@
+.recommend-container{
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+.top-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+
+    width: 402px;
+    height: 51px;
+
+    padding: 1px 12px 2px 0px;
+}
+
+.video-listblock{
+    display: flex;
+    width: 100%;
+    height: 102px;
+
+    padding-top: 8px;
+}
+
+.side-info{
+}
+
+.side-title{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.side-username, .side-videoDesc{
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.thumbnail{
+    border-radius: 0%;
+    width: 168px;
+    height: 94px;
+    
+    margin-right: 8px;
+}
