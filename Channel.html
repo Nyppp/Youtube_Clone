@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="Css/Header.css">
     <link rel="stylesheet" href="Css/Sidebar.css">
+    <link rel="stylesheet" href="Css/Channel.css">
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                     <a id="Logo" href="#"></a>
                 </div>
                 <form class="SearchBox">
-                    <input type="text" id="Search" placeholder="Search"/>
+                    <input type="text" id="Search" placeholder="Search" />
                     <button type="submit" id="SearchBtn"></button>
                     <button type="submit" id="VoiceSearch"></button>
                 </form>
@@ -181,7 +182,127 @@
 
             <!-- 메인 콘텐츠 -->
             <main class="content">
-                
+                <!-- 상단 배너 이미지 -->
+                <section class="channel-banner" aria-label="채널 배너">
+                    <img src="resources/images/Channel/Channel-Cover.png" alt="Marcus Levin 채널 배너 이미지"
+                        class="banner-image">
+                </section>
+
+                <!-- 채널 정보 섹션 -->
+                <section class="channel-info" aria-label="채널 정보">
+                    <div class="channel-profile">
+                        <figure class="profile-image">
+                            <img src="resources/images/Channel/Profile.png" alt="프로필 사진">
+                        </figure>
+                        <div class="channel-details">
+                            <h1 class="channel-name">Marcus Levin</h1>
+                            <p class="subscriber-count">1.2M subscribers</p>
+                        </div>
+                    </div>
+                    <div class="subscribe-container">
+                        <button class="subscribe-button" aria-label="구독하기">SUBSCRIBES</button>
+                    </div>
+                </section>
+
+                <!-- 채널 내비게이션 -->
+                <nav class="channel-navigation" aria-label="채널 내비게이션">
+                    <ul class="nav-tabs">
+                        <li><a href="#" class="nav-tab active">HOME</a></li>
+                        <li><a href="#" class="nav-tab">VIDEOS</a></li>
+                        <li><a href="#" class="nav-tab">PLAYLISTS</a></li>
+                        <li><a href="#" class="nav-tab">COMMUNITY</a></li>
+                        <li><a href="#" class="nav-tab">CHANNELS</a></li>
+                        <li><a href="#" class="nav-tab">ABOUT</a></li>
+                        <li><a href="#" class="Search"><img src="resources/images/Channel/Search.png" alt="검색 아이콘"></a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- 채널 컨텐츠 -->
+                <section class="main-video" aria-label="대표 영상">
+                    <article>
+                        <!-- 비디오 플레이어 영역 (왼쪽) -->
+                        <div class="main-video-player-container">
+                            <figure class="main-video-player">
+                                <figure class="video-thumbnail">
+                                    <video src="" title="Video 1"> </video>
+                                </figure>
+                            </figure>
+                        </div>
+
+                        <!-- 비디오 정보 영역 (오른쪽) -->
+                        <div class="main-video-info">
+                            <h2 class="main-video-title">Blind Woodturner: Turning passion into fine art</h2>
+                            <div class="main-video-meta">
+                                <span class="views">576,969 views</span>
+                                <span>•</span>
+                                <time datetime="2025-03-23">3 weeks ago</time>
+                            </div>
+                            <p class="main-video-description">
+                                Chris Fisher, also known as the Blind Woodturner, learned his craft by listening to
+                                hundreds of hours of YouTube videos and experimenting in his workshop. Now he's a
+                                YouTube creator himself, sells his products worldwide, and does demonstrations all
+                                around the country.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- 채널 컨텐츠 목록 섹션 1 -->
+                <section class="video-section" aria-label="비디오 목록">
+                    <header class="section-header">
+                        <h3>Search On '21</h3>
+                        <button class="play-all" aria-label="모두 재생">
+                            <img src="resources/images/Channel/play.png" alt="Play All" class="play-icon">
+                            PLAY ALL
+                        </button>
+                    </header>
+                    <div class="video-grid">
+                        <!-- 비디오 아이템 -->
+                        <article class="video-item">
+                            <figure class="video-thumbnail">
+                                <video src="" title="Video 1"> </video>
+                            </figure>
+                            <div class="video-details">
+                                <h4 class="video-title">Lorem ipsum dolor sit amet, consecte...</h4>
+                                <p class="video-channel-name">Marcus Levin</p>
+                                <div class="video-stats">
+                                    <span class="views">329K views</span>
+                                    <span>•</span>
+                                    <time class="upload-time" datetime="2025-03-23">1 month ago</time>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 채널 컨텐츠 목록 섹션 2 -->
+                <section class="video-section" aria-label="비디오 목록">
+                    <header class="section-header">
+                        <h3>Search On '21</h3>
+                        <button class="play-all" aria-label="모두 재생">
+                            <img src="resources/images/Channel/play.png" alt="Play All" class="play-icon">
+                            PLAY ALL
+                        </button>
+                    </header>
+                    <div class="video-grid">
+                        <!-- 비디오 아이템 -->
+                        <article class="video-item">
+                            <figure class="video-thumbnail">
+                                <video src="" title="Video 1"> </video>
+                            </figure>
+                            <div class="video-details">
+                                <h4 class="video-title">Lorem ipsum dolor sit amet, consecte...</h4>
+                                <p class="video-channel-name">Marcus Levin</p>
+                                <div class="video-stats">
+                                    <span class="views">329K views</span>
+                                    <span>•</span>
+                                    <time class="upload-time" datetime="2025-03-23">1 month ago</time>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
             </main>
         </div>
 </body>
