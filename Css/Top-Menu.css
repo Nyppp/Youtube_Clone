@@ -12,6 +12,9 @@
     border-bottom: 1px solid #303030;
 }
 .Top-Menu-All {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
     width: 53px;
     height: 32px;
@@ -28,6 +31,9 @@
     color: #030303;
 }
 .Top-Menu-Item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
     width: 53px;
     height: 32px;
