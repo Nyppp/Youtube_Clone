@@ -20,9 +20,6 @@ img{
     flex-direction: row;
 
     width: 1440px;
-
-    margin: 0px auto;
-
     justify-content: center;
 }
 
@@ -31,7 +28,7 @@ img{
     flex-direction: column;
 
     width: 664px;
-    height: 968px;
+    height: 100%;
 
     align-items: center;
     gap: 10px;
@@ -46,6 +43,22 @@ img{
 
     align-items: left;
 }
+
+/*======== 반응형 세팅 ========*/
+
+@media (max-width:768px){
+    .main-container{
+        flex-direction: column;
+        width: 768px;
+
+        align-items: center;
+    }
+
+    .recommend-container{
+        width: 640px;
+    }
+}
+
 
 /*======== 비디오 공간 ========*/
 .video-box{
@@ -253,8 +266,7 @@ img{
     display: flex;
     flex-direction: column;
     width: 640px;
-    height: 144px;
-
+    height: 100%;
     padding: 24px 0px 32px 0px;
     gap:24px;
 }
