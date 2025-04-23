@@ -1,0 +1,71 @@
+.Video-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000000;
+    margin: 16px;
+    gap: 25px;
+}
+.video-Row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    height: 247px;
+}
+.Video-Item {
+    display: flex;
+    flex-direction: column;
+    width: 276px;
+}
+.Thumbnail {
+    text-decoration: none;
+}
+.Thumbnail-Image {
+    width: 276px;
+    height: 155px;
+    background-image: url(../resources/images/Video-Container/Thumbnail/card1.png);
+}
+.VideoTime {
+    position: relative;
+    top: 133px;
+    left: 239px;
+    background-color: #000000;
+    text-align: center;
+    color: #ffffff;
+    font-size: 10px;
+    width: 33px;
+    height: 18px;
+    margin: 0px;
+}
+.Video-Info {
+    display: flex;
+    gap: 10px;
+    margin-top: 13px;
+}
+.Video-Profile {
+    border-radius: 24px;
+    width: 36px;
+    height: 36px;
+    background-image: url(../resources/images/Video-Container/Profile/User-Avatar1.png);
+}
+.Video-Description {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 226px;
+}
+.Video-Title {
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+}
+.Video-Channel {
+    color: #AAAAAA;
+    font-size: 12px;
+    text-decoration: none;
+}
+.Time {
+    color: #AAAAAA;
+    font-size: 12px;
+    text-decoration: none;
+}

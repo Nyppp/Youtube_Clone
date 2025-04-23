@@ -1,5 +1,8 @@
 .Top-Menu {
     display: flex;
+    position: sticky;
+    top: 56px;
+    z-index: 99;
     justify-content: space-evenly;
     align-items: center;
     background-color: #212121;
