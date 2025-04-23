@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-
-body {
+/* 자주 사용하는 속성 설정 + 폰트 패밀리의 경우 모두 동일하게 적용 */
+:root{
     font-family: 'Roboto';
-    color : #ffffff;
+
+    --main-text-color: #ffffff;
+    --sub-text-color: #aaaaaa;
 }
+

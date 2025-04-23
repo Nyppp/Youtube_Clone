@@ -2,6 +2,9 @@
 body{
     margin: 0px auto;
     background-color: #181818;
+
+    /* 아래와 같이 사용 var(변수명) */
+    color: var(--main-text-color);
 }
 
 button:hover{
@@ -105,9 +108,9 @@ img{
     gap:5px;
 }
 
-.likesButton, .hatesButton, .replyButton,
-.hatesButton, .shareButton,
-.saveButton,.moreButton{
+.likes-button, .hates-button, .reply-button,
+.hates-button, .share-button,
+.save-button,.more-button{
     background-color: #181818;
     border: none;
 
@@ -115,31 +118,31 @@ img{
     background-size: contain;
 }
 
-.buttonArea > .likesButton{
+.buttonArea > .likes-button{
     width: 18px;
     height: 17px;
     background-image: url(../resources/images/video_page/Liked.svg);
 }
 
-.buttonArea > .hatesButton{
+.buttonArea > .hates-button{
     width: 18px;
     height: 17px;
     background-image: url(../resources/images/video_page/Hates.svg);
 }
 
-.buttonArea > .shareButton{
+.buttonArea > .share-button{
     width: 20px;
     height: 18px;
     background-image: url(../resources/images/video_page/Share.svg);
 }
 
-.buttonArea > .saveButton{
+.buttonArea > .save-button{
     width: 20px;
     height: 10px;
     background-image: url(../resources/images/video_page/Save.svg);
 }
 
-.buttonArea > .moreButton{
+.buttonArea > .more-button{
     width: 15px;
     height: 3px;
     background-image: url(../resources/images/video_page/More.svg);
@@ -415,14 +418,14 @@ img{
     align-items: center;
 }
 
-.toolbar-container > .likesButton{
+.toolbar-container > .likes-button{
     width: 16px;
     height: 16px;
 
     background-image: url(../resources/images/video_page/Liked.svg);
 }
 
-.toolbar-container > .hatesButton{
+.toolbar-container > .hates-button{
     width: 16px;
     height: 16px;
 
@@ -436,7 +439,7 @@ img{
 }
 
 
-.replyButton{
+.reply-button{
     width: 67px;
 
     padding: 8px 16px 8px 16px;
@@ -462,7 +465,7 @@ img{
 
 
 /*======== 우측 비디오 리스트 영역 ========*/
-.top-menu {
+.recommend-topMenu {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -472,6 +475,29 @@ img{
     height: 51px;
 
     padding: 1px 12px 2px 0px;
+}
+
+.recommend-topMenu_All{
+    width: 53px;
+    height: 32px;
+    border-radius: 32px;
+    text-align: center;
+    padding: 8px 12px 8px 12px;
+    background-color: #ffffff;
+    color:#181818;
+    font-size: 14px;
+}
+
+.recommend-topMenu_Item{
+    color: #ffffff;
+    width: 53px;
+    height: 32px;
+    border-radius: 32px;
+    text-align: center;
+    border: 0.3px solid #AAAAAA;
+    padding: 8px 12px 8px 12px;
+    background-color: #303030;
+    font-size: 14px;
 }
 
 .video-listblock{
