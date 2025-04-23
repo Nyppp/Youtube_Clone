@@ -24,6 +24,9 @@
     width: 276px;
     height: 155px;
     background-image: url(../resources/images/Video-Container/Thumbnail/card1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 .VideoTime {
     position: relative;
@@ -44,9 +47,12 @@
 }
 .Video-Profile {
     border-radius: 24px;
-    width: 36px;
-    height: 36px;
+    width: 43px;
+    height: 43px;
     background-image: url(../resources/images/Video-Container/Profile/User-Avatar1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 .Video-Description {
     display: flex;
@@ -56,16 +62,23 @@
 }
 .Video-Title {
     color: #ffffff;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
 }
 .Video-Channel {
     color: #AAAAAA;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
+    display: block;
+    line-height: 1;
+}
+.Video-Channel:hover {
+    color: #ffffff;
 }
 .Time {
     color: #AAAAAA;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
+    display: block;
+    line-height: 0.4;
 }
