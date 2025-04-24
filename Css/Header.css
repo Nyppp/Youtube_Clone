@@ -68,13 +68,18 @@ nav {
     padding: 2px 7px 2px 7px;
     width: 64px;
     height: 40px;
+    cursor: pointer;
     background-image: url(../resources/images/nav/searchbox/search.png);
     background-position: center center;
     background-repeat: no-repeat;
 }
+#SearchBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 #VoiceSearch {
     width: 40px;
     height: 40px;
+    cursor: pointer;
     background-color: #000000;
     background-image: url(../resources/images/nav/searchbox/mic.png);
     background-position: center center;
