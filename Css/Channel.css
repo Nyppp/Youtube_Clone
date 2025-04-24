@@ -1,0 +1,269 @@
+/* 메인 콘텐츠 영역 스타일 */
+.content {
+  width: calc(100% - 270px);
+  color: #fff;
+  background-color: #0f0f0f;
+  margin-left: 270px;
+  box-sizing: border-box;
+}
+
+/* 채널 배너 스타일 */
+.channel-banner {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.channel-banner img,
+.banner-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 채널 정보 섹션 스타일 */
+.channel-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #181818;
+}
+
+.channel-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-image,
+.profile-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.channel-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-name {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: #fff;
+}
+
+.subscriber-count {
+  font-size: 14px;
+  color: #aaa;
+  margin: 0;
+}
+
+.subscribe-button {
+  background-color: #c00;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* 채널 내비게이션 스타일 */
+.channel-navigation {
+  display: flex;
+  border-bottom: 1px solid #303030;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #181818;
+}
+
+.nav-tabs {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-tabs li {
+  margin: 0;
+  text-align: center;
+}
+
+.nav-tab {
+  display: block;
+  padding: 16px 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-tab.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.nav-tab:hover {
+  color: #fff;
+}
+
+.search-icon {
+  margin-left: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+/* 주요 비디오 섹션 스타일 */
+.main-video {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #0f0f0f;
+}
+
+.main-video article {
+  display: flex;
+  gap: 24px;
+}
+
+/* 비디오 플레이어 영역 (왼쪽) */
+.video-player {
+  width: 40%;
+  background-color: #000;
+}
+
+.video-player img,
+.video-player video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 비디오 정보 영역 (오른쪽) */
+.video-info {
+  width: 60%;
+}
+
+.video-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
+
+.video-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.video-description {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #aaa;
+}
+
+/* 비디오 목록 섹션 스타일 */
+.video-section {
+  width: 100%;
+  padding: 0 24px 24px;
+  box-sizing: border-box;
+  background-color: #0f0f0f;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0 16px;
+  background-color: #0f0f0f;
+}
+
+.section-header h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+.play-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.play-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* 비디오 그리드 */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.video-item {
+  width: 100%;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background-color: #181818;
+  border-radius: 0;
+}
+
+.video-details .video-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 8px 0 4px 0;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.video-details .video-channel-name {
+  font-size: 12px;
+  color: #aaa;
+  margin: 4px 0;
+}
+
+.video-stats {
+  font-size: 12px;
+  color: #aaa;
+  display: flex;
+  gap: 4px;
+}
