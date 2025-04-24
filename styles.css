@@ -1,9 +1,27 @@
 body, html{
-    margin: 0px;
-    padding: 0px;
+    margin: 0px auto;
     background-color: black;
 }
 
 * {
     box-sizing: border-box;
+}
+
+.page-container{
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-sidebar{
+    width: 270px;
+}
+
+@media(max-width : 375px){
+    #main-sidebar{
+        display: none;
+    }
 }

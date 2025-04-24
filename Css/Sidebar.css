@@ -1,4 +1,6 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
     width: 270px;
     background-color: #212121;
     overflow-y: auto;
@@ -7,6 +9,30 @@
     position: fixed;
     z-index: 100;
     left: 0;
+}
+
+#main-sidebar{
+    width: 270px;
+}
+
+@media (max-width : 768px){
+    .sidebar, #main-sidebar{
+        width: 80px;
+    }
+
+    h3{
+        visibility: hidden;
+    }
+
+    span{
+        display: none;
+    }
+}
+
+@media (max-width:375px){
+    .sidebar{
+        display: none;
+    }
 }
 
 .sidebar h3 {
