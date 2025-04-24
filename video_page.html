@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Css/VideoPage.css">
+    <link rel="stylesheet" href="Css/Top-Menu.css">
+    <link rel="stylesheet" href="Css/Font.css">
+</head>
+
+<!-- 전체적인 이후 TODO -->
+<!-- API 통해 비디오 정보 받아와서, 해당 비디오 정보를 파싱해오는 작업 진행 예정 -->
+<!-- 필요한 부분(메인) : 비디오 재생 영역 / 채널 정보 / 댓글 리스트 호출 -->
+<!-- 필요한 부분(사이드) : 영상 리스트 호출 -->
+
+<body>
+    <!-- 전체 틀에 대한 컨테이너 -->
+    <main class="main-container">
+        <!-- 비디오 + 채널정보 + 댓글 컨테이너(좌측 영역) -->
+        <section class="video-container">
+            <!-- 비디오 노출 공간 -->
+            <articleVideo>
+                <div class="video-box">
+                    <video controls class="video-player"></video>
+                    <div class="video-info">
+                        <div id="video-title">Blind Woodturner: Turning passion into fine art</div>
+                        <!-- 비디오 설명 > 제목, 버튼들 -->
+                        <div class ="info-container">
+                            <div id="info-text">576,969 views . Oct 8, 2021</div>
+
+                            <!-- 각 버튼들에 대한 정의 (좋아요, 싫어요, 공유 등) -->
+                            <div class="video-buttonlayer">
+                                <!-- TODO:버튼 속성 추가, 정렬하고 이미지도 넣어야됨 -->
+                                <div class="buttonArea">
+                                    <button class="likes-button"></button>
+                                    <div>1.7K</div>
+                                </div>
+
+                                <div class="buttonArea">
+                                    <button class="hates-button"></button>
+                                    <div>632</div>
+                                </div>
+
+                                <div class="buttonArea">
+                                    <button class="share-button"></button>
+                                    <div>SHARE</div>
+                                </div>
+
+                                <div class="buttonArea">
+                                    <button class="save-button"></button>
+                                    <div>SAVE</div>
+                                </div>
+
+                                <div class="buttonArea">
+                                    <button class="more-button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </articleVideo>
+
+            <!-- 비디오 설명 노출 공간 -->
+            <articleDesc>
+                <div class="desc-box">
+                    <!-- 설명 공간 상단 : 채널 정보, 구독 버튼 배치 -->
+                    <div class="desc-titleBox">
+                        <a href="#"><img class="channelProfile" src="/resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+                        
+                        <div class="descTop">
+                            <div class="channelInfo">
+                                <div id="channelName">Marcus Levin</div>
+                                <div id="subscribtionText">1.2M subscribers</div>
+                            </div>
+
+                            <button id="subscribeButton">SUBSCRIBES</button>
+                        </div>
+                    </div>
+
+                    <!-- 설명 공간 하단(영상에 대한 설명 노출) -->
+                    <div class="desc-textBox">
+                        <div class="descText">
+                            Chris Fisher, also known as the Blind Woodturner, learned his craft by listening to hundreds of hours of YouTube videos and experimenting in his workshop. Now he’s a YouTube creator himself, sells his products worldwide, and does demonstrations all around the country.
+                        </div>
+                    </div>
+
+                    <!-- 설명 더보기 버튼 -->
+                    <div class="descBottom">
+                        <button id="descOpenButton">SHOW MORE</button>
+                    </div>
+                </div>
+            </articleDesc>
+
+            <articeRecommend class="side-responsive">
+                <!-- TODO : 반응형 > 768px 이하 해상도에서 해당 영역에 비디오 리스트 노출 -->
+            </articeRecommend>
+
+            <!-- 비디오 코멘트 영역 -->
+            <article3>
+                <div class="comment-box">
+                    <!-- 코멘트 수, 정렬 -->
+                    <div class="sortArea">
+                        <div id="commentCount">286 Comments</div>
+                        <button id="commentSortButton">
+                            <div id="sortIcon"></div>
+                            <div id="sortText">SORT BY</div>
+                        </button>
+                    </div>
+
+                    <!-- 코멘트 작성란 -->
+                    <div class="comment-addArea">
+                        <a href="#"><img class="userProfile" src="/resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+                        <input type="text" class="commentLine" placeholder="Add a public comment...">
+                    </div>
+
+                    <!-- 코멘트 리스트 -->
+                    <div class="comment-list">
+                        
+                        <div class="comment-block">
+                            <a href="#"><img class="commentProfile" src="/resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+
+                            <div class="comment-container">
+                                <div class="comment-header">
+                                    <div class="comment-userId">
+                                        James Gouse
+                                    </div>
+
+                                    <div class="comment-time">
+                                        8 hours ago
+                                    </div>
+                                </div>
+
+                                <div class="comment-text">
+                                    Wow, world is full of different skills
+                                </div>
+
+                                <div class="comment-toolbar">
+                                    <div class="toolbar-container">
+                                        <button class="likes-button"></button>
+                                        <div class="likesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="hates-button"></button>
+                                        <div class="hatesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="reply-button">REPLY</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comment-block">
+                            <a href="#"><img class="commentProfile" src="/resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+
+                            <div class="comment-container">
+                                <div class="comment-header">
+                                    <div class="comment-userId">
+                                        James Gouse
+                                    </div>
+
+                                    <div class="comment-time">
+                                        8 hours ago
+                                    </div>
+                                </div>
+
+                                <div class="comment-text">
+                                    Wow, world is full of different skills
+                                </div>
+
+                                <div class="comment-toolbar">
+                                    <div class="toolbar-container">
+                                        <button class="likes-button"></button>
+                                        <div class="likesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="hates-button"></button>
+                                        <div class="hatesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="reply-button">REPLY</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comment-block">
+                            <a href="#"><img class="commentProfile" src="/resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+
+                            <div class="comment-container">
+                                <div class="comment-header">
+                                    <div class="comment-userId">
+                                        James Gouse
+                                    </div>
+
+                                    <div class="comment-time">
+                                        8 hours ago
+                                    </div>
+                                </div>
+
+                                <div class="comment-text">
+                                    Wow, world is full of different skills
+                                </div>
+
+                                <div class="comment-toolbar">
+                                    <div class="toolbar-container">
+                                        <button class="likes-button"></button>
+                                        <div class="likesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="hates-button"></button>
+                                        <div class="hatesCount">3</div>
+                                    </div>
+                                    <div class="toolbar-container">
+                                        <button class="reply-button">REPLY</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article3>
+        </section>
+
+        <aside class="recommend-container">
+            <nav class="recommend-topMenu">
+                <button class="recommend-topMenu_All">All</button>
+                <button class="recommend-topMenu_Item">Item</button>
+                <button class="recommend-topMenu_Item">Item</button>
+            </nav>
+
+            <div class="video-list">
+                <div class="video-listblock">
+                    <a href="#"><img src="/resources/images/video_page/Thumbnail.svg" alt="비디오 이미지" class="thumbnail"></a>
+                    <div class="side-Info">
+                        <div class="side-title">Ep 3: Living to Serve</div>
+                        <div class="side-username">James Gouse</div>
+                        <div class="side-videoDesc">1M views . 3 years ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-list">
+                <div class="video-listblock">
+                    <a href="#"><img src="/resources/images/video_page/Thumbnail.svg" alt="비디오 이미지" class="thumbnail"></a>
+                    <div class="side-Info">
+                        <div class="side-title">Ep 6: Living to Serve | SEARCH ON SEARCH ON SEARCH ON</div>
+                        <div class="side-username">James Gouse</div>
+                        <div class="side-videoDesc">1M views . 3 years ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-list">
+                <div class="video-listblock">
+                    <a href="#"><img src="/resources/images/video_page/Thumbnail.svg" alt="비디오 이미지" class="thumbnail"></a>
+                    <div class="side-Info">
+                        <div class="side-title">Ep 6: Living to Serve | SEARCH ON</div>
+                        <div class="side-username">James Gouse</div>
+                        <div class="side-videoDesc">1M views . 3 years ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-list">
+                <div class="video-listblock">
+                    <a href="#"><img src="/resources/images/video_page/Thumbnail.svg" alt="비디오 이미지" class="thumbnail"></a>
+                    <div class="side-Info">
+                        <div class="side-title">Ep 6: Living to Serve | SEARCH ON 으아아아아아</div>
+                        <div class="side-username">James Gouse</div>
+                        <div class="side-videoDesc">1M views . 3 years ago</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+/* 배경 색에 대해 공통으로 사용할 컬러 */
+:root{
+    --default-background-color : #181818;
+    --sub-background-color : #303030;
+    --selected-background-color : #ffffff;
+}

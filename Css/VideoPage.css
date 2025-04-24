@@ -1,0 +1,546 @@
+/*======== 전체 구조 스타일 ========*/
+body{
+    margin: 0px auto;
+    background-color: #181818;
+
+    /* 아래와 같이 사용 var(변수명) */
+    color: var(--main-text-color);
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+img{
+    border-radius: 50%;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: row;
+
+    width: 1440px;
+    justify-content: center;
+    margin: 0px auto;
+}
+
+.video-container{
+    display: flex;
+    flex-direction: column;
+
+    width: 664px;
+    height: 100%;
+
+    align-items: center;
+    gap: 10px;
+}
+
+.recommend-container{
+    display: flex;
+    flex-direction: column;
+
+    width: 426px;
+    height: 968px;
+
+    align-items: left;
+}
+
+/*======== 반응형 세팅 ========*/
+
+@media (max-width:768px){
+    .main-container{
+        flex-direction: column;
+        width: 768px;
+
+        align-items: center;
+    }
+
+    .recommend-container{
+        width: 640px;
+    }
+}
+
+
+/*======== 비디오 공간 ========*/
+.video-box{
+    width: 640px;
+    height: 455px;
+}
+
+.video-player{
+    width: 100%;
+    height: 360px;
+}
+
+.video-info{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 95px;
+
+    padding: 20px 0px 8px 0px;
+    box-sizing: border-box;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 640px;
+    height: 40px;
+}
+
+#video-title{
+    font-size: 18px;
+    font-weight: 400;
+
+    margin: 0px;
+}
+
+#info-text{
+    font-size: 14px;
+    font-weight: 700;
+    color: #aaaaaa;
+}
+
+.video-buttonlayer{
+    display: flex;
+    flex-direction: row;
+
+    gap: 8px;
+}
+
+.buttonArea{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap:5px;
+}
+
+.likes-button, .hates-button, .reply-button,
+.hates-button, .share-button,
+.save-button,.more-button{
+    background-color: #181818;
+    border: none;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.buttonArea > .likes-button{
+    width: 18px;
+    height: 17px;
+    background-image: url(../resources/images/video_page/Liked.svg);
+}
+
+.buttonArea > .hates-button{
+    width: 18px;
+    height: 17px;
+    background-image: url(../resources/images/video_page/Hates.svg);
+}
+
+.buttonArea > .share-button{
+    width: 20px;
+    height: 18px;
+    background-image: url(../resources/images/video_page/Share.svg);
+}
+
+.buttonArea > .save-button{
+    width: 20px;
+    height: 10px;
+    background-image: url(../resources/images/video_page/Save.svg);
+}
+
+.buttonArea > .more-button{
+    width: 15px;
+    height: 3px;
+    background-image: url(../resources/images/video_page/More.svg);
+}
+
+/*======== 비디오 설명 공간 ========*/
+.desc-box{
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    height: 166px;
+
+    border-bottom: 1px solid #303030;
+    border-top: 1px solid #303030;
+}
+
+.desc-titleBox{
+    display: flex;
+    width: 100%;
+    height: 67px;
+    
+    padding: 18px 0px 0px 0px;
+    box-sizing: border-box;
+    gap:10px;
+}
+
+.descTop{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#subscribtionText{
+    color: #aaaaaa;
+    font-size: 12px;
+}
+
+#subscribeButton{
+    display: flex;
+    justify-content: center;
+    width: 116px;
+    height: 36px;
+
+    padding: 10px 16px 10px 16px;
+    box-sizing: border-box;
+    gap: 10px;
+
+    background-color: #CC0000;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 100%;
+
+    border: none;
+    color: #ffffff;
+
+    border-radius: 2px;
+}
+
+.desc-textBox{
+    width: 100%;
+    height: 60px;
+
+    padding: 12px 0px 0px 64px;
+    gap: 10px;
+
+}
+
+.descText{
+    height: 48px;
+
+    font-weight: 400;
+    font-size: 14px;
+
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.descBottom{
+    width: 100%;
+    height: 22px;
+
+    padding: 8px 0px 0px 64px;
+    box-sizing: border-box;
+    gap:10px;
+
+    
+}
+
+#descOpenButton{
+    height: 14px;
+    background-color: #181818;
+    color:#aaaaaa;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-align: left;
+    border: none;
+}
+
+.channelProfile{
+
+}
+
+/*======== 비디오 코멘트 - 코멘트 수,정렬 공간 ========*/
+.comment-box{
+    display: flex;
+    flex-direction: column;
+    width: 640px;
+    height: 100%;
+    padding: 24px 0px 32px 0px;
+    gap:24px;
+}
+
+.sortArea{
+    display: flex;
+    width: 300px;
+    height: 24px;
+
+    align-items: center;
+}
+
+#commentCount{
+    width: 142px;
+    height: 24px;
+
+    padding: 1px 0px 1px 0px;
+
+    font-size: 16px;
+    line-height: 22px;
+}
+
+#commentSortButton{
+    width: 120px;
+    height: 24px;
+
+    display: flex;
+
+    background-color: #181818;
+    border: none;
+}
+
+#sortIcon{
+    width: 32px;
+    height: 24px;
+
+    padding-right: 8px;
+    box-sizing: border-box;
+    gap:10px;
+
+    background-image: url(../resources/images/video_page/Dropdown.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#sortText{
+    width: 100px;
+    height: 24px;
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+/*======== 비디오 코멘트 작성 공간 ========*/
+.comment-addArea{
+    width: 100%;
+    height: 40px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.userProfile{
+    width: 56px;
+    
+    padding-right: 16px;
+    gap:10px;
+}
+
+.commentLine{
+    width: 584px;
+
+    background-color: #181818;
+    color: #ffffff;
+
+    border: none;
+    border-bottom: 1px solid #303030;
+
+    outline: none;
+}
+
+.commentLine:focus{
+    border-bottom: 1px solid #ffffff;
+}
+
+/*======== 비디오 코멘트 리스트 ========*/
+.comment-list{
+    display: flex;
+    flex-direction: column;
+
+    width: 640px;
+}
+
+.comment-container{
+    width: 100%;
+}
+
+.comment-block{
+    display: flex;
+    width: 100%;
+    height: 100px;
+
+    padding-bottom: 16px;
+}
+
+.comment-header{
+    display: flex;
+
+    height: 22px;
+
+    padding-bottom: 2px;
+    gap:5px;
+}
+
+.comment-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.comment-block > a{
+    margin-right: 16px;
+    gap:10px;
+}
+
+.comment-userId{
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.comment-time{
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #aaaaaa;
+}
+
+.comment-text{
+    width: 100%;
+    padding: 2px 0px 2px 0px;
+    gap: 10px;
+}
+
+.comment-toolbar{
+    display: flex;
+
+    width: 100%;
+    height: 38px;
+    padding-top: 4px;
+
+    justify-content: left;
+}
+
+.toolbar-container{
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+}
+
+.toolbar-container > .likes-button{
+    width: 16px;
+    height: 16px;
+
+    background-image: url(../resources/images/video_page/Liked.svg);
+}
+
+.toolbar-container > .hates-button{
+    width: 16px;
+    height: 16px;
+
+    background-image: url(../resources/images/video_page/Hates.svg);
+}
+
+.likesCount, .hatesCount{
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+
+.reply-button{
+    width: 67px;
+
+    padding: 8px 16px 8px 16px;
+    gap:10px;
+
+    text-align: center;
+
+    background-color: #181818;
+    border: none;
+
+    color: #aaaaaa;
+    font-size: 12px;
+}
+
+.likesCount, .hatesCount{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+
+    padding: 7px 8px 7px;
+    gap: 10px;
+}
+
+
+/*======== 우측 비디오 리스트 영역 ========*/
+.recommend-topMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+
+    width: 402px;
+    height: 51px;
+
+    padding: 1px 12px 2px 0px;
+}
+
+.recommend-topMenu_All{
+    width: 53px;
+    height: 32px;
+    border-radius: 32px;
+    text-align: center;
+    padding: 8px 12px 8px 12px;
+    background-color: #ffffff;
+    color:#181818;
+    font-size: 14px;
+}
+
+.recommend-topMenu_Item{
+    color: #ffffff;
+    width: 53px;
+    height: 32px;
+    border-radius: 32px;
+    text-align: center;
+    border: 0.3px solid #AAAAAA;
+    padding: 8px 12px 8px 12px;
+    background-color: #303030;
+    font-size: 14px;
+}
+
+.video-listblock{
+    display: flex;
+    width: 100%;
+    height: 102px;
+
+    padding-top: 8px;
+}
+
+.side-info{
+}
+
+.side-title{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.side-username, .side-videoDesc{
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.thumbnail{
+    border-radius: 0%;
+    width: 168px;
+    height: 94px;
+    
+    margin-right: 8px;
+}
