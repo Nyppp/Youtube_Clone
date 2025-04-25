@@ -13,11 +13,17 @@ body, html{
     flex-grow: 1;
 
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+
+    gap:1px;
 }
 
 #main-sidebar{
     width: 270px;
+}
+
+#main-contentbox{
+    width: 100%;
 }
 
 @media(max-width : 375px){

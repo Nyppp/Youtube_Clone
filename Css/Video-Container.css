@@ -7,7 +7,7 @@
 
 }
 
-.Video-Container {
+#Video-Container {
     display: grid;
     width: 100%;
 
@@ -26,21 +26,21 @@
 }
 
 @media (max-width:1480px){
-    .Video-Container{
+    #Video-Container{
         grid-template-columns: repeat(3,1fr);
         min-width: 860px;
     }
 }
 
 @media (max-width:1098px){
-    .Video-Container{
+    #Video-Container{
         grid-template-columns: repeat(2,1fr);
         min-width: 568px;
     }
 }
 
 @media (max-width:767px){
-    .Video-Container{
+    #Video-Container{
         grid-template-columns: repeat(1,1fr);
         min-width: 276px;
     }
@@ -51,8 +51,7 @@
     flex-direction: column;
 
     
-    justify-content: center;
-    align-self: center;
+    justify-content: top;
     justify-self: center;
     width: 276px;
 }
@@ -62,10 +61,7 @@
 .Thumbnail-Image {
     width: 276px;
     height: 155px;
-    background-image: url(../resources/images/Video-Container/Thumbnail/card1.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+    object-fit: content;
 }
 .VideoTime {
     position: relative;
@@ -88,14 +84,20 @@
     margin-top: 13px;
 }
 .Video-Profile {
-    border-radius: 24px;
-    width: 40px;
-    height: 40px;
-    background-image: url(../resources/images/Video-Container/Profile/User-Avatar1.png);
+    
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 }
+
+.Video-Profile_image{
+    border-radius: 24px;
+    width: 40px;
+    height: 40px;
+
+    object-fit: content;
+}
+
 .Video-Description {
     display: flex;
     flex-direction: column;
