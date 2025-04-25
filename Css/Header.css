@@ -4,10 +4,18 @@ header {
     top: 0;
     z-index: 99;
 }
+
+@media(max-width:848px){
+    .SearchBox{
+        display: none !important;
+    }
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100vw;
     height: 56px;
 }
 .Yt-Button {
@@ -40,9 +48,9 @@ nav {
     align-items: center;
 }
 #Search {
+    display: flex;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
-    width: 362px;
     height: 40px;
     background-color: #121212;
     border: 1px solid #303030;
