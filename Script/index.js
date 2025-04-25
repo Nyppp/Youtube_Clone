@@ -46,18 +46,16 @@ function setChannelPage(){
     });
 }
 
-initDisplay(setVideoCardPage);
-
 //최초 실행 > 해당 페이지에 노출되는 html 태그 설정
 console.log(window.location.search);
 
 window.onload = function(){
     if(window.location.search.indexOf('channel') > 0){
         //setChannelPage();
-        setChannelPage();
+        initDisplay(setChannelPage);
     } else if (window.location.search.indexOf('video') > 0){
-        setVideoPlayerPage();
+        initDisplay(setVideoPlayerPage);
     } else {
-        setVideoCardPage();
+        initDisplay(setVideoCardPage);
     }
 }

@@ -62,7 +62,7 @@ function parseJsondata(results){
         // 썸네일 영역
         const thumbnailBox = document.createElement('a');
         thumbnailBox.classList.add('Thumbnail');
-        thumbnailBox.onclick=()=>{setVideoPlayerPage();}
+        thumbnailBox.href =`?video_id=${video.id}`;
 
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
@@ -89,7 +89,6 @@ function parseJsondata(results){
         videoTitle.classList.add('Video-Title');
         videoTitle.href =`?video_id=${video.id}`;
         videoTitle.textContent = video.title;
-        videoTitle.onclick=()=>{setVideoPlayerPage();}
 
         const videoChannel = document.createElement('a');
         videoChannel.classList.add('Video-Channel');
@@ -99,6 +98,7 @@ function parseJsondata(results){
         uploadDate.classList.add('Time');
         uploadDate.textContent = setViewUnit(video.views) + " views . " + timeAgo(video.created_dt);
 
+        //비디오 추가 정보 (게시자, 프로필 이미지) 받아오기 위해 api 요청
         getChannelInfo(video.channel_id, function(channelName, channelProfile){
             videoChannel.textContent = channelName;
             profileImg.src = channelProfile;
@@ -111,7 +111,6 @@ function parseJsondata(results){
 
         //비디오 설명 + 채널 프로필 이미지 영역
         videoProfile.appendChild(profileImg);
-
         videoInfoBox.appendChild(videoProfile);
         videoInfoBox.appendChild(videoDesc);
 
@@ -123,7 +122,7 @@ function parseJsondata(results){
         videoItem.appendChild(thumbnailBox);
         videoItem.appendChild(videoInfoBox);
         
-
+        //그리드에 비디오 정보 추가
         videoList.appendChild(videoItem);
     });
 }
