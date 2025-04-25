@@ -70,12 +70,12 @@
                 <div class="desc-box">
                     <!-- 설명 공간 상단 : 채널 정보, 구독 버튼 배치 -->
                     <div class="desc-titleBox">
-                        <a href="#"><img class="channelProfile" src="./resources/images/video_page/User-Avatar.svg" alt="icon"></a>
+                        <a href="#"><img id="channelProfile" src="" alt="icon"></a>
                         
                         <div class="descTop">
                             <div class="channelInfo">
-                                <div id="channelName">Marcus Levin</div>
-                                <div id="subscribtionText">1.2M subscribers</div>
+                                <div id="channelName"></div>
+                                <div id="subscribtionText"></div>
                             </div>
 
                             <button id="subscribeButton">SUBSCRIBES</button>
@@ -84,9 +84,7 @@
 
                     <!-- 설명 공간 하단(영상에 대한 설명 노출) -->
                     <div class="desc-textBox">
-                        <div class="descText">
-                            Chris Fisher, also known as the Blind Woodturner, learned his craft by listening to hundreds of hours of YouTube videos and experimenting in his workshop. Now he’s a YouTube creator himself, sells his products worldwide, and does demonstrations all around the country.
-                        </div>
+                        <div id="descText"></div>
                     </div>
 
                     <!-- 설명 더보기 버튼 -->
@@ -279,6 +277,6 @@
             </div>
         </aside>
     </main>
-    <script src="videoInfoLoader.js"></script>
+    <script src="./Script/video_page.js"></script>
 </body>
 </html>
