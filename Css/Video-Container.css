@@ -1,0 +1,128 @@
+.content-box{
+    display: flex;
+    flex-direction: column;
+
+    margin: 0px auto;
+    box-sizing: border-box;
+
+}
+
+#Video-Container {
+    display: grid;
+    width: 100%;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    
+
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+
+    background-color: #000000;
+    margin: 30px;
+    gap: 40px 16px;
+    box-sizing: border-box;
+}
+
+@media (max-width:1480px){
+    #Video-Container{
+        grid-template-columns: repeat(3,1fr);
+        min-width: 860px;
+    }
+}
+
+@media (max-width:1098px){
+    #Video-Container{
+        grid-template-columns: repeat(2,1fr);
+        min-width: 568px;
+    }
+}
+
+@media (max-width:767px){
+    #Video-Container{
+        grid-template-columns: repeat(1,1fr);
+        min-width: 276px;
+    }
+}
+
+.Video-Item {
+    display: flex;
+    flex-direction: column;
+
+    
+    justify-content: top;
+    justify-self: center;
+    width: 276px;
+}
+.Thumbnail {
+    text-decoration: none;
+}
+.Thumbnail-Image {
+    width: 276px;
+    height: 155px;
+    object-fit: content;
+}
+.VideoTime {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 133px;
+    left: 239px;
+    background-color: #000000;
+    text-align: center;
+    color: #ffffff;
+    font-size: 10px;
+    width: 33px;
+    height: 18px;
+    margin: 0px;
+}
+.Video-Info {
+    display: flex;
+    gap: 10px;
+    margin-top: 13px;
+}
+.Video-Profile {
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.Video-Profile_image{
+    border-radius: 24px;
+    width: 40px;
+    height: 40px;
+
+    object-fit: content;
+}
+
+.Video-Description {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 226px;
+}
+.Video-Title {
+    color: #ffffff;
+    font-size: 15px;
+    text-decoration: none;
+}
+.Video-Channel {
+    color: #AAAAAA;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    line-height: 1;
+}
+.Video-Channel:hover {
+    color: #ffffff;
+}
+.Time {
+    color: #AAAAAA;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    line-height: 0.4;
+}
