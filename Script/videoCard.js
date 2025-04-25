@@ -7,7 +7,6 @@ function getVideoList(){
     xhr.onload = function(){
         if(xhr.status === 200){
             let response = JSON.parse(xhr.responseText);
-            console.log(response);
             parseJsondata(response);
         } else{
             console.error('Error:', xhr.status);
@@ -29,7 +28,6 @@ function getChannelInfo(channelId, callback){
     xhr.onload = function(){
         if(xhr.status === 200){
             const response = JSON.parse(xhr.responseText);
-            console.log(response);
             
             callback(response.channel_name, response.channel_profile);
             
@@ -48,6 +46,7 @@ function getChannelInfo(channelId, callback){
 //영상 제목, 영상 아이디, 날짜, 게시자, 썸네일 등등을 가져와서 처리
 function parseJsondata(results){
     const videoList = document.getElementById('Video-Container');
+    console.log(videoList);
     videoList.innerHTML = '';
 
     if(!results || results.length ===0){
@@ -63,6 +62,7 @@ function parseJsondata(results){
         // 썸네일 영역
         const thumbnailBox = document.createElement('a');
         thumbnailBox.classList.add('Thumbnail');
+        thumbnailBox.onclick=()=>{setVideoPlayerPage();}
 
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
@@ -77,6 +77,7 @@ function parseJsondata(results){
 
         const videoProfile = document.createElement('a');
         videoProfile.classList.add('Video-Profile');
+        videoProfile.href =`?channel_id=${video.channel_id}`;
 
         const profileImg = document.createElement('img');
         profileImg.classList.add('Video-Profile_image');
@@ -86,10 +87,13 @@ function parseJsondata(results){
 
         const videoTitle = document.createElement('a');
         videoTitle.classList.add('Video-Title');
+        videoTitle.href =`?video_id=${video.id}`;
         videoTitle.textContent = video.title;
+        videoTitle.onclick=()=>{setVideoPlayerPage();}
 
         const videoChannel = document.createElement('a');
         videoChannel.classList.add('Video-Channel');
+        videoChannel.href = '#';
 
         const uploadDate = document.createElement('a');
         uploadDate.classList.add('Time');
