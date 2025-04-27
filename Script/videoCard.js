@@ -1,7 +1,8 @@
+import * as common from "./commonModule.js";
 
 //비디오 리스트 가져오기
 function getVideoList(){
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
 
     xhr.onload = function(){
@@ -46,7 +47,9 @@ function getChannelInfo(channelId, callback){
 //영상 제목, 영상 아이디, 날짜, 게시자, 썸네일 등등을 가져와서 처리
 function parseJsondata(results){
     const videoList = document.getElementById('Video-Container');
-    console.log(videoList);
+    // if(!videoList){
+    //     return;
+    // }
     videoList.innerHTML = '';
 
     if(!results || results.length ===0){
@@ -92,11 +95,11 @@ function parseJsondata(results){
 
         const videoChannel = document.createElement('a');
         videoChannel.classList.add('Video-Channel');
-        videoChannel.href = '#';
+        videoChannel.href =`?channel_id=${video.channel_id}`;
 
         const uploadDate = document.createElement('a');
         uploadDate.classList.add('Time');
-        uploadDate.textContent = setViewUnit(video.views) + " views . " + timeAgo(video.created_dt);
+        uploadDate.textContent = common.setViewUnit(video.views) + " views . " + common.timeAgo(video.created_dt);
 
         //비디오 추가 정보 (게시자, 프로필 이미지) 받아오기 위해 api 요청
         getChannelInfo(video.channel_id, function(channelName, channelProfile){
@@ -125,58 +128,6 @@ function parseJsondata(results){
         //그리드에 비디오 정보 추가
         videoList.appendChild(videoItem);
     });
-}
-
-
-// 조회수 표기 > 1000을 넘기면 K 붙이기
-function setViewUnit(viewCount){
-    if(viewCount > 1000){
-        viewCount = Math.floor(viewCount / 1000);
-
-        
-        return viewCount + "K";
-    }
-    return viewCount;
-}
-
-//업로드 날짜 < > 현재 시간 상대 시간 계산
-function timeAgo(dateString) {
-    const now = new Date();
-    const past = new Date(dateString);
-    const diffInSeconds = Math.floor((now - past) / 1000);
-
-    const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
-    if (diffInSeconds < 60) {
-        return rtf.format(-diffInSeconds, "second");
-    }
-
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
-    if (diffInMinutes < 60) {
-        return rtf.format(-diffInMinutes, "minute");
-    }
-
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) {
-        return rtf.format(-diffInHours, "hour");
-    }
-
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) {
-        return rtf.format(-diffInDays, "day");
-    }
-
-    const diffInWeeks = Math.floor(diffInDays / 7);
-    if (diffInWeeks < 5) {
-        return rtf.format(-diffInWeeks, "week");
-    }
-
-    const diffInMonths = Math.floor(diffInDays / 30);
-    if (diffInMonths < 12) {
-        return rtf.format(-diffInMonths, "month");
-    }
-
-    const diffInYears = Math.floor(diffInDays / 365);
-    return rtf.format(-diffInYears, "year");
 }
 
 getVideoList();
