@@ -152,13 +152,10 @@ function performSearch(searchTerm) {
     // 결과 표시
     console.log(`검색 결과: ${filteredVideos.length}개의 비디오를 찾았습니다.`);
     
-    // videoCard.js의 parseJsondata 함수를 직접 호출하지 않고
-    // 아래에 정의한 함수를 사용
+  
     parseJsondata(filteredVideos);
 }
 
-// parseJsondata 함수 구현
-// videoCard.js에 있는 함수와 동일한 기능을 하도록 구현
 function parseJsondata(results) {
     const videoList = document.getElementById('Video-Container');
     if (!videoList) {
@@ -182,6 +179,7 @@ function parseJsondata(results) {
         // 썸네일 영역
         const thumbnailBox = document.createElement('a');
         thumbnailBox.classList.add('Thumbnail');
+        thumbnailBox.href = `?video_id=${video.id}`; // 링크 추가
         
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
@@ -196,6 +194,7 @@ function parseJsondata(results) {
         
         const videoProfile = document.createElement('a');
         videoProfile.classList.add('Video-Profile');
+        videoProfile.href = `?channel_id=${video.channel_id}`; // 링크 추가
         
         const profileImg = document.createElement('img');
         profileImg.classList.add('Video-Profile_image');
@@ -205,10 +204,12 @@ function parseJsondata(results) {
         
         const videoTitle = document.createElement('a');
         videoTitle.classList.add('Video-Title');
+        videoTitle.href = `?video_id=${video.id}`; // 링크 추가
         videoTitle.textContent = video.title;
         
         const videoChannel = document.createElement('a');
         videoChannel.classList.add('Video-Channel');
+        videoChannel.href = `?channel_id=${video.channel_id}`; // 링크 추가
         
         const uploadDate = document.createElement('a');
         uploadDate.classList.add('Time');
