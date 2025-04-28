@@ -25,24 +25,23 @@
     box-sizing: border-box;
 }
 
-@media (max-width:1480px){
+@media (max-width:1440px){
     #Video-Container{
         grid-template-columns: repeat(3,1fr);
-        min-width: 860px;
-    }
-}
-
-@media (max-width:1098px){
-    #Video-Container{
-        grid-template-columns: repeat(2,1fr);
         min-width: 568px;
     }
 }
 
-@media (max-width:767px){
+@media (max-width:768px){
+    #Video-Container{
+        grid-template-columns: repeat(2,1fr);
+        min-width: 276px;
+    }
+}
+
+@media (max-width:425px){
     #Video-Container{
         grid-template-columns: repeat(1,1fr);
-        min-width: 276px;
     }
 }
 

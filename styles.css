@@ -7,6 +7,10 @@ body, html{
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+}
+
 .page-container{
     display: flex;
     flex-shrink: 0;
@@ -26,7 +30,13 @@ body, html{
     width: 100%;
 }
 
-@media(max-width : 375px){
+@media(max-width : 1024px){
+    #main-sidebar{
+        width: 80px;
+    }
+}
+
+@media(max-width : 425px){
     #main-sidebar{
         display: none;
     }

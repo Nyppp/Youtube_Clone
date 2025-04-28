@@ -11,11 +11,7 @@
     left: 0;
 }
 
-#main-sidebar{
-    width: 270px;
-}
-
-@media (max-width : 768px){
+@media (max-width : 1024px){
     .sidebar, #main-sidebar{
         width: 80px;
     }
@@ -25,12 +21,6 @@
     }
 
     span{
-        display: none;
-    }
-}
-
-@media (max-width:375px){
-    .sidebar{
         display: none;
     }
 }
