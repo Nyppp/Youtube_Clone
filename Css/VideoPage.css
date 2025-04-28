@@ -1,4 +1,7 @@
 /*======== 전체 구조 스타일 ========*/
+html{
+    background-color: #181818;
+}
 body{
     margin: 0px auto;
     background-color: #181818;
@@ -21,6 +24,7 @@ img{
     width: 100%;
     justify-content: center;
     margin: 0px auto;
+    gap: 10px;
 }
 
 .video-container{
@@ -293,16 +297,19 @@ img{
 /*======== 비디오 코멘트 작성 공간 ========*/
 .comment-addArea{
     width: 100%;
-    height: 40px;
+    height: 50px;
     display: flex;
     flex-direction: row;
+    gap: 16px;
 }
 
 .userProfile{
-    width: 56px;
-    
+    width: 48px;
+    height: 48px;
     padding-right: 16px;
     gap:10px;
+    background-image: url(../resources/images/video_page/User-Avatar.svg);
+    border-radius: 40px;
 }
 
 .commentLine{
@@ -460,20 +467,30 @@ img{
     font-size: 14px;
 }
 
+#video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .video-listblock{
     display: flex;
     width: 100%;
     height: 102px;
     padding-top: 8px;
+    gap: 3px;
 }
 
 .side-info{
+    display: flex;
+    flex-direction: column;
 }
 
 .side-title{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+    margin-bottom: 5px;
 }
 
 .side-username, .side-videoDesc{
