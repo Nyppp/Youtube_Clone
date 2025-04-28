@@ -33,7 +33,7 @@ function setVideoPlayerPage(){
     .then(res => res.text())
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
-        console.log("load video player page.");
+        import('./video_page.js');
     });
 }
 
