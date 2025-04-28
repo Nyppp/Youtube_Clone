@@ -345,7 +345,6 @@ img{
     font-size: 14px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
 }
 
 /* 입력창에 포커스되었을 때 Enter 버튼 보이기 */
