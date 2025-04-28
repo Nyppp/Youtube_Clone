@@ -312,6 +312,11 @@ img{
     border-radius: 40px;
 }
 
+.input-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
 .commentLine{
     width: 584px;
     background-color: #181818;
@@ -319,10 +324,34 @@ img{
     border: none;
     border-bottom: 1px solid #303030;
     outline: none;
+    padding-bottom: 10px;
 }
 
 .commentLine:focus{
     border-bottom: 1px solid #ffffff;
+}
+
+.enterBtn {
+    position: relative;
+    left: 90%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #3ea6ff;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* 입력창에 포커스되었을 때 Enter 버튼 보이기 */
+.input-wrapper:focus-within .enterBtn {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /*======== 비디오 코멘트 리스트 ========*/
