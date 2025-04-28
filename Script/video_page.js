@@ -118,6 +118,7 @@ function parseJsonVideoListdata(videoListData) {
     // 썸네일 영역
     const thumbnailBox = document.createElement('a');
     thumbnailBox.classList.add('thumbnailBox');
+    thumbnailBox.href = `?video_id=${list.id}`;
 
     const thumbnailImg = document.createElement('img');
     thumbnailImg.classList.add('thumbnail');
@@ -130,11 +131,13 @@ function parseJsonVideoListdata(videoListData) {
     const sideTitle = document.createElement('a');
     sideTitle.classList.add('side-title');
     sideTitle.textContent = list.title;
+    sideTitle.href = `?video_id=${list.id}`;
 
     const sideUsername = document.createElement('a');
     sideUsername.classList.add('side-username');
+    sideUsername.href = `?channel_id=${list.channel_id}`;
 
-    const sideVideoDesc = document.createElement('a');
+    const sideVideoDesc = document.createElement('div');
     sideVideoDesc.classList.add('side-videoDesc');
     sideVideoDesc.textContent = common.setViewUnit(list.views) + " views . " + common.timeAgo(list.created_dt);
 

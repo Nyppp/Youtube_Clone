@@ -39,21 +39,28 @@ img{
 .recommend-container{
     display: flex;
     flex-direction: column;
-    width: 426px;
-    height: 968px;
-    align-items: left;
 }
 
 /*======== 반응형 세팅 ========*/
 
-@media (max-width:768px){
+@media (max-width:1024px){
     .main-container{
         flex-direction: column;
         width: 768px;
         align-items: center;
     }
-    .recommend-container{
-        width: 640px;
+
+    .side-Info{
+        width: 400px !important;
+    }
+}
+
+@media (max-width:768px){
+    .main-container{
+        flex-direction: column;
+        align-items: center;
+
+        min-width: 640px;
     }
 }
 
@@ -66,7 +73,6 @@ img{
 
 #video-player{
     width: 100%;
-    height: 360px;
 }
 
 .video-info{
@@ -439,7 +445,8 @@ img{
     flex-direction: row;
     align-items: center;
     gap:10px;
-    width: 402px;
+    width: 100%;
+    min-width: 200px;
     height: 51px;
     padding: 1px 12px 2px 0px;
 }
@@ -475,22 +482,29 @@ img{
 
 .video-listblock{
     display: flex;
-    width: 100%;
     height: 102px;
+    width: 100%;
     padding-top: 8px;
     gap: 3px;
 }
 
-.side-info{
+.side-Info{
     display: flex;
     flex-direction: column;
+
+    width: 150px;
 }
 
 .side-title{
+    color: #fff;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     margin-bottom: 5px;
+
+    white-space : nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .side-username, .side-videoDesc{
