@@ -1,4 +1,7 @@
 /*======== 전체 구조 스타일 ========*/
+html{
+    background-color: #181818;
+}
 body{
     margin: 0px auto;
     background-color: #181818;
@@ -468,12 +471,15 @@ img{
 }
 
 .side-info{
+    display: flex;
+    flex-direction: column;
 }
 
 .side-title{
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+    margin-bottom: 5px;
 }
 
 .side-username, .side-videoDesc{
