@@ -1,5 +1,9 @@
 import * as common from "./commonModule.js";
 
+// 전체 태그를 담는 변수
+const videoTags = [];
+let uniqueTag;
+
 //비디오 리스트 가져오기
 function getVideoList(){
     const xhr = new XMLHttpRequest();
@@ -58,6 +62,10 @@ function parseJsondata(results){
     }
 
     results.forEach(function(video){
+
+        video.tags.forEach(function(tag){
+            videoTags.push(tag);
+        });
         // 비디오 박스 전체영역
         const videoItem = document.createElement('div');
         videoItem.classList.add('Video-Item');
@@ -127,6 +135,31 @@ function parseJsondata(results){
         
         //그리드에 비디오 정보 추가
         videoList.appendChild(videoItem);
+    });
+
+    
+    uniqueTag = [... new Set(videoTags)];
+    console.log(uniqueTag);
+    initTagMenu(uniqueTag);
+}
+
+// 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
+function initTagMenu(tags){
+    const topMenu = document.getElementsByClassName('Top-Menu')[0];
+    
+    // 전체 선택 버튼 추가
+    const allButton = document.createElement('a');
+    allButton.classList.add('Top-Menu-All');
+    allButton.textContent = 'All';
+    topMenu.appendChild(allButton);
+
+    // 이후 태그별로 버튼 추가
+    tags.forEach(tag => {
+        const tagButton = document.createElement('a');
+        tagButton.classList.add('Top-Menu-Item');
+        tagButton.textContent = tag;
+
+        topMenu.appendChild(tagButton);
     });
 }
 
