@@ -1,8 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const videoId = 1;
+import * as common from "./commonModule.js";
+
+function getVideoData(){
+  const videoId = window.location.search.split('=');
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=${videoId}`, true);
+  xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=${videoId[1]}`, true);
 
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -22,59 +24,59 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   xhr.send();
+}
 
-  function parseJsondata(data) {
-    document.getElementById('video-title').textContent = data.title;
+function parseJsondata(data) {
+  document.getElementById('video-title').textContent = data.title;
 
-    const videoSource = document.getElementById('video-source');
-    videoSource.src = `https://storage.googleapis.com/youtube-clone-video/${data.id}.mp4`;
+  const videoSource = document.getElementById('video-source');
+  videoSource.src = `https://storage.googleapis.com/youtube-clone-video/${data.id}.mp4`;
 
-    const videoPlayer = document.getElementById('video-player');
-    videoPlayer.load();
+  const videoPlayer = document.getElementById('video-player');
+  videoPlayer.load();
 
-    document.getElementById('views').textContent = `${data.views.toLocaleString()} views.`;
+  document.getElementById('views').textContent = `${data.views.toLocaleString()} views.`;
 
-    const date = new Date(data.created_dt);
-    const formattedDate = `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
-    document.getElementById('date').textContent = formattedDate;
+  const date = new Date(data.created_dt);
+  const formattedDate = `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
+  document.getElementById('date').textContent = formattedDate;
 
-    document.getElementById('likes').textContent = data.likes;
-    document.getElementById('hates').textContent = data.dislikes;
+  document.getElementById('likes').textContent = data.likes;
+  document.getElementById('hates').textContent = data.dislikes;
 
-    document.getElementById('descText').textContent = data.tags.map(tag => `#${tag}`).join(' ');
-  }
+  document.getElementById('descText').textContent = data.tags.map(tag => `#${tag}`).join(' ');
+}
 
-  // 메인 비디오용 채널 정보 가져오기
-  function fetchChannelInfo(channelId) {
-    const xhrChannel = new XMLHttpRequest();
-    xhrChannel.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+// 메인 비디오용 채널 정보 가져오기
+function fetchChannelInfo(channelId) {
+  const xhrChannel = new XMLHttpRequest();
+  xhrChannel.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
 
-    xhrChannel.onload = function () {
-      if (xhrChannel.status === 200) {
-        const channelResponse = JSON.parse(xhrChannel.responseText);
-        console.log(channelResponse);
-        parseJsonchanneldata(channelResponse);
-      } else {
-        console.error('Error', xhrChannel.status);
-      }
-    };
+  xhrChannel.onload = function () {
+    if (xhrChannel.status === 200) {
+      const channelResponse = JSON.parse(xhrChannel.responseText);
+      console.log(channelResponse);
+      parseJsonchanneldata(channelResponse);
+    } else {
+      console.error('Error', xhrChannel.status);
+    }
+  };
 
-    xhrChannel.onerror = function () {
-      console.error('Network Error');
-    };
+  xhrChannel.onerror = function () {
+    console.error('Network Error');
+  };
 
-    xhrChannel.send();
-  }
+  xhrChannel.send();
+}
 
-  function parseJsonchanneldata(channelData) {
-    document.getElementById('channelName').textContent = channelData.channel_name;
+function parseJsonchanneldata(channelData) {
+  document.getElementById('channelName').textContent = channelData.channel_name;
 
-    const channelProfileImg = document.getElementById('channelProfile');
-    channelProfileImg.src = channelData.channel_profile;
+  const channelProfileImg = document.getElementById('channelProfile');
+  channelProfileImg.src = channelData.channel_profile;
 
-    document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
-  }
-});
+  document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
+}
 
 // 사이드 비디오 리스트 가져오기
 function getVideoList() {
@@ -134,7 +136,7 @@ function parseJsonVideoListdata(videoListData) {
 
     const sideVideoDesc = document.createElement('a');
     sideVideoDesc.classList.add('side-videoDesc');
-    sideVideoDesc.textContent = setViewUnit(list.views) + " views . " + timeAgo(list.created_dt);
+    sideVideoDesc.textContent = common.setViewUnit(list.views) + " views . " + common.timeAgo(list.created_dt);
 
     // 채널 이름 가져오기
     fetchChannelName(list.channel_id, function (channelName) {
@@ -172,53 +174,5 @@ function fetchChannelName(channelId, callback) {
   xhrChannel.send();
 }
 
-// 조회수 표기 > 1000을 넘기면 K 붙이기
-function setViewUnit(viewCount) {
-  if (viewCount > 1000) {
-    viewCount = Math.floor(viewCount / 1000);
-    return viewCount + "K";
-  }
-  return viewCount;
-}
-
-// 업로드 날짜 < > 현재 시간 상대 시간 계산
-function timeAgo(dateString) {
-  const now = new Date();
-  const past = new Date(dateString);
-  const diffInSeconds = Math.floor((now - past) / 1000);
-
-  const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
-  if (diffInSeconds < 60) {
-    return rtf.format(-diffInSeconds, "second");
-  }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return rtf.format(-diffInMinutes, "minute");
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return rtf.format(-diffInHours, "hour");
-  }
-
-  const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) {
-    return rtf.format(-diffInDays, "day");
-  }
-
-  const diffInWeeks = Math.floor(diffInDays / 7);
-  if (diffInWeeks < 5) {
-    return rtf.format(-diffInWeeks, "week");
-  }
-
-  const diffInMonths = Math.floor(diffInDays / 30);
-  if (diffInMonths < 12) {
-    return rtf.format(-diffInMonths, "month");
-  }
-
-  const diffInYears = Math.floor(diffInDays / 365);
-  return rtf.format(-diffInYears, "year");
-}
-
+getVideoData();
 getVideoList();

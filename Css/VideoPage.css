@@ -18,7 +18,7 @@ img{
 .main-container{
     display: flex;
     flex-direction: row;
-    width: 1440px;
+    width: 100%;
     justify-content: center;
     margin: 0px auto;
 }
