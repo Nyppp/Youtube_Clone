@@ -63,7 +63,7 @@ function addComment(e) {
     replyBtn.classList.add("replyBtnClass");
     deleteBtn.classList.add("deleteBtnClass");
 
-  userID.innerHTML = "James Gouse";
+  userID.innerHTML = "Marcus Levin";
   commentText.innerHTML = inputComment.value;
   likeCount.innerText = "0";
   hateCount.innerText = "0";
@@ -71,7 +71,7 @@ function addComment(e) {
   deleteBtn.innerHTML = "DELETE";
 
   // 요소 추가
-  newComment.appendChild(comment);
+  newComment.insertBefore(comment, newComment.firstChild);
   comment.appendChild(profileImg);
   comment.appendChild(commentBox);
 
