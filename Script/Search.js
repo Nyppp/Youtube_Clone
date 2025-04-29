@@ -157,12 +157,23 @@ function performSearch(searchTerm) {
 }
 
 function parseJsondata(results) {
-    const videoList = document.getElementById('Video-Container');
+    let videoList = document.getElementById('Video-Container');
     if (!videoList) {
-        //비디오 카드 페이지를 보고있지 않으면 에러남 + 검색 불가능
-        console.error('비디오 컨테이너를 찾을 수 없습니다.');
+        setVideoCardPage();
+        const interval = setInterval(()=>{
+            if(videoList){
+                clearInterval(interval);
+                drawList(videoList, results);
+            }
+            videoList = document.getElementById('Video-Container');
+        }, 100);
     }
-    
+    else{
+        drawList(videoList, results);
+    }
+}
+
+function drawList(videoList, results){
     // 기존 비디오 목록 비우기
     videoList.innerHTML = '';
     

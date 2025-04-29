@@ -12,12 +12,10 @@
 
     width: calc(100vw - 270px);
     overflow-x: auto;
-
-    scroll-behavior: smooth;
 }
 
 .Top-Menu::-webkit-scrollbar{
-    display: flex;
+    display: block;
 }
 
 @media (max-width : 1024px) {
