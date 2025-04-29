@@ -1,7 +1,7 @@
-const inputComment = document.getElementById("input");
-const buttonComment = document.getElementById("button");
+const inputComment = document.getElementById("commentInput");
+const buttonComment = document.getElementById("enterBtn");
 const newComment = document.getElementById("newComment");
-const commentForm = document.getElementsByClassName("comment")[0];
+const commentForm = document.getElementsByClassName("comment-addArea")[0];
 
 inputComment.addEventListener("keyup", function(e) {
     responseBtn();
@@ -18,10 +18,10 @@ function responseBtn() {
   const inputValue = inputComment.value;
   
   if (inputValue.length > 0) {
-    buttonComment.style.color = "#065fd4";
+    buttonComment.style.backgroundColor = "#3ea6ff";
     buttonComment.disabled = false;
   } else {
-    buttonComment.style.color = "#181818";
+    buttonComment.style.backgroundColor = "#181818";
     buttonComment.disabled = true;
   }
   return;
@@ -31,54 +31,68 @@ function responseBtn() {
 function addComment(e) {
     e.preventDefault();
 
+    // 태그 추가
     const comment = document.createElement("div");
     const profileImg = document.createElement("img");
+    const commentBox = document.createElement("div");
     const userID = document.createElement("span");
     const commentText = document.createElement("span");
+    const btnContainer = document.createElement("div");
     const likeContainer = document.createElement("div");
     const likeBtn = document.createElement("button");
     const likeCount = document.createElement("span");
     const hateContainer = document.createElement("div");
     const hateBtn = document.createElement("button");
     const hateCount = document.createElement("span");
+    const replyBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
 
+    // 태그 클래스 추가
     comment.classList.add("commentClass");
     profileImg.classList.add("profileImgClass");
+    commentBox.classList.add("commentBoxClass");
     userID.classList.add("userIDClass");
     commentText.classList.add("commentTextClass");
+    btnContainer.classList.add("btnContainerClass");
     likeContainer.classList.add("likeContainerClass");
     likeBtn.classList.add("likeBtnClass");
     likeCount.classList.add("likeCountClass");
     hateContainer.classList.add("hateContainerClass");
     hateBtn.classList.add("hateBtnClass");
     hateCount.classList.add("hateCountClass");
+    replyBtn.classList.add("replyBtnClass");
     deleteBtn.classList.add("deleteBtnClass");
 
   userID.innerHTML = "James Gouse";
   commentText.innerHTML = inputComment.value;
   likeCount.innerText = "0";
   hateCount.innerText = "0";
-  deleteBtn.innerHTML = "delete";
+  replyBtn.innerHTML = "REPLY";
+  deleteBtn.innerHTML = "DELETE";
 
+  // 요소 추가
   newComment.appendChild(comment);
   comment.appendChild(profileImg);
-  comment.appendChild(userID);
-  comment.appendChild(commentText);
+  comment.appendChild(commentBox);
+
+  commentBox.appendChild(userID);
+  commentBox.appendChild(commentText);
+  commentBox.appendChild(btnContainer);
+
+  btnContainer.appendChild(likeContainer);
+  btnContainer.appendChild(hateContainer);
+  btnContainer.appendChild(replyBtn);
+  btnContainer.appendChild(deleteBtn);
   
-  comment.appendChild(likeContainer);
   likeContainer.appendChild(likeBtn);
   likeContainer.appendChild(likeCount);
   
-  comment.appendChild(hateContainer);
   hateContainer.appendChild(hateBtn);
   hateContainer.appendChild(hateCount);
 
-  comment.appendChild(deleteBtn);
-
 // 댓글 등록 후 입력창 리셋, 버튼 비활성화
   inputComment.value = "";
-  buttonComment.style.color = "#181818";
+  buttonComment.style.backgroundColor = "#181818";
   buttonComment.disabled = true;
 
 // 삭제 기능

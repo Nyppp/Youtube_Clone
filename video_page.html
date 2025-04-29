@@ -104,13 +104,16 @@
                     <div class="comment-addArea">
                         <div class="userProfile"></div>
                         <div class="input-wrapper">
-                            <input type="text" class="commentLine" placeholder="Add a public comment...">
-                            <button class="enterBtn">Eneter</button>
+                            <input type="text" id="commentInput" placeholder="Add a public comment...">
+                            <button id="enterBtn" disabled>Eneter</button>
                         </div>
                     </div>
 
                     <!-- 코멘트 리스트 -->
                     <div class="comment-list">
+
+                        <!-- 새 코멘트 영역 -->
+                        <div id="newComment"></div>
                         
                         <div class="comment-block">
                             <a href="#"><img class="commentProfile" src="./resources/images/video_page/User-Avatar.svg" alt="icon"></a>
@@ -230,5 +233,6 @@
         </aside>
     </main>
     <script src="./Script/video_page.js"></script>
+    <script src="./Script/comment.js"></script>
 </body>
 </html>
