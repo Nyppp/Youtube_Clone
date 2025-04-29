@@ -16,6 +16,10 @@
     scroll-behavior: smooth;
 }
 
+.Top-Menu::-webkit-scrollbar{
+    display: flex;
+}
+
 @media (max-width : 1024px) {
     .Top-Menu{
         width: calc(100vw - 80px);

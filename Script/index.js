@@ -14,7 +14,7 @@ function initDisplay(callback){
     });
 
     //콜백으로 사이드, 탑 영역 제외 어떤 부분 불러올지 호출
-    callback();
+    if(callback) callback();
 }
 
 // 비디오 카드 리스트 페이지 호출
@@ -29,7 +29,7 @@ function setVideoCardPage(){
 
 // 비디오 플레이어 페이지 호출
 function setVideoPlayerPage(){
-    fetch('video_page.html')
+    return fetch('video_page.html')
     .then(res => res.text())
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
@@ -52,9 +52,9 @@ console.log(window.location.search);
 
 //페이지가 로드될 때, 주소값의 정보를 가져와서 페이지 렌더링
 window.onload = function(){
-    if(window.location.search.indexOf('channel') > 0){
+    if(window.location.search.indexOf('channel_id=') > 0){
         initDisplay(setChannelPage);
-    } else if (window.location.search.indexOf('video') > 0){
+    } else if (window.location.search.indexOf('video_id=') > 0){
         initDisplay(setVideoPlayerPage);
     } else {
         initDisplay(setVideoCardPage);
