@@ -57,6 +57,7 @@ function initSearchFunctionality() {
 // URL 업데이트 및 검색 실행
 function updateUrlAndSearch(searchInput) {
     const searchTerm = searchInput.value.trim();
+    console.log(searchInput);
     
     // 검색어가 있을 때만 URL 업데이트
     if (searchTerm) {
@@ -107,7 +108,7 @@ function fetchAndStoreVideos() {
                 performSearch(query);
             } else {
                 // 검색어가 없으면 모든 비디오 표시
-                parseJsondata(allVideos);
+                //parseJsondata(allVideos);
             }
         } else {
             console.error('Error:', xhr.status);
@@ -152,17 +153,27 @@ function performSearch(searchTerm) {
     // 결과 표시
     console.log(`검색 결과: ${filteredVideos.length}개의 비디오를 찾았습니다.`);
     
-  
     parseJsondata(filteredVideos);
 }
 
 function parseJsondata(results) {
-    const videoList = document.getElementById('Video-Container');
+    let videoList = document.getElementById('Video-Container');
     if (!videoList) {
-        console.error('비디오 컨테이너를 찾을 수 없습니다.');
-        return;
+        setVideoCardPage();
+        const interval = setInterval(()=>{
+            if(videoList){
+                clearInterval(interval);
+                drawList(videoList, results);
+            }
+            videoList = document.getElementById('Video-Container');
+        }, 100);
     }
-    
+    else{
+        drawList(videoList, results);
+    }
+}
+
+function drawList(videoList, results){
     // 기존 비디오 목록 비우기
     videoList.innerHTML = '';
     
