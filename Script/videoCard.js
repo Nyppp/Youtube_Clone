@@ -79,6 +79,17 @@ function parseJsondata(results){
         thumbnailBox.classList.add('Thumbnail');
         thumbnailBox.href =`?video_id=${video.id}`;
 
+        const videoPreview = document.createElement('video');
+        videoPreview.src = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
+        videoPreview.preload = "none";
+        videoPreview.style.display = "none";
+        videoPreview.autoplay = true;
+        videoPreview.muted = true;
+        videoPreview.loop = true;
+
+        videoPreview.style.width = "276px";
+        videoPreview.style.height = "155px";
+
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
         thumbnailImg.src = video.thumbnail;
@@ -130,8 +141,20 @@ function parseJsondata(results){
         videoInfoBox.appendChild(videoDesc);
 
         //썸네일 영역
+        
         thumbnailImg.appendChild(videoTime);
         thumbnailBox.appendChild(thumbnailImg);
+        thumbnailBox.appendChild(videoPreview);
+
+        thumbnailBox.addEventListener('mouseenter', ()=>{
+            thumbnailBox.firstChild.style.display = "none";
+            thumbnailBox.lastChild.style.display = "block";
+        });
+
+        thumbnailBox.addEventListener('mouseleave', ()=>{
+            thumbnailBox.firstChild.style.display = "block";
+            thumbnailBox.lastChild.style.display = "none";
+        });
 
         // 전체 구조
         videoItem.appendChild(thumbnailBox);
@@ -144,6 +167,10 @@ function parseJsondata(results){
     //태그들 가져오기
     uniqueTag = [... new Set(videoTags)];
     initTagMenu(uniqueTag);
+}
+
+function changeImgToVideo(img){
+    console.log('프리뷰 재생');
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수

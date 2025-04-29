@@ -156,8 +156,13 @@ function performSearch(searchTerm) {
     parseJsondata(filteredVideos);
 }
 
+// 검색 결과 데이터파일을 객체화
 function parseJsondata(results) {
     let videoList = document.getElementById('Video-Container');
+
+
+    // 비디오 페이지가 아닌 곳에서 검색 > 비디오 페이지를 우선 불러와야 하기에, 페이지 호출
+    // 그 이후 videoList 객체가 defined 상태가 될 때까지 렌더링 하지 않고 대기
     if (!videoList) {
         setVideoCardPage();
         const interval = setInterval(()=>{
@@ -173,6 +178,7 @@ function parseJsondata(results) {
     }
 }
 
+// 검색 결과 > 렌더링 하는 함수
 function drawList(videoList, results){
     // 기존 비디오 목록 비우기
     videoList.innerHTML = '';
@@ -195,6 +201,17 @@ function drawList(videoList, results){
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
         thumbnailImg.src = video.thumbnail;
+
+        const videoPreview = document.createElement('video');
+        videoPreview.src = `https://storage.googleapis.com/youtube-clone-video/${video.id}.mp4`;
+        videoPreview.preload = "none";
+        videoPreview.style.display = "none";
+        videoPreview.autoplay = true;
+        videoPreview.muted = true;
+        videoPreview.loop = true;
+
+        videoPreview.style.width = "276px";
+        videoPreview.style.height = "155px";
         
         const videoTime = document.createElement('p');
         videoTime.classList.add('VideoTime');
@@ -244,7 +261,18 @@ function drawList(videoList, results){
         
         // 썸네일 영역
         thumbnailBox.appendChild(thumbnailImg);
-        thumbnailBox.appendChild(videoTime);
+        thumbnailBox.appendChild(videoPreview);
+
+        thumbnailBox.addEventListener('mouseenter', ()=>{
+            console.log(thumbnailBox.lastChild);
+            thumbnailBox.firstChild.style.display = "none";
+            thumbnailBox.lastChild.style.display = "block";
+        });
+
+        thumbnailBox.addEventListener('mouseleave', ()=>{
+            thumbnailBox.firstChild.style.display = "block";
+            thumbnailBox.lastChild.style.display = "none";
+        });
         
         // 전체 구조
         videoItem.appendChild(thumbnailBox);
