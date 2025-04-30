@@ -1,4 +1,3 @@
-
 //업로드 날짜 < > 현재 시간 상대 시간 계산
 function timeAgo(dateString) {
     const now = new Date();
@@ -51,4 +50,161 @@ function setViewUnit(viewCount){
     return viewCount;
 }
 
-export {timeAgo, setViewUnit}
+//채널 정보 가져오기
+function getChannelInfo(channelId, callback){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+
+    xhr.onload = function(){
+        if(xhr.status === 200){
+            const response = JSON.parse(xhr.responseText);
+            
+            //페이지 호출 이후 추가 작업 필요할 때 콜백 사용
+            if(callback) callback(response.channel_name, response.channel_profile);
+            
+        } else{
+            console.error('Error:', xhr.status);
+        }
+    };
+
+    xhr.onerror = function(){
+        console.error('Network Error');
+    };
+    xhr.send();
+}
+
+// 검색 결과 > 렌더링 하는 함수
+function drawList(videoList, results){
+    // 기존 비디오 목록 비우기
+    videoList.innerHTML = '';
+    
+    if (!results || results.length === 0) {
+        videoList.textContent = "No videos found.";
+        return;
+    }
+    
+    results.forEach(function(video) {
+        // 비디오 박스 전체영역
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('Video-Item');
+        
+        // 썸네일 영역
+        const thumbnailBox = document.createElement('a');
+        thumbnailBox.classList.add('Thumbnail');
+        thumbnailBox.href = `?video_id=${video.id}`; // 링크 추가
+        
+        const thumbnailImg = document.createElement('img');
+        thumbnailImg.classList.add('Thumbnail-Image');
+        thumbnailImg.src = video.thumbnail;
+
+        const videoPreview = document.createElement('video');
+        videoPreview.preload = "none";
+        videoPreview.style.display = "none";
+        videoPreview.autoplay = true;
+        videoPreview.muted = true;
+        videoPreview.loop = true;
+
+        videoPreview.style.width = "276px";
+        videoPreview.style.height = "155px";
+        
+        const videoTime = document.createElement('p');
+        videoTime.classList.add('VideoTime');
+        
+        // 비디오 정보 영역
+        const videoInfoBox = document.createElement('div');
+        videoInfoBox.classList.add('Video-Info');
+        
+        const videoProfile = document.createElement('a');
+        videoProfile.classList.add('Video-Profile');
+        videoProfile.href = `?channel_id=${video.channel_id}`; // 링크 추가
+        
+        const profileImg = document.createElement('img');
+        profileImg.classList.add('Video-Profile_image');
+        
+        const videoDesc = document.createElement('div');
+        videoDesc.classList.add('Video-Description');
+        
+        const videoTitle = document.createElement('a');
+        videoTitle.classList.add('Video-Title');
+        videoTitle.href = `?video_id=${video.id}`; // 링크 추가
+        videoTitle.textContent = video.title;
+        
+        const videoChannel = document.createElement('a');
+        videoChannel.classList.add('Video-Channel');
+        videoChannel.href = `?channel_id=${video.channel_id}`; // 링크 추가
+        
+        const uploadDate = document.createElement('a');
+        uploadDate.classList.add('Time');
+        uploadDate.textContent = setViewUnit(video.views) + " views . " + timeAgo(video.created_dt);
+        
+        getChannelInfo(video.channel_id, function(channelName, channelProfile) {
+            videoChannel.textContent = channelName;
+            profileImg.src = channelProfile;
+        });
+
+        // 정렬을 위한 데이터 삽입
+        const videoIdData = document.createElement('p');
+        videoIdData.textContent = video.id;
+        videoIdData.style.display = "none";
+        videoIdData.classList.add("videoId");
+
+        const likesData = document.createElement('p');
+        likesData.textContent = video.likes;
+        likesData.style.display = "none";
+        likesData.classList.add("likesCount");
+
+        const viewsData = document.createElement('p');
+        viewsData.textContent = video.views;
+        viewsData.style.display = "none";
+        viewsData.classList.add("viewsCount");
+
+        const timeData = document.createElement('p');
+        timeData.textContent = video.created_dt;
+        timeData.style.display = "none";
+        timeData.classList.add("timeData");
+
+        videoItem.appendChild(likesData);
+        videoItem.appendChild(viewsData);
+        videoItem.appendChild(timeData);
+        
+        // 비디오 설명 영역
+        videoDesc.appendChild(videoTitle);
+        videoDesc.appendChild(videoChannel);
+        videoDesc.appendChild(uploadDate);
+        
+        // 비디오 설명 + 채널 프로필 이미지 영역
+        videoProfile.appendChild(profileImg);
+        
+        videoInfoBox.appendChild(videoProfile);
+        videoInfoBox.appendChild(videoDesc);
+        
+        // 썸네일 영역
+        thumbnailBox.appendChild(thumbnailImg);
+        thumbnailBox.appendChild(videoIdData);
+        thumbnailBox.appendChild(videoPreview);
+
+        thumbnailBox.addEventListener('mouseenter', ()=>{
+            console.log(thumbnailBox.getElementsByClassName('videoId')[0]);
+
+            const videoId = thumbnailBox.getElementsByClassName('videoId')[0].textContent;
+            videoPreview.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`;
+            thumbnailBox.firstChild.style.display = "none";
+            thumbnailBox.lastChild.style.display = "block";
+        });
+
+        thumbnailBox.addEventListener('mouseleave', ()=>{
+            thumbnailBox.firstChild.style.display = "block";
+            thumbnailBox.lastChild.style.display = "none";
+        });
+        
+        // 전체 구조
+        videoItem.appendChild(thumbnailBox);
+        videoItem.appendChild(videoInfoBox);
+        
+        videoList.appendChild(videoItem);
+    });
+}
+
+
+
+export {timeAgo, setViewUnit, drawList}
