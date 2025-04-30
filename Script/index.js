@@ -34,6 +34,7 @@ function setVideoPlayerPage(){
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
         import('./video_page.js');
+        import('./comment.js');
     });
 }
 
