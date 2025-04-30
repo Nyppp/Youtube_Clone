@@ -49,6 +49,7 @@ function getChannelVideoList(){
 
 //채널 정보 출력 함수
 function displayChannelInfo(info){
+    const channel_id = window.location.search.split('=');
     const profileImg = document.getElementsByClassName('profile-image')[0];
     profileImg.src = info.channel_profile;
 
@@ -71,70 +72,19 @@ function displayChannelVideoList(results){
     let maxView = -1;
     let mainVideoInfo;
 
-    if(!results || results.length ===0){
-        videoList.textContent = "No videos found.";
-        return;
-    }
-
     results.forEach(function(video){
         if(maxView < video.views){
             maxView = video.views;
             mainVideoInfo = video;
         }
-
-        //비디오 아이템 생성
-        const videoItem = document.createElement('article');
-        videoItem.classList.add('video-item');
-
-        //비디오 썸네일 영역 생성
-        const videoThumbnail = document.createElement('a');
-        videoThumbnail.classList.add('video-thumbnail');
-        videoThumbnail.href = `?video_id=${video.id}`;
-
-        const videoThumbnail_img = document.createElement('img');
-        videoThumbnail_img.classList.add('thumbnail-img')
-        videoThumbnail_img.src = video.thumbnail;
-
-        //비디오 정보 영역 생성
-        const videoDetail = document.createElement('div');
-        videoDetail.classList.add('video-details');
-
-        const videoTitle = document.createElement('a');
-        videoTitle.classList.add('video-title');
-        videoTitle.textContent = video.title;
-        videoTitle.href = `?video_id=${video.id}`;
-
-        const channelName = document.createElement('a');
-        channelName.classList.add('video-channel-name');
-        channelName.textContent = document.getElementsByClassName('channel-name')[0].textContent;
-        channelName.href = `?channel_id=${video.channel_id}`;
-
-        //채널 추가정보(조회수, 시간) 생성
-        const videoStats = document.createElement('div');
-        videoStats.classList.add('video-stats');
-
-        const videoViews = document.createElement('div');
-        videoViews.classList.add('views');
-        videoViews.textContent = common.setViewUnit(video.views) + " views . " + common.timeAgo(video.created_dt);
-
-        //비디오 썸네일 영역 배치
-        videoThumbnail.appendChild(videoThumbnail_img);
-        videoItem.appendChild(videoThumbnail);
-
-        //채널 정보 영역 배치
-        videoDetail.appendChild(videoTitle);
-        videoDetail.appendChild(channelName);
-        videoItem.appendChild(videoDetail);
-
-        //채널 추가정보 (조회수, 시간) 배치
-        videoStats.appendChild(videoViews);
-        videoItem.appendChild(videoStats);
-
-
-        videoGrid.appendChild(videoItem);
     });
 
-    //가장 조회수 높은 영상 > 메인 비디오로 세팅
+    if(!results || results.length ===0){
+        videoList.textContent = "No videos found.";
+        return;
+    }
+
+    common.drawList(videoGrid, results);
     displayMainVideo(mainVideoInfo);
 }
 

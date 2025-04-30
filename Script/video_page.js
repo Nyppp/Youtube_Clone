@@ -102,6 +102,11 @@ function parseJsonchanneldata(channelData) {
 
 // 사이드 비디오 리스트 가져오기
 function getVideoList() {
+  if(window.videoListRes != null){
+    parseJsondata(window.videoListRes);
+    return;
+  }
+
   const xhrVideoList = new XMLHttpRequest();
   xhrVideoList.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
 
