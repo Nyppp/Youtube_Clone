@@ -90,6 +90,7 @@ function initTagMenu(tags){
     viewButton.textContent = 'Views';
     viewButton.href = "";
 
+    //태그에 대한 기능 추가 (전체 보기 -> "" 상태로 검색되게끔)
     allButton.addEventListener("click", function(e){
         e.preventDefault();
         const searchInput = document.getElementById('Search');
@@ -97,6 +98,7 @@ function initTagMenu(tags){
         document.getElementById('SearchBtn').click();
     });
 
+    //태그에 대한 기능 추가 (좋아요 순으로 노출)
     likesButton.addEventListener("click", function(e){
         e.preventDefault();
         const searchInput = document.getElementById('Search');
@@ -118,6 +120,7 @@ function initTagMenu(tags){
         });
     });
 
+    //태그에 대한 기능 추가 (날짜 순으로 노출)
     dateButton.addEventListener("click", function(e){
         e.preventDefault();
         const searchInput = document.getElementById('Search');
@@ -141,6 +144,7 @@ function initTagMenu(tags){
         });
     });
 
+    //태그에 대한 기능 추가 (조회수 순으로 노출)
     viewButton.addEventListener("click", function(e){
         e.preventDefault();
         const searchInput = document.getElementById('Search');
@@ -162,12 +166,13 @@ function initTagMenu(tags){
         });
     });
 
+    //기본 정렬버튼 추가 (전체 ~ 조회수 순)
     topMenu.appendChild(allButton);
     topMenu.appendChild(likesButton);
     topMenu.appendChild(dateButton);
     topMenu.appendChild(viewButton);
 
-    // 이후 태그별로 버튼 추가
+    // 이후 각 영상 태그별로 버튼 추가
     tags.forEach(tag => {
         const tagButton = document.createElement('a');
         tagButton.classList.add('Top-Menu-Item');

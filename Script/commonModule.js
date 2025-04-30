@@ -73,7 +73,7 @@ function getChannelInfo(channelId, callback){
     xhr.send();
 }
 
-// 검색 결과 > 렌더링 하는 함수
+// 검색 결과 > 렌더링 하는 함수 (비디오 카드 형식으로 렌더링 하는 곳에서 사용)
 function drawList(videoList, results){
     // 기존 비디오 목록 비우기
     videoList.innerHTML = '';
