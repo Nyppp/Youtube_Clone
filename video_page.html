@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="Css/VideoPage.css">
     <link rel="stylesheet" href="Css/Top-Menu.css">
     <link rel="stylesheet" href="Css/Font.css">
+    
+    
 </head>
 
 <body>
@@ -68,7 +70,7 @@
                                 <div id="subscribtionText"></div>
                             </div>
 
-                            <button id="subscribeButton">SUBSCRIBES</button>
+                            <button id="subscribe-button" class="subscribe-button" data-channel-id="" data-channel-name="" data-channel-profile="">SUBSCRIBES</button>
                         </div>
                     </div>
 
@@ -93,7 +95,7 @@
                 <div class="comment-box">
                     <!-- 코멘트 수, 정렬 -->
                     <div class="sortArea">
-                        <div id="commentCount">286 Comments</div>
+                        <div id="commentCount">3 Comments</div>
                         <button id="commentSortButton">
                             <div id="sortIcon"></div>
                             <div id="sortText">SORT BY</div>
@@ -114,7 +116,8 @@
 
                         <!-- 새 코멘트 영역 -->
                         <div id="newComment"></div>
-                        
+                        <!-- 기존 코멘트 영역 -->
+
                         <div class="comment-block">
                             <a href="#"><img class="commentProfile" src="./resources/images/video_page/User-Avatar.svg" alt="icon"></a>
 
@@ -135,12 +138,12 @@
 
                                 <div class="comment-toolbar">
                                     <div class="toolbar-container">
-                                        <button class="likes-button"></button>
-                                        <div class="likesCount">3</div>
+                                        <button class="like-button"></button>
+                                        <span class="likeCount">3</span>
                                     </div>
                                     <div class="toolbar-container">
-                                        <button class="hates-button"></button>
-                                        <div class="hatesCount">3</div>
+                                        <button class="hate-button"></button>
+                                        <span class="hateCount">3</span>
                                     </div>
                                     <div class="toolbar-container">
                                         <button class="reply-button">REPLY</button>
@@ -155,26 +158,26 @@
                             <div class="comment-container">
                                 <div class="comment-header">
                                     <div class="comment-userId">
-                                        James Gouse
+                                        Alan Cooper
                                     </div>
 
                                     <div class="comment-time">
-                                        8 hours ago
+                                        12 hours ago
                                     </div>
                                 </div>
 
                                 <div class="comment-text">
-                                    Wow, world is full of different skills
+                                    Can you provide?
                                 </div>
 
                                 <div class="comment-toolbar">
                                     <div class="toolbar-container">
-                                        <button class="likes-button"></button>
-                                        <div class="likesCount">3</div>
+                                        <button class="like-button"></button>
+                                        <span class="likeCount">21</span>
                                     </div>
                                     <div class="toolbar-container">
-                                        <button class="hates-button"></button>
-                                        <div class="hatesCount">3</div>
+                                        <button class="hate-button"></button>
+                                        <span class="hateCount">5</span>
                                     </div>
                                     <div class="toolbar-container">
                                         <button class="reply-button">REPLY</button>
@@ -189,26 +192,26 @@
                             <div class="comment-container">
                                 <div class="comment-header">
                                     <div class="comment-userId">
-                                        James Gouse
+                                        Alex Sears
                                     </div>
 
                                     <div class="comment-time">
-                                        8 hours ago
+                                        17 hours ago
                                     </div>
                                 </div>
 
                                 <div class="comment-text">
-                                    Wow, world is full of different skills
+                                    Oh, I love this video
                                 </div>
 
                                 <div class="comment-toolbar">
                                     <div class="toolbar-container">
-                                        <button class="likes-button"></button>
-                                        <div class="likesCount">3</div>
+                                        <button class="like-button"></button>
+                                        <span class="likeCount">12</span>
                                     </div>
                                     <div class="toolbar-container">
-                                        <button class="hates-button"></button>
-                                        <div class="hatesCount">3</div>
+                                        <button class="hate-button"></button>
+                                        <span class="hateCount">10</span>
                                     </div>
                                     <div class="toolbar-container">
                                         <button class="reply-button">REPLY</button>
@@ -232,6 +235,7 @@
             </div>
         </aside>
     </main>
+    <script src="Script/subscription.js"></script>
     <script src="./Script/video_page.js"></script>
     
 </body>
