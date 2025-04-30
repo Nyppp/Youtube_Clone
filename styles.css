@@ -24,6 +24,7 @@ a{
 
 #main-sidebar{
     width: 270px;
+    flex-shrink: 0;
 }
 
 #main-contentbox{

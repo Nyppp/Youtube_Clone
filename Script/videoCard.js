@@ -1,7 +1,11 @@
 import * as common from "./commonModule.js";
 
+// 전체 태그를 담는 변수
+const videoTags = [];
+let uniqueTag;
+
 //비디오 리스트 가져오기
-function getVideoList(){
+function getVideoList(callback){
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
 
@@ -9,6 +13,9 @@ function getVideoList(){
         if(xhr.status === 200){
             let response = JSON.parse(xhr.responseText);
             parseJsondata(response);
+
+            //페이지 호출 이후 추가 작업 필요할 때 콜백 사용
+            if(callback) callback();
         } else{
             console.error('Error:', xhr.status);
         }
@@ -30,7 +37,8 @@ function getChannelInfo(channelId, callback){
         if(xhr.status === 200){
             const response = JSON.parse(xhr.responseText);
             
-            callback(response.channel_name, response.channel_profile);
+            //페이지 호출 이후 추가 작업 필요할 때 콜백 사용
+            if(callback) callback(response.channel_name, response.channel_profile);
             
         } else{
             console.error('Error:', xhr.status);
@@ -58,6 +66,10 @@ function parseJsondata(results){
     }
 
     results.forEach(function(video){
+
+        video.tags.forEach(function(tag){
+            videoTags.push(tag);
+        });
         // 비디오 박스 전체영역
         const videoItem = document.createElement('div');
         videoItem.classList.add('Video-Item');
@@ -127,6 +139,48 @@ function parseJsondata(results){
         
         //그리드에 비디오 정보 추가
         videoList.appendChild(videoItem);
+    });
+
+    //태그들 가져오기
+    uniqueTag = [... new Set(videoTags)];
+    initTagMenu(uniqueTag);
+}
+
+// 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
+function initTagMenu(tags){
+    const topMenu = document.getElementsByClassName('Top-Menu')[0];
+    
+    // 전체 선택 버튼 추가
+    const allButton = document.createElement('a');
+    allButton.classList.add('Top-Menu-All');
+    allButton.textContent = 'All';
+    allButton.href = "";
+
+    allButton.addEventListener("click", function(e){
+        e.preventDefault();
+        const searchInput = document.getElementById('Search');
+        searchInput.value = "";
+        document.getElementById('SearchBtn').click();
+    });
+
+    topMenu.appendChild(allButton);
+
+    // 이후 태그별로 버튼 추가
+    tags.forEach(tag => {
+        const tagButton = document.createElement('a');
+        tagButton.classList.add('Top-Menu-Item');
+        tagButton.textContent = tag;
+        tagButton.href="";
+
+        tagButton.addEventListener("click", function(e){
+            e.preventDefault();
+            const searchInput = document.getElementById('Search');
+            searchInput.value = tag;
+
+            document.getElementById('SearchBtn').click();
+        });
+
+        topMenu.appendChild(tagButton);
     });
 }
 
