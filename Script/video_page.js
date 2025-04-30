@@ -76,6 +76,28 @@ function parseJsonchanneldata(channelData) {
   channelProfileImg.src = channelData.channel_profile;
 
   document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
+  
+  // 구독버튼 설정
+  const subscribeButton = document.getElementById('subscribe-button');
+  if (subscribeButton) {
+    // 필수 data 속성 설정
+    subscribeButton.dataset.channelId = channelData.id;
+    subscribeButton.dataset.channelName = channelData.channel_name;
+    subscribeButton.dataset.channelProfile = channelData.channel_profile;
+    
+    // 구독 상태에 따라 버튼 텍스트와 스타일 설정
+    if (isChannelSubscribed(channelData.id)) {
+      subscribeButton.textContent = 'SUBSCRIBED';
+      subscribeButton.classList.add('subscribed');
+    } else {
+      subscribeButton.textContent = 'SUBSCRIBES';
+      subscribeButton.classList.remove('subscribed');
+    }
+    
+    // 클릭 이벤트 설정
+    subscribeButton.removeEventListener('click', handleSubscribeButtonClick);
+    subscribeButton.addEventListener('click', handleSubscribeButtonClick);
+  }
 }
 
 // 사이드 비디오 리스트 가져오기
