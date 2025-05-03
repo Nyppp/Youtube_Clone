@@ -163,10 +163,22 @@ function drawList(videoList, results){
         timeData.style.display = "none";
         timeData.classList.add("timeData");
 
+        const videoTags = document.createElement('p');
+        videoTags.textContent = video.tags;
+        videoTags.style.display = "none";
+        videoTags.classList.add("videoTag");
+
+        const videoId = document.createElement('p');
+        videoId.textContent = video.id;
+        videoId.style.display = "none";
+        videoId.classList.add("videoId");
+
         videoItem.appendChild(likesData);
         videoItem.appendChild(viewsData);
         videoItem.appendChild(timeData);
-        
+        videoItem.appendChild(videoTags);
+        videoItem.appendChild(videoId);
+
         // 비디오 설명 영역
         videoDesc.appendChild(videoTitle);
         videoDesc.appendChild(videoChannel);
