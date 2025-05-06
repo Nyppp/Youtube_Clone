@@ -1,5 +1,9 @@
 import * as common from "./commonModule.js";
 
+// 전체 태그를 담는 변수
+const videoTags = [];
+let uniqueTag;
+
 function getVideoData(){
   const videoId = window.location.search.split('=');
 
@@ -9,7 +13,6 @@ function getVideoData(){
   xhr.onload = function () {
     if (xhr.status === 200) {
       const response = JSON.parse(xhr.responseText);
-      console.log(response);
       parseJsondata(response);
 
       const channelId = response.channel_id; // 채널 ID 가져오기
@@ -55,7 +58,6 @@ function fetchChannelInfo(channelId) {
   xhrChannel.onload = function () {
     if (xhrChannel.status === 200) {
       const channelResponse = JSON.parse(xhrChannel.responseText);
-      console.log(channelResponse);
       parseJsonchanneldata(channelResponse);
     } else {
       console.error('Error', xhrChannel.status);
@@ -138,71 +140,167 @@ function parseJsonVideoListdata(videoListData) {
 
   common.drawList(videoList, videoListData);
 
-  // videoListData.forEach(function (list) {
-  //   // 리스트 안에 있는 비디오 박스 전체 영역
-  //   const videoListBlock = document.createElement('div');
-  //   videoListBlock.classList.add('video-listblock');
+  videoListData.forEach(function(video){
+    video.tags.forEach(function(tag){
+        videoTags.push(tag);
+    });
+})
 
-  //   // 썸네일 영역
-  //   const thumbnailBox = document.createElement('a');
-  //   thumbnailBox.classList.add('thumbnailBox');
-  //   thumbnailBox.href = `?video_id=${list.id}`;
-
-  //   const thumbnailImg = document.createElement('img');
-  //   thumbnailImg.classList.add('thumbnail');
-  //   thumbnailImg.src = list.thumbnail;
-
-  //   // 비디오 정보 영역
-  //   const sideInfo = document.createElement('div');
-  //   sideInfo.classList.add('side-Info');
-
-  //   const sideTitle = document.createElement('a');
-  //   sideTitle.classList.add('side-title');
-  //   sideTitle.textContent = list.title;
-  //   sideTitle.href = `?video_id=${list.id}`;
-
-  //   const sideUsername = document.createElement('a');
-  //   sideUsername.classList.add('side-username');
-  //   sideUsername.href = `?channel_id=${list.channel_id}`;
-
-  //   const sideVideoDesc = document.createElement('div');
-  //   sideVideoDesc.classList.add('side-videoDesc');
-  //   sideVideoDesc.textContent = common.setViewUnit(list.views) + " views . " + common.timeAgo(list.created_dt);
-
-  //   // 채널 이름 가져오기
-  //   fetchChannelName(list.channel_id, function (channelName) {
-  //     sideUsername.textContent = channelName;
-  //   });
-
-  //   videoListBlock.appendChild(thumbnailBox);
-  //   thumbnailBox.appendChild(thumbnailImg);
-  //   videoListBlock.appendChild(sideInfo);
-  //   sideInfo.appendChild(sideTitle);
-  //   sideInfo.appendChild(sideUsername);
-  //   sideInfo.appendChild(sideVideoDesc);
-  //   videoList.appendChild(videoListBlock);
-  // });
+//태그들 가져오기
+uniqueTag = [... new Set(videoTags)];
+initTagMenu(uniqueTag);
 }
 
-// 사이드바용 채널 이름만 가져오는 함수
-function fetchChannelName(channelId, callback) {
-  const xhrChannel = new XMLHttpRequest();
-  xhrChannel.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+// 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
+function initTagMenu(tags){
+  const topMenu = document.getElementsByClassName('recommend-topMenu')[0];
+  
+  // 전체 선택 버튼 추가
+  const allButton = document.createElement('a');
+  allButton.classList.add('Top-Menu-All');
+  allButton.textContent = 'All';
+  allButton.href = "";
 
-  xhrChannel.onload = function () {
-    if (xhrChannel.status === 200) {
-      const channelResponse = JSON.parse(xhrChannel.responseText);
-      callback(channelResponse.channel_name);
-    } else {
-      console.error('Error', xhrChannel.status);
-    }
-  };
+  // 조회수 순 선택 버튼 추가
+  const recommendButton = document.createElement('a');
+  recommendButton.classList.add('Top-Menu-All');
+  recommendButton.textContent = 'Recommend';
+  recommendButton.href = "";
 
-  xhrChannel.onerror = function () {
-    console.error('Network Error');
-  };
+  // 좋아요 기준 버튼 추가
+  const likesButton = document.createElement('a');
+  likesButton.classList.add('Top-Menu-All');
+  likesButton.textContent = 'Likes';
+  likesButton.href = "";
 
-  xhrChannel.send();
+  // 최신 순 선택 버튼 추가
+  const dateButton = document.createElement('a');
+  dateButton.classList.add('Top-Menu-All');
+  dateButton.textContent = 'Date';
+  dateButton.href = "";
+
+  // 조회수 순 선택 버튼 추가
+  const viewButton = document.createElement('a');
+  viewButton.classList.add('Top-Menu-All');
+  viewButton.textContent = 'Views';
+  viewButton.href = "";
+
+  //태그에 대한 기능 추가 (전체 보기 > id 순서로 정렬)
+  allButton.addEventListener("click", function(e){
+      e.preventDefault();
+      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      const videoContainer = document.getElementById('video-list');
+
+      allVideos.sort((a,b) => {
+        const aId = parseInt(a.getElementsByClassName('videoId')[0].textContent);
+        const bId = parseInt(b.getElementsByClassName('videoId')[0].textContent);
+
+        return aId - bId;
+    });
+      allVideos.forEach(videoItem=>{
+        videoContainer.appendChild(videoItem);
+    });
+
+  });
+
+  recommendButton.addEventListener("click", function(e){
+      e.preventDefault();
+      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+
+      common.getSimilarity();
+
+  });
+
+  //태그에 대한 기능 추가 (좋아요 순으로 노출)
+  likesButton.addEventListener("click", function(e){
+      e.preventDefault();
+      const videoContainer = document.getElementById('video-list');
+      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+
+      allVideos.sort((a,b) => {
+          const aLikes = parseInt(a.getElementsByClassName('likesCount')[0].textContent);
+          const bLikes = parseInt(b.getElementsByClassName('likesCount')[0].textContent);
+
+          return bLikes - aLikes;
+      });
+      allVideos.forEach(videoItem=>{
+          videoContainer.appendChild(videoItem);
+      });
+  });
+
+  //태그에 대한 기능 추가 (날짜 순으로 노출)
+  dateButton.addEventListener("click", function(e){
+      e.preventDefault();
+      const videoContainer = document.getElementById('video-list');
+      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      
+
+      allVideos.sort((a,b) => {
+          const atime = new Date(a.getElementsByClassName('timeData')[0].textContent);
+          const btime = new Date(b.getElementsByClassName('timeData')[0].textContent);
+
+          return btime - atime;
+      });
+      allVideos.forEach(videoItem=>{
+          videoContainer.appendChild(videoItem);
+      });
+  });
+
+  //태그에 대한 기능 추가 (조회수 순으로 노출)
+  viewButton.addEventListener("click", function(e){
+      e.preventDefault();
+      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      const videoContainer = document.getElementById('video-list');
+
+      allVideos.sort((a,b) => {
+          const aLikes = parseInt(a.getElementsByClassName('viewsCount')[0].textContent);
+          const bLikes = parseInt(b.getElementsByClassName('viewsCount')[0].textContent);
+
+          return bLikes - aLikes;
+      });
+      allVideos.forEach(videoItem=>{
+        videoContainer.appendChild(videoItem);
+      });
+  });
+
+  //기본 정렬버튼 추가 (전체 ~ 조회수 순)
+  topMenu.appendChild(allButton);
+  topMenu.appendChild(recommendButton);
+  topMenu.appendChild(likesButton);
+  topMenu.appendChild(dateButton);
+  topMenu.appendChild(viewButton);
+
+  // // 이후 각 영상 태그별로 버튼 추가
+  // tags.forEach(tag => {
+  //     const tagButton = document.createElement('a');
+  //     tagButton.classList.add('Top-Menu-Item');
+  //     tagButton.textContent = tag;
+  //     tagButton.href="";
+
+  //     tagButton.addEventListener("click", function(e){
+  //         e.preventDefault();
+  //         const tagKey = tagButton.textContent;
+          
+  //         allVideos.forEach(videoItem=>{
+  //             videoItem.style.display = 'block';
+  //         });
+
+  //         allVideos.forEach(videoItem=>{
+  //             const videoTag = videoItem.getElementsByClassName('videoTag')[0];
+              
+  //             if(videoTag.textContent.indexOf(tagKey) < 0){
+  //                 videoItem.style.display = 'none';
+  //             }
+  //         });
+
+  //         // const searchInput = document.getElementById('Search');
+  //         // searchInput.value = tag;
+
+  //         // document.getElementById('SearchBtn').click();
+  //     });
+
+  //     topMenu.appendChild(tagButton);
+  // });
 }
 
 getVideoData();

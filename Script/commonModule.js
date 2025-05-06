@@ -194,8 +194,6 @@ function drawList(videoList, results){
         thumbnailBox.appendChild(videoPreview);
 
         thumbnailBox.addEventListener('mouseenter', ()=>{
-            console.log(thumbnailBox.getElementsByClassName('videoId')[0]);
-
             const videoId = thumbnailBox.getElementsByClassName('videoId')[0].textContent;
             videoPreview.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`;
             thumbnailBox.firstChild.style.display = "none";
@@ -215,6 +213,55 @@ function drawList(videoList, results){
     });
 }
 
+function getSimilarity(){
+    const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
+    const access_key = '495469be-0399-4e67-9af5-086ef64c73d8';
+    const firstWord = '배';
+    const secondWord = '사과';
+
+    const requestJson = {
+        argument: {
+            first_word: firstWord,
+            second_word: secondWord,
+        }
+    };
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', openApiURL, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', access_key);
 
 
-export {timeAgo, setViewUnit, drawList}
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const responseData = JSON.parse(xhr.responseText);
+                const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;
+
+                console.log(wordRelInfo);
+
+                let sum = 0;
+                let count = 0;
+                wordRelInfo.forEach(sim => {
+                    sum += sim.SimScore;
+                    count++;
+                });
+
+            console.log("유사도 평균값은 : " + (sum / count));
+            } else {
+            console.error('HTTP 요청 실패:', xhr.status);
+            }
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('네트워크 오류 발생');
+    };
+
+    xhr.send(JSON.stringify(requestJson));
+}
+
+
+
+
+export {timeAgo, setViewUnit, drawList, getSimilarity}

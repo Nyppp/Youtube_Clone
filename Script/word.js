@@ -10,14 +10,15 @@ var requestJson = {
     }
 };
 
-var request = require('request');
+import pkg from 'request';
+const { post } = pkg;
 var options = {
     url: openApiURL,
     body: JSON.stringify(requestJson),
     headers: {'Content-Type':'application/json','Authorization':access_key}
 };
 
-request.post(options, function (error, response, body) {
+post(options, function (error, response, body) {
     const responseData = JSON.parse(body);
 
     const key = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;

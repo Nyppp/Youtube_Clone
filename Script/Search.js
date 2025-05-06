@@ -5,8 +5,6 @@ let filteredVideos = [];
 
 // DOM이 완전히 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM이 로드되었습니다.');
-    
     // 검색 요소 초기화
     const topbarElement = document.getElementById('topbar');
     if (topbarElement) {
@@ -28,10 +26,6 @@ function initSearchFunctionality() {
     const searchInput = document.getElementById('Search');
     const searchButton = document.getElementById('SearchBtn');
     const searchForm = document.querySelector('.SearchBox');
-    
-    console.log('검색 입력란:', searchInput);
-    console.log('검색 버튼:', searchButton);
-    console.log('검색 폼:', searchForm);
     
     // 요소가 존재하지 않으면 함수 종료
     if (!searchInput || !searchButton || !searchForm) {

@@ -194,11 +194,6 @@ function initTagMenu(tags){
                     videoItem.style.display = 'none';
                 }
             });
-
-            // const searchInput = document.getElementById('Search');
-            // searchInput.value = tag;
-
-            // document.getElementById('SearchBtn').click();
         });
 
         topMenu.appendChild(tagButton);
