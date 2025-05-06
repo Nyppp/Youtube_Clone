@@ -14,7 +14,7 @@ button:hover{
     cursor: pointer;
 }
 
-img{
+#channelProfile{
     border-radius: 50%;
 }
 
@@ -604,6 +604,8 @@ img{
     display: flex;
     flex-direction: column;
     gap: 5px;
+
+    width: 426px;
 }
 
 .video-listblock{
@@ -640,9 +642,53 @@ img{
     font-weight: 400;
 }
 
-.thumbnail{
-    border-radius: 0%;
+.Thumbnail{
+    display: block;
+}
+
+
+.Thumbnail, .Thumbnail-Image {
     width: 168px;
     height: 94px;
-    margin-right: 8px;
+}
+
+.Video-Profile_image {
+    display: none;
+}
+
+.Video-Item{
+    display: flex;
+}
+
+.Video-Description{
+    display: flex;
+    flex-direction: column;
+}
+
+.Video-Info{
+    width: 226px;
+}
+
+.video-preview{
+    width: 168px;
+    height: 94px;
+}
+
+.Video-Title{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 5px;
+
+    white-space : nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.Video-Channel, .Time{
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
 }

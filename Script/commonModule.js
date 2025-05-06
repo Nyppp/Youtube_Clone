@@ -98,14 +98,12 @@ function drawList(videoList, results){
         thumbnailImg.src = video.thumbnail;
 
         const videoPreview = document.createElement('video');
+        videoPreview.classList.add('video-preview');
         videoPreview.preload = "none";
         videoPreview.style.display = "none";
         videoPreview.autoplay = true;
         videoPreview.muted = true;
         videoPreview.loop = true;
-
-        videoPreview.style.width = "276px";
-        videoPreview.style.height = "155px";
         
         const videoTime = document.createElement('p');
         videoTime.classList.add('VideoTime');

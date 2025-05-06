@@ -113,7 +113,6 @@ function getVideoList() {
   xhrVideoList.onload = function () {
     if (xhrVideoList.status === 200) {
       const videoListResponse = JSON.parse(xhrVideoList.responseText);
-      console.log(videoListResponse);
       parseJsonVideoListdata(videoListResponse);
     } else {
       console.error('Error:', xhrVideoList.status);
@@ -137,50 +136,52 @@ function parseJsonVideoListdata(videoListData) {
     return;
   }
 
-  videoListData.forEach(function (list) {
-    // 리스트 안에 있는 비디오 박스 전체 영역
-    const videoListBlock = document.createElement('div');
-    videoListBlock.classList.add('video-listblock');
+  common.drawList(videoList, videoListData);
 
-    // 썸네일 영역
-    const thumbnailBox = document.createElement('a');
-    thumbnailBox.classList.add('thumbnailBox');
-    thumbnailBox.href = `?video_id=${list.id}`;
+  // videoListData.forEach(function (list) {
+  //   // 리스트 안에 있는 비디오 박스 전체 영역
+  //   const videoListBlock = document.createElement('div');
+  //   videoListBlock.classList.add('video-listblock');
 
-    const thumbnailImg = document.createElement('img');
-    thumbnailImg.classList.add('thumbnail');
-    thumbnailImg.src = list.thumbnail;
+  //   // 썸네일 영역
+  //   const thumbnailBox = document.createElement('a');
+  //   thumbnailBox.classList.add('thumbnailBox');
+  //   thumbnailBox.href = `?video_id=${list.id}`;
 
-    // 비디오 정보 영역
-    const sideInfo = document.createElement('div');
-    sideInfo.classList.add('side-Info');
+  //   const thumbnailImg = document.createElement('img');
+  //   thumbnailImg.classList.add('thumbnail');
+  //   thumbnailImg.src = list.thumbnail;
 
-    const sideTitle = document.createElement('a');
-    sideTitle.classList.add('side-title');
-    sideTitle.textContent = list.title;
-    sideTitle.href = `?video_id=${list.id}`;
+  //   // 비디오 정보 영역
+  //   const sideInfo = document.createElement('div');
+  //   sideInfo.classList.add('side-Info');
 
-    const sideUsername = document.createElement('a');
-    sideUsername.classList.add('side-username');
-    sideUsername.href = `?channel_id=${list.channel_id}`;
+  //   const sideTitle = document.createElement('a');
+  //   sideTitle.classList.add('side-title');
+  //   sideTitle.textContent = list.title;
+  //   sideTitle.href = `?video_id=${list.id}`;
 
-    const sideVideoDesc = document.createElement('div');
-    sideVideoDesc.classList.add('side-videoDesc');
-    sideVideoDesc.textContent = common.setViewUnit(list.views) + " views . " + common.timeAgo(list.created_dt);
+  //   const sideUsername = document.createElement('a');
+  //   sideUsername.classList.add('side-username');
+  //   sideUsername.href = `?channel_id=${list.channel_id}`;
 
-    // 채널 이름 가져오기
-    fetchChannelName(list.channel_id, function (channelName) {
-      sideUsername.textContent = channelName;
-    });
+  //   const sideVideoDesc = document.createElement('div');
+  //   sideVideoDesc.classList.add('side-videoDesc');
+  //   sideVideoDesc.textContent = common.setViewUnit(list.views) + " views . " + common.timeAgo(list.created_dt);
 
-    videoListBlock.appendChild(thumbnailBox);
-    thumbnailBox.appendChild(thumbnailImg);
-    videoListBlock.appendChild(sideInfo);
-    sideInfo.appendChild(sideTitle);
-    sideInfo.appendChild(sideUsername);
-    sideInfo.appendChild(sideVideoDesc);
-    videoList.appendChild(videoListBlock);
-  });
+  //   // 채널 이름 가져오기
+  //   fetchChannelName(list.channel_id, function (channelName) {
+  //     sideUsername.textContent = channelName;
+  //   });
+
+  //   videoListBlock.appendChild(thumbnailBox);
+  //   thumbnailBox.appendChild(thumbnailImg);
+  //   videoListBlock.appendChild(sideInfo);
+  //   sideInfo.appendChild(sideTitle);
+  //   sideInfo.appendChild(sideUsername);
+  //   sideInfo.appendChild(sideVideoDesc);
+  //   videoList.appendChild(videoListBlock);
+  // });
 }
 
 // 사이드바용 채널 이름만 가져오는 함수
