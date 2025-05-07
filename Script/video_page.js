@@ -113,7 +113,6 @@ async function getVideoList() {
 
   if(window.videoListRes != null){
     parseJsondata(window.videoListRes);
-    simTags = await common.getSimilarity(videoId[1], window.videoListRes);
     return;
   }
 
@@ -124,7 +123,7 @@ async function getVideoList() {
     if (xhrVideoList.status === 200) {
       window.videoListRes = JSON.parse(xhrVideoList.responseText);
       parseJsonVideoListdata(window.videoListRes);
-      //simTags = await common.getSimilarity(videoId[1], window.videoListRes);
+      
     } else {
       console.error('Error:', xhrVideoList.status);
     }
@@ -163,7 +162,7 @@ function parseJsonVideoListdata(videoListData) {
 }
 
 //현재 보고 있는 비디오와 태그가 같은 비디오들 리스트 저장
-function setSameTagVideo(){
+async function setSameTagVideo(){
   const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
   const currentVideoId = window.location.search.split('=');
 
@@ -191,6 +190,8 @@ function setSameTagVideo(){
   });
 
   sameTagVideos = [... new Set(videos)];
+
+  await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
@@ -254,8 +255,6 @@ function initTagMenu(tags){
     e.preventDefault();
     const currentVideoId = window.location.search.split('=');
 
-    console.log(sameTagVideos);
-
     const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
     allVideos.forEach(video=>{
@@ -270,6 +269,8 @@ function initTagMenu(tags){
         video.style.display = 'flex';
       }
     })
+
+    
 
     // if(simTags){
     //   allVideos.forEach(video=>{

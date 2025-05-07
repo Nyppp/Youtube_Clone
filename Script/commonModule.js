@@ -219,7 +219,7 @@ function delay(ms) {
 }
 
 //유사도 계산 함수 (api 호출 + 유사도 계산)
-async function getSimilarity(videoId, allVideos){
+async function getSimilarity(videoId, allVideos, skipVideos){
 
     let startTime = window.performance.now();
     let firstTags;
@@ -227,8 +227,10 @@ async function getSimilarity(videoId, allVideos){
     let allTags = [];
     let allUniqueTags
 
-    //현재 보고있는 비디오의 1번 태그
-    //전체 태그 리스트 서로 비교 (api 초기값 기준 27개)
+    let targetVideos = [];
+
+    //현재 보고있는 비디오의 태그와, 다른 비디오들 태그 유사도 계산
+    //태그 중 단 한개라도 일치하는 비디오는 이미 추천 리스트 올라갔으니 계산 제외(skipVideos)
 
     allVideos.forEach(video=>{
         //현재 보고있는 비디오의 태그들 추출
@@ -236,11 +238,16 @@ async function getSimilarity(videoId, allVideos){
             firstTags = video.tags;
         }
 
-        //전체 태그 추출
+        if(!skipVideos.includes(String(video.id))){
+            targetVideos.push(video);
+        }
+    });
+
+    targetVideos.forEach(video=>{
         video.tags.forEach(tag=>{
             allTags.push(tag);
         })
-    });
+    })
 
     //전체 태그 중복제거
     allUniqueTags = [... new Set(allTags)];
@@ -273,7 +280,7 @@ async function getSimilarity(videoId, allVideos){
 async function calcSimilarity(firstWord, secondWord){
     return new Promise((resolve, reject)=> {
         const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
-        const access_key = '495469be-0399-4e67-9af5-086ef64c73d8';
+        const access_key = '34f8f74f-733c-4b95-b8a4-2998d4580dbd';
         const requestJson = {
             argument: {
                 first_word: firstWord,
