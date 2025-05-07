@@ -209,7 +209,6 @@ function initTagMenu(tags){
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
       common.getSimilarity();
-
   });
 
   //태그에 대한 기능 추가 (좋아요 순으로 노출)

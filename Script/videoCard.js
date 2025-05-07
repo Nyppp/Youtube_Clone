@@ -182,6 +182,7 @@ function initTagMenu(tags){
         tagButton.addEventListener("click", function(e){
             e.preventDefault();
             const tagKey = tagButton.textContent;
+            const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
             
             allVideos.forEach(videoItem=>{
                 videoItem.style.display = 'block';
