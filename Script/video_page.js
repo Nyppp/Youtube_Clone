@@ -191,6 +191,10 @@ function initTagMenu(tags){
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
       const videoContainer = document.getElementById('video-list');
 
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
+
       allVideos.sort((a,b) => {
         const aId = parseInt(a.getElementsByClassName('videoId')[0].textContent);
         const bId = parseInt(b.getElementsByClassName('videoId')[0].textContent);
@@ -204,11 +208,83 @@ function initTagMenu(tags){
   });
 
   //추천 탭에 대한 이벤트 추가
-  recommendButton.addEventListener("click", function(e){
-      e.preventDefault();
-      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+  recommendButton.addEventListener("click", async function(e){
+    e.preventDefault();
+    const videoContainer = document.getElementById('video-list');
+    const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
-      common.getSimilarity();
+    allVideos.forEach(videoItem=>{
+      videoItem.style.display = 'flex';
+    });
+
+    const currentVideoID = window.location.search.split('=');
+    let simTags = [];
+
+    if(window.videoListRes != null){
+      simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
+
+      allVideos.forEach(video=>{
+        const videoTag = video.getElementsByClassName('videoTag')[0];
+        
+        let isSim = false;
+        simTags.forEach(tag=>{
+          if(videoTag.textContent.indexOf(tag) > 0){
+            isSim = true;
+          }
+        });
+
+        if(!isSim){
+          video.style.display = 'none';
+        }
+      });
+    }else{
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
+
+      xhr.onload = async function(){
+          if(xhr.status === 200){
+              window.videoListRes = JSON.parse(xhr.responseText);
+              simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
+
+              allVideos.forEach(video=>{
+                const videoTag = video.getElementsByClassName('videoTag')[0];
+                
+                let isSim = false;
+                simTags.forEach(tag=>{
+                  if(videoTag.textContent.indexOf(tag) > 0){
+                    isSim = true;
+                  }
+                });
+
+                if(!isSim){
+                  video.style.display = 'none';
+                }
+              });
+
+          } else{
+              console.error('Error:', xhr.status);
+          }
+      };
+
+      xhr.onerror = function(){
+          console.error('Network Error');
+      };
+
+      xhr.send();
+    }
+    
+    // window.videoListRes.forEach(video=>{
+    //   if(video.id == currentVideoID[1]){
+    //     currentTags = video.tags;
+    //   }
+    // });
+
+    //주소를 통해, 비디오 id를 인자로 전달
+    //여기서 해당 영상 태그들 리스트 넘겨줘버릴까...
+    //common.getSimilarity(currentVideoID[1]);
+
+    
+
   });
 
   //태그에 대한 기능 추가 (좋아요 순으로 노출)
@@ -216,6 +292,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const videoContainer = document.getElementById('video-list');
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
 
       allVideos.sort((a,b) => {
           const aLikes = parseInt(a.getElementsByClassName('likesCount')[0].textContent);
@@ -233,6 +312,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const videoContainer = document.getElementById('video-list');
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
       
 
       allVideos.sort((a,b) => {
@@ -251,6 +333,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
       const videoContainer = document.getElementById('video-list');
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
 
       allVideos.sort((a,b) => {
           const aLikes = parseInt(a.getElementsByClassName('viewsCount')[0].textContent);

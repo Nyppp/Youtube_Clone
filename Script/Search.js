@@ -119,6 +119,7 @@ function fetchAndStoreVideos() {
 
 // 검색 실행 함수
 function performSearch(searchTerm) {
+    
     // 검색어가 없으면 모든 비디오 표시
     if (!searchTerm) {
         filteredVideos = [...allVideos];
