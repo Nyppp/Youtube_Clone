@@ -213,6 +213,7 @@ function drawList(videoList, results){
     });
 }
 
+//유사도 계산 함수 (api 호출 + 유사도 계산)
 function getSimilarity(){
     const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
     const access_key = '495469be-0399-4e67-9af5-086ef64c73d8';
@@ -260,8 +261,5 @@ function getSimilarity(){
 
     xhr.send(JSON.stringify(requestJson));
 }
-
-
-
 
 export {timeAgo, setViewUnit, drawList, getSimilarity}

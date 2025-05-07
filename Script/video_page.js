@@ -203,6 +203,7 @@ function initTagMenu(tags){
 
   });
 
+  //추천 탭에 대한 이벤트 추가
   recommendButton.addEventListener("click", function(e){
       e.preventDefault();
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
@@ -269,38 +270,6 @@ function initTagMenu(tags){
   topMenu.appendChild(likesButton);
   topMenu.appendChild(dateButton);
   topMenu.appendChild(viewButton);
-
-  // // 이후 각 영상 태그별로 버튼 추가
-  // tags.forEach(tag => {
-  //     const tagButton = document.createElement('a');
-  //     tagButton.classList.add('Top-Menu-Item');
-  //     tagButton.textContent = tag;
-  //     tagButton.href="";
-
-  //     tagButton.addEventListener("click", function(e){
-  //         e.preventDefault();
-  //         const tagKey = tagButton.textContent;
-          
-  //         allVideos.forEach(videoItem=>{
-  //             videoItem.style.display = 'block';
-  //         });
-
-  //         allVideos.forEach(videoItem=>{
-  //             const videoTag = videoItem.getElementsByClassName('videoTag')[0];
-              
-  //             if(videoTag.textContent.indexOf(tagKey) < 0){
-  //                 videoItem.style.display = 'none';
-  //             }
-  //         });
-
-  //         // const searchInput = document.getElementById('Search');
-  //         // searchInput.value = tag;
-
-  //         // document.getElementById('SearchBtn').click();
-  //     });
-
-  //     topMenu.appendChild(tagButton);
-  // });
 }
 
 getVideoData();
