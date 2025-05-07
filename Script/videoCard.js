@@ -181,10 +181,20 @@ function initTagMenu(tags){
 
         tagButton.addEventListener("click", function(e){
             e.preventDefault();
-            const searchInput = document.getElementById('Search');
-            searchInput.value = tag;
+            const tagKey = tagButton.textContent;
+            const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+            
+            allVideos.forEach(videoItem=>{
+                videoItem.style.display = 'block';
+            });
 
-            document.getElementById('SearchBtn').click();
+            allVideos.forEach(videoItem=>{
+                const videoTag = videoItem.getElementsByClassName('videoTag')[0];
+                
+                if(videoTag.textContent.indexOf(tagKey) < 0){
+                    videoItem.style.display = 'none';
+                }
+            });
         });
 
         topMenu.appendChild(tagButton);

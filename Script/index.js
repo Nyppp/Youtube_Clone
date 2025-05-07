@@ -51,9 +51,6 @@ function setChannelPage(){
     });
 }
 
-//최초 실행 > 해당 페이지에 노출되는 html 태그 설정
-console.log(window.location.search);
-
 //페이지가 로드될 때, 주소값의 정보를 가져와서 페이지 렌더링
 window.onload = function(){
     if(window.location.search.indexOf('channel_id=') > 0){
