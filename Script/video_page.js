@@ -3,6 +3,7 @@ import * as common from "./commonModule.js";
 // 전체 태그를 담는 변수
 const videoTags = [];
 let uniqueTag;
+let simTags = [];
 
 function getVideoData(){
   const videoId = window.location.search.split('=');
@@ -103,19 +104,23 @@ function parseJsonchanneldata(channelData) {
 }
 
 // 사이드 비디오 리스트 가져오기
-function getVideoList() {
+async function getVideoList() {
+  const videoId = window.location.search.split('=');
+
   if(window.videoListRes != null){
     parseJsondata(window.videoListRes);
+    simTags = await common.getSimilarity(videoId[1], window.videoListRes);
     return;
   }
 
   const xhrVideoList = new XMLHttpRequest();
   xhrVideoList.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
 
-  xhrVideoList.onload = function () {
+  xhrVideoList.onload = async function () {
     if (xhrVideoList.status === 200) {
-      const videoListResponse = JSON.parse(xhrVideoList.responseText);
-      parseJsonVideoListdata(videoListResponse);
+      window.videoListRes = JSON.parse(xhrVideoList.responseText);
+      parseJsonVideoListdata(window.videoListRes);
+      simTags = await common.getSimilarity(videoId[1], window.videoListRes);
     } else {
       console.error('Error:', xhrVideoList.status);
     }
@@ -217,12 +222,7 @@ function initTagMenu(tags){
       videoItem.style.display = 'flex';
     });
 
-    const currentVideoID = window.location.search.split('=');
-    let simTags = [];
-
-    if(window.videoListRes != null){
-      simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
-
+    if(simTags){
       allVideos.forEach(video=>{
         const videoTag = video.getElementsByClassName('videoTag')[0];
         
@@ -237,53 +237,62 @@ function initTagMenu(tags){
           video.style.display = 'none';
         }
       });
-    }else{
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
-
-      xhr.onload = async function(){
-          if(xhr.status === 200){
-              window.videoListRes = JSON.parse(xhr.responseText);
-              simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
-
-              allVideos.forEach(video=>{
-                const videoTag = video.getElementsByClassName('videoTag')[0];
-                
-                let isSim = false;
-                simTags.forEach(tag=>{
-                  if(videoTag.textContent.indexOf(tag) > 0){
-                    isSim = true;
-                  }
-                });
-
-                if(!isSim){
-                  video.style.display = 'none';
-                }
-              });
-
-          } else{
-              console.error('Error:', xhr.status);
-          }
-      };
-
-      xhr.onerror = function(){
-          console.error('Network Error');
-      };
-
-      xhr.send();
+    } else{
+      console.log('유사도 배열 로드 중...');
     }
-    
-    // window.videoListRes.forEach(video=>{
-    //   if(video.id == currentVideoID[1]){
-    //     currentTags = video.tags;
-    //   }
-    // });
 
-    //주소를 통해, 비디오 id를 인자로 전달
-    //여기서 해당 영상 태그들 리스트 넘겨줘버릴까...
-    //common.getSimilarity(currentVideoID[1]);
+    // if(window.videoListRes != null){
+    //   simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
 
-    
+    //   allVideos.forEach(video=>{
+    //     const videoTag = video.getElementsByClassName('videoTag')[0];
+        
+    //     let isSim = false;
+    //     simTags.forEach(tag=>{
+    //       if(videoTag.textContent.indexOf(tag) > 0){
+    //         isSim = true;
+    //       }
+    //     });
+
+    //     if(!isSim){
+    //       video.style.display = 'none';
+    //     }
+    //   });
+    // }else{
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
+
+    //   xhr.onload = async function(){
+    //       if(xhr.status === 200){
+    //           window.videoListRes = JSON.parse(xhr.responseText);
+    //           simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
+
+    //           allVideos.forEach(video=>{
+    //             const videoTag = video.getElementsByClassName('videoTag')[0];
+                
+    //             let isSim = false;
+    //             simTags.forEach(tag=>{
+    //               if(videoTag.textContent.indexOf(tag) > 0){
+    //                 isSim = true;
+    //               }
+    //             });
+
+    //             if(!isSim){
+    //               video.style.display = 'none';
+    //             }
+    //           });
+
+    //       } else{
+    //           console.error('Error:', xhr.status);
+    //       }
+    //   };
+
+    //   xhr.onerror = function(){
+    //       console.error('Network Error');
+    //   };
+
+    //   xhr.send();
+    // }
 
   });
 

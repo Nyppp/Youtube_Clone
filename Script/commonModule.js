@@ -220,6 +220,8 @@ function delay(ms) {
 
 //유사도 계산 함수 (api 호출 + 유사도 계산)
 async function getSimilarity(videoId, allVideos){
+
+    let startTime = window.performance.now();
     let firstTags;
 
     let allTags = [];
@@ -248,9 +250,9 @@ async function getSimilarity(videoId, allVideos){
     console.log(allUniqueTags);
 
     const simTags = [];
+    let resCount = 0;
 
     for (const secondTag of allUniqueTags){
-        await delay(50);
         if(firstTags[0] == secondTag){
             continue;
         }
@@ -260,31 +262,16 @@ async function getSimilarity(videoId, allVideos){
             continue;
         }
 
+
+        await delay(20);
         let sim = await calcSimilarity(firstTags[0], secondTag);
         if (sim > 0){
             simTags.push(secondTag);
         }
     }
+    let endTime = window.performance.now();
 
-    // for (const firstTag of firstTags){
-
-    //     for (const secondTag of allUniqueTags){
-    //         await delay(10);
-    //         if(firstTag == secondTag){
-    //             continue;
-    //         }
-
-    //         if(simTags.indexOf(secondTag) > 0)
-    //         {
-    //             continue;
-    //         }
-
-    //         let sim = await calcSimilarity(firstTag, secondTag);
-    //         if (sim > 0){
-    //             simTags.push(secondTag);
-    //         }
-    //     }
-    // }
+    console.log("유사도 계산 완료, 걸린 시간 : " + (endTime - startTime) + "\n" + simTags);
 
     return simTags;
 }
@@ -318,8 +305,6 @@ async function calcSimilarity(firstWord, secondWord){
                         sum += sim.SimScore;
                         count++;
                     });
-
-                    console.log(firstWord + " and " + secondWord +" 유사도 평균값은 : " + (sum / count));
 
                     resolve((sum / count));
                     } catch(e){
