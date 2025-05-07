@@ -126,3 +126,8 @@
     display: block;
     line-height: 0.4;
 }
+
+.video-preview{
+    width: 276px;
+    height: 155px;
+}

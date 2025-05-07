@@ -148,7 +148,6 @@ function updateSidebarSubscriptions() {
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('subscription.js 로드됨');
     
     // 사이드바가 로드된 후에 구독 목록 업데이트
     const sidebarElement = document.getElementById('main-sidebar');
