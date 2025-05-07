@@ -227,12 +227,9 @@ async function getSimilarity(videoId, allVideos){
     let allTags = [];
     let allUniqueTags
 
-    //전체 비디오 리스트 반복
-    //1번부터 ~ 끝까지, videoId의 태그들과 비교 > 2차배열?
-    // ex) 3번 태그 : 동물, 과학 > 1~끝번호까지 동물태그 비교 > 1~끝번호까지 과학태그 비교 > n^2코스트
-    // 성능 향상 위해, 앞 태그에서 기준치를 충족하면, 뒷 태그는 검사하지 않는 거로 > 다음 비디오 id로 넘김
+    //현재 보고있는 비디오의 1번 태그
+    //전체 태그 리스트 서로 비교 (api 초기값 기준 27개)
 
-    // TODO : 우선 성능 신경안쓰고 모든 태그를 비교하도록 코드 작성
     allVideos.forEach(video=>{
         //현재 보고있는 비디오의 태그들 추출
         if(video.id == videoId){
@@ -250,18 +247,15 @@ async function getSimilarity(videoId, allVideos){
     console.log(allUniqueTags);
 
     const simTags = [];
-    let resCount = 0;
 
     for (const secondTag of allUniqueTags){
         if(firstTags[0] == secondTag){
             continue;
         }
 
-        if(simTags.indexOf(secondTag) > 0)
-        {
+        if(simTags.indexOf(secondTag) > 0){
             continue;
         }
-
 
         await delay(20);
         let sim = await calcSimilarity(firstTags[0], secondTag);

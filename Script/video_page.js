@@ -1,10 +1,12 @@
 import * as common from "./commonModule.js";
 
-// 전체 태그를 담는 변수
-const videoTags = [];
-let uniqueTag;
-let simTags = [];
 
+const videoTags = []; // 전체 태그를 담는 변수
+let uniqueTag; //전체 태그 > 중복 제거 값
+let simTags = []; //유사도 계산용
+let sameTagVideos = []; //동일 태그 비디오들 id 저장
+
+//현재 보고 있는 비디오 정보 가져오기
 function getVideoData(){
   const videoId = window.location.search.split('=');
 
@@ -30,6 +32,7 @@ function getVideoData(){
   xhr.send();
 }
 
+//비디오 정보를 화면에 출력
 function parseJsondata(data) {
   document.getElementById('video-title').textContent = data.title;
 
@@ -72,6 +75,7 @@ function fetchChannelInfo(channelId) {
   xhrChannel.send();
 }
 
+//채널 데이터 연동
 function parseJsonchanneldata(channelData) {
   document.getElementById('channelName').textContent = channelData.channel_name;
 
@@ -120,7 +124,7 @@ async function getVideoList() {
     if (xhrVideoList.status === 200) {
       window.videoListRes = JSON.parse(xhrVideoList.responseText);
       parseJsonVideoListdata(window.videoListRes);
-      simTags = await common.getSimilarity(videoId[1], window.videoListRes);
+      //simTags = await common.getSimilarity(videoId[1], window.videoListRes);
     } else {
       console.error('Error:', xhrVideoList.status);
     }
@@ -149,11 +153,44 @@ function parseJsonVideoListdata(videoListData) {
     video.tags.forEach(function(tag){
         videoTags.push(tag);
     });
-})
+  })
 
-//태그들 가져오기
-uniqueTag = [... new Set(videoTags)];
-initTagMenu(uniqueTag);
+  //태그들 가져오기
+  uniqueTag = [... new Set(videoTags)];
+  initTagMenu(uniqueTag);
+
+  setSameTagVideo();
+}
+
+//현재 보고 있는 비디오와 태그가 같은 비디오들 리스트 저장
+function setSameTagVideo(){
+  const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+  const currentVideoId = window.location.search.split('=');
+
+  let currentTags = [];
+  let videos = [];
+
+  //모든 영상 리스트를 보이지 않음 설정 후, 현재 보고있는 영상 태그 저장
+  allVideos.forEach(videoItem=>{
+    if(videoItem.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
+      currentTags = videoItem.getElementsByClassName('videoTag')[0].textContent.split(',');
+    }
+  });
+  
+  //전체 영상 중, 현재 보고있는 영상 태그를 가지고 있는 비디오는 모두 추천 리스트로 등록
+  allVideos.forEach(videoItem=>{
+    const videoTags = videoItem.getElementsByClassName('videoTag')[0].textContent;
+
+    
+
+    currentTags.forEach(tag=>{
+      if (videoTags.indexOf(tag)>=0){
+        videos.push(videoItem.getElementsByClassName('videoId')[0].textContent);
+      }
+    });
+  });
+
+  sameTagVideos = [... new Set(videos)];
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
@@ -215,35 +252,26 @@ function initTagMenu(tags){
   //추천 탭에 대한 이벤트 추가
   recommendButton.addEventListener("click", async function(e){
     e.preventDefault();
-    const videoContainer = document.getElementById('video-list');
+    const currentVideoId = window.location.search.split('=');
+
+    console.log(sameTagVideos);
+
     const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
-    allVideos.forEach(videoItem=>{
-      videoItem.style.display = 'flex';
-    });
+    allVideos.forEach(video=>{
+      video.style.display = 'none';
 
-    if(simTags){
-      allVideos.forEach(video=>{
-        const videoTag = video.getElementsByClassName('videoTag')[0];
-        
-        let isSim = false;
-        simTags.forEach(tag=>{
-          if(videoTag.textContent.indexOf(tag) > 0){
-            isSim = true;
-          }
-        });
+      //자신 제외
+      if(video.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
+        return;
+      }
 
-        if(!isSim){
-          video.style.display = 'none';
-        }
-      });
-    } else{
-      console.log('유사도 배열 로드 중...');
-    }
+      if(sameTagVideos.indexOf(video.getElementsByClassName('videoId')[0].textContent) >= 0){
+        video.style.display = 'flex';
+      }
+    })
 
-    // if(window.videoListRes != null){
-    //   simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
-
+    // if(simTags){
     //   allVideos.forEach(video=>{
     //     const videoTag = video.getElementsByClassName('videoTag')[0];
         
@@ -258,40 +286,8 @@ function initTagMenu(tags){
     //       video.style.display = 'none';
     //     }
     //   });
-    // }else{
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
-
-    //   xhr.onload = async function(){
-    //       if(xhr.status === 200){
-    //           window.videoListRes = JSON.parse(xhr.responseText);
-    //           simTags = await common.getSimilarity(currentVideoID[1], window.videoListRes);
-
-    //           allVideos.forEach(video=>{
-    //             const videoTag = video.getElementsByClassName('videoTag')[0];
-                
-    //             let isSim = false;
-    //             simTags.forEach(tag=>{
-    //               if(videoTag.textContent.indexOf(tag) > 0){
-    //                 isSim = true;
-    //               }
-    //             });
-
-    //             if(!isSim){
-    //               video.style.display = 'none';
-    //             }
-    //           });
-
-    //       } else{
-    //           console.error('Error:', xhr.status);
-    //       }
-    //   };
-
-    //   xhr.onerror = function(){
-    //       console.error('Network Error');
-    //   };
-
-    //   xhr.send();
+    // } else{
+    //   console.log('유사도 배열 로드 중...');
     // }
 
   });
