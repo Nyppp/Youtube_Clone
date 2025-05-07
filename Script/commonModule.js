@@ -1,3 +1,4 @@
+
 //업로드 날짜 < > 현재 시간 상대 시간 계산
 function timeAgo(dateString) {
     const now = new Date();
@@ -213,53 +214,115 @@ function drawList(videoList, results){
     });
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 //유사도 계산 함수 (api 호출 + 유사도 계산)
-function getSimilarity(){
-    const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
-    const access_key = '495469be-0399-4e67-9af5-086ef64c73d8';
-    const firstWord = '배';
-    const secondWord = '사과';
+async function getSimilarity(videoId, allVideos, skipVideos){
 
-    const requestJson = {
-        argument: {
-            first_word: firstWord,
-            second_word: secondWord,
+    let startTime = window.performance.now();
+    let firstTags;
+
+    let allTags = [];
+    let allUniqueTags
+
+    let targetVideos = [];
+
+    //현재 보고있는 비디오의 태그와, 다른 비디오들 태그 유사도 계산
+    //태그 중 단 한개라도 일치하는 비디오는 이미 추천 리스트 올라갔으니 계산 제외(skipVideos)
+
+    allVideos.forEach(video=>{
+        //현재 보고있는 비디오의 태그들 추출
+        if(video.id == videoId){
+            firstTags = video.tags;
         }
-    };
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', openApiURL, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', access_key);
+        if(!skipVideos.includes(String(video.id))){
+            targetVideos.push(video);
+        }
+    });
 
+    targetVideos.forEach(video=>{
+        video.tags.forEach(tag=>{
+            allTags.push(tag);
+        })
+    })
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const responseData = JSON.parse(xhr.responseText);
-                const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;
+    //전체 태그 중복제거
+    allUniqueTags = [... new Set(allTags)];
+    console.log(allUniqueTags);
 
-                console.log(wordRelInfo);
+    const simTags = [];
 
-                let sum = 0;
-                let count = 0;
-                wordRelInfo.forEach(sim => {
-                    sum += sim.SimScore;
-                    count++;
-                });
+    for (const secondTag of allUniqueTags){
+        if(firstTags[0] == secondTag){
+            continue;
+        }
 
-            console.log("유사도 평균값은 : " + (sum / count));
-            } else {
-            console.error('HTTP 요청 실패:', xhr.status);
+        if(simTags.indexOf(secondTag) > 0){
+            continue;
+        }
+
+        await delay(20);
+        let sim = await calcSimilarity(firstTags[0], secondTag);
+        if (sim > 0){
+            simTags.push(secondTag);
+        }
+    }
+    let endTime = window.performance.now();
+
+    console.log("유사도 계산 완료, 걸린 시간 : " + (endTime - startTime) + "\n" + simTags);
+
+    return simTags;
+}
+
+async function calcSimilarity(firstWord, secondWord){
+    return new Promise((resolve, reject)=> {
+        const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
+        const access_key = '34f8f74f-733c-4b95-b8a4-2998d4580dbd';
+        const requestJson = {
+            argument: {
+                first_word: firstWord,
+                second_word: secondWord,
             }
-        }
-    };
+        };
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', openApiURL, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Authorization', access_key);
 
-    xhr.onerror = function () {
-        console.error('네트워크 오류 발생');
-    };
+        xhr.onreadystatechange = function () {
+            let sum = 0;
+            let count = 0;
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try{
+                    const responseData = JSON.parse(xhr.responseText);
+                    const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;
 
-    xhr.send(JSON.stringify(requestJson));
+                    
+                    wordRelInfo.forEach(sim => {
+                        sum += sim.SimScore;
+                        count++;
+                    });
+
+                    resolve((sum / count));
+                    } catch(e){
+                        reject(e);
+                    }
+
+                } else {
+                    console.error('HTTP 요청 실패:', xhr.status);
+                }
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error('네트워크 오류 발생');
+        };
+        xhr.send(JSON.stringify(requestJson));
+    });
 }
 
 export {timeAgo, setViewUnit, drawList, getSimilarity}

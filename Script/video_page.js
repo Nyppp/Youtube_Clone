@@ -1,9 +1,12 @@
 import * as common from "./commonModule.js";
 
-// 전체 태그를 담는 변수
-const videoTags = [];
-let uniqueTag;
 
+const videoTags = []; // 전체 태그를 담는 변수
+let uniqueTag; //전체 태그 > 중복 제거 값
+let simTags = []; //유사도 계산용
+let sameTagVideos = []; //동일 태그 비디오들 id 저장
+
+//현재 보고 있는 비디오 정보 가져오기
 function getVideoData(){
   const videoId = window.location.search.split('=');
 
@@ -29,6 +32,7 @@ function getVideoData(){
   xhr.send();
 }
 
+//비디오 정보를 화면에 출력
 function parseJsondata(data) {
   document.getElementById('video-title').textContent = data.title;
 
@@ -71,6 +75,7 @@ function fetchChannelInfo(channelId) {
   xhrChannel.send();
 }
 
+//채널 데이터 연동
 function parseJsonchanneldata(channelData) {
   document.getElementById('channelName').textContent = channelData.channel_name;
 
@@ -103,7 +108,9 @@ function parseJsonchanneldata(channelData) {
 }
 
 // 사이드 비디오 리스트 가져오기
-function getVideoList() {
+async function getVideoList() {
+  const videoId = window.location.search.split('=');
+
   if(window.videoListRes != null){
     parseJsondata(window.videoListRes);
     return;
@@ -112,10 +119,11 @@ function getVideoList() {
   const xhrVideoList = new XMLHttpRequest();
   xhrVideoList.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
 
-  xhrVideoList.onload = function () {
+  xhrVideoList.onload = async function () {
     if (xhrVideoList.status === 200) {
-      const videoListResponse = JSON.parse(xhrVideoList.responseText);
-      parseJsonVideoListdata(videoListResponse);
+      window.videoListRes = JSON.parse(xhrVideoList.responseText);
+      parseJsonVideoListdata(window.videoListRes);
+      
     } else {
       console.error('Error:', xhrVideoList.status);
     }
@@ -144,11 +152,46 @@ function parseJsonVideoListdata(videoListData) {
     video.tags.forEach(function(tag){
         videoTags.push(tag);
     });
-})
+  })
 
-//태그들 가져오기
-uniqueTag = [... new Set(videoTags)];
-initTagMenu(uniqueTag);
+  //태그들 가져오기
+  uniqueTag = [... new Set(videoTags)];
+  initTagMenu(uniqueTag);
+
+  setSameTagVideo();
+}
+
+//현재 보고 있는 비디오와 태그가 같은 비디오들 리스트 저장
+async function setSameTagVideo(){
+  const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+  const currentVideoId = window.location.search.split('=');
+
+  let currentTags = [];
+  let videos = [];
+
+  //모든 영상 리스트를 보이지 않음 설정 후, 현재 보고있는 영상 태그 저장
+  allVideos.forEach(videoItem=>{
+    if(videoItem.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
+      currentTags = videoItem.getElementsByClassName('videoTag')[0].textContent.split(',');
+    }
+  });
+  
+  //전체 영상 중, 현재 보고있는 영상 태그를 가지고 있는 비디오는 모두 추천 리스트로 등록
+  allVideos.forEach(videoItem=>{
+    const videoTags = videoItem.getElementsByClassName('videoTag')[0].textContent;
+
+    
+
+    currentTags.forEach(tag=>{
+      if (videoTags.indexOf(tag)>=0){
+        videos.push(videoItem.getElementsByClassName('videoId')[0].textContent);
+      }
+    });
+  });
+
+  sameTagVideos = [... new Set(videos)];
+
+  await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
@@ -191,6 +234,10 @@ function initTagMenu(tags){
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
       const videoContainer = document.getElementById('video-list');
 
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
+
       allVideos.sort((a,b) => {
         const aId = parseInt(a.getElementsByClassName('videoId')[0].textContent);
         const bId = parseInt(b.getElementsByClassName('videoId')[0].textContent);
@@ -204,11 +251,46 @@ function initTagMenu(tags){
   });
 
   //추천 탭에 대한 이벤트 추가
-  recommendButton.addEventListener("click", function(e){
-      e.preventDefault();
-      const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+  recommendButton.addEventListener("click", async function(e){
+    e.preventDefault();
+    const currentVideoId = window.location.search.split('=');
 
-      common.getSimilarity();
+    const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+
+    allVideos.forEach(video=>{
+      video.style.display = 'none';
+
+      //자신 제외
+      if(video.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
+        return;
+      }
+
+      if(sameTagVideos.indexOf(video.getElementsByClassName('videoId')[0].textContent) >= 0){
+        video.style.display = 'flex';
+      }
+    })
+
+    
+
+    // if(simTags){
+    //   allVideos.forEach(video=>{
+    //     const videoTag = video.getElementsByClassName('videoTag')[0];
+        
+    //     let isSim = false;
+    //     simTags.forEach(tag=>{
+    //       if(videoTag.textContent.indexOf(tag) > 0){
+    //         isSim = true;
+    //       }
+    //     });
+
+    //     if(!isSim){
+    //       video.style.display = 'none';
+    //     }
+    //   });
+    // } else{
+    //   console.log('유사도 배열 로드 중...');
+    // }
+
   });
 
   //태그에 대한 기능 추가 (좋아요 순으로 노출)
@@ -216,6 +298,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const videoContainer = document.getElementById('video-list');
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
 
       allVideos.sort((a,b) => {
           const aLikes = parseInt(a.getElementsByClassName('likesCount')[0].textContent);
@@ -233,6 +318,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const videoContainer = document.getElementById('video-list');
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
       
 
       allVideos.sort((a,b) => {
@@ -251,6 +339,9 @@ function initTagMenu(tags){
       e.preventDefault();
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
       const videoContainer = document.getElementById('video-list');
+      allVideos.forEach(videoItem=>{
+        videoItem.style.display = 'flex';
+      });
 
       allVideos.sort((a,b) => {
           const aLikes = parseInt(a.getElementsByClassName('viewsCount')[0].textContent);
