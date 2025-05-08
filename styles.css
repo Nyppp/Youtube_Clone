@@ -22,10 +22,11 @@ a{
     gap:1px;
 }
 
-#main-sidebar{
-    width: 270px;
+#main-sidebar {
+    width: 270px !important; /* !important 추가 */
     flex-shrink: 0;
-    transition: width 0.3s ease-in-out;
+    position: relative; /* 포지셔닝 추가 */
+    z-index: 10; 
 }
 
 #main-contentbox{
@@ -33,12 +34,13 @@ a{
 }
 
 #main-sidebar.collapsed {
-    width: 80px !important; /* !important로 우선순위 확보 */
+    width: 80px !important;
 }
 
 #main-contentbox {
-    width: calc(100% - 270px); /* 기본적으로 사이드바 크기를 뺀 값 */
-    transition: width 0.3s ease-in-out;
+    width: calc(100% - 270px) !important; 
+    position: relative; 
+    z-index: 1; 
 }
 
 #main-contentbox.expanded {
@@ -54,22 +56,31 @@ a{
     width: calc(100% - 80px);
 }
 
-@media(max-width : 1024px){
-    #main-sidebar{
-        width: 80px;
-    }
+/* 사이드바 축소 상태 */
+body.sidebar-collapsed #main-sidebar {
+    width: 80px !important;
+}
 
-    #main-sidebar.collapsed {
-        width: 80px;
+body.sidebar-collapsed #main-contentbox {
+    width: calc(100% - 80px) !important;
+}
+
+@media(max-width: 1024px) {
+    #main-sidebar {
+        width: 80px !important;
     }
     
-    #main-contentbox.expanded {
-        width: calc(100% - 80px);
+    #main-contentbox {
+        width: calc(100% - 80px) !important;
     }
 }
 
-@media(max-width : 425px){
-    #main-sidebar{
-        display: none;
+@media(max-width: 425px) {
+    #main-sidebar {
+        display: none !important;
+    }
+    
+    #main-contentbox {
+        width: 100% !important;
     }
 }
