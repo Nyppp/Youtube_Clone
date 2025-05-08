@@ -18,6 +18,7 @@ const interval = setInterval(()=>{
       clearInterval(interval);
   }
   toggleBtn = document.getElementById('toggle-theme');
+  document.documentElement.classList.add("light-mode");
   
 }, 100);
 
