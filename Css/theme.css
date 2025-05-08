@@ -1,0 +1,13 @@
+body.light-mode {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode a {
+    color: black;
+}
+body.light-mode p {
+    color: black;
+}
+body.light-mode h1 {
+    color: black;
+}

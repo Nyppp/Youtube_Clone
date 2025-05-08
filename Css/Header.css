@@ -159,6 +159,7 @@ nav {
     background-image: url(../resources/images/nav/profile/user.png);
     background-size: cover;
 }
+#toggle-theme {}
 
 @media (max-width : 425px){
     #Hamburger{
