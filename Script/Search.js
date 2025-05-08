@@ -56,7 +56,7 @@ function updateUrlAndSearch(searchInput) {
     
     // 검색어가 있을 때만 URL 업데이트
     if (searchTerm) {
-        const url = new URL(window.location.href);
+        const url = new URL(window.location.origin + window.location.pathname);
         url.searchParams.set('q', searchTerm);
         window.history.pushState({}, '', url);
     } else {
@@ -164,7 +164,7 @@ function parseJsondata(results) {
         const interval = setInterval(()=>{
             if(videoList){
                 clearInterval(interval);
-                common.drawList(videoList, window.videoListRes);
+                common.drawList(videoList, results);
             }
             videoList = document.getElementById('Video-Container');
             drawSearchList(videoList);
