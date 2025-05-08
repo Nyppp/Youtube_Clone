@@ -1,6 +1,5 @@
 import * as common from "./commonModule.js";
 
-
 const videoTags = []; // 전체 태그를 담는 변수
 let uniqueTag; //전체 태그 > 중복 제거 값
 let simTags = []; //유사도 계산용
@@ -81,6 +80,9 @@ function parseJsonchanneldata(channelData) {
 
   const channelProfileImg = document.getElementById('channelProfile');
   channelProfileImg.src = channelData.channel_profile;
+
+  const profileLink = document.getElementsByClassName('profileLink')[0];
+  profileLink.href = `?channel_id=${channelData.id}`;
 
   document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
   
@@ -191,7 +193,7 @@ async function setSameTagVideo(){
 
   sameTagVideos = [... new Set(videos)];
 
-  await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
+  simTags = await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
@@ -268,29 +270,13 @@ function initTagMenu(tags){
       if(sameTagVideos.indexOf(video.getElementsByClassName('videoId')[0].textContent) >= 0){
         video.style.display = 'flex';
       }
+
+      simTags.forEach(tag=>{
+        if(video.getElementsByClassName('videoTag')[0].textContent.indexOf(tag) > 0){
+          video.style.display = 'flex';
+        }
+      });
     })
-
-    
-
-    // if(simTags){
-    //   allVideos.forEach(video=>{
-    //     const videoTag = video.getElementsByClassName('videoTag')[0];
-        
-    //     let isSim = false;
-    //     simTags.forEach(tag=>{
-    //       if(videoTag.textContent.indexOf(tag) > 0){
-    //         isSim = true;
-    //       }
-    //     });
-
-    //     if(!isSim){
-    //       video.style.display = 'none';
-    //     }
-    //   });
-    // } else{
-    //   console.log('유사도 배열 로드 중...');
-    // }
-
   });
 
   //태그에 대한 기능 추가 (좋아요 순으로 노출)

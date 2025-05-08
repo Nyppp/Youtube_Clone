@@ -90,20 +90,28 @@ function initTagMenu(tags){
     viewButton.textContent = 'Views';
     viewButton.href = "";
 
-    //태그에 대한 기능 추가 (전체 보기 -> "" 상태로 검색되게끔)
+    //태그에 대한 기능 추가 (전체 보기 -> id 정렬)
     allButton.addEventListener("click", function(e){
         e.preventDefault();
-        const searchInput = document.getElementById('Search');
-        searchInput.value = "";
-        document.getElementById('SearchBtn').click();
+        const videoContainer = document.getElementById('Video-Container');
+        const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
+        
+
+        allVideos.sort((a,b) => {
+            const aId = parseInt(a.getElementsByClassName('videoId')[0].textContent);
+            const bId = parseInt(b.getElementsByClassName('videoId')[0].textContent);
+
+            return aId - bId;
+        });
+        allVideos.forEach(videoItem=>{
+            videoItem.style.display = 'block';
+            videoContainer.appendChild(videoItem);
+        });
     });
 
     //태그에 대한 기능 추가 (좋아요 순으로 노출)
     likesButton.addEventListener("click", function(e){
         e.preventDefault();
-        const searchInput = document.getElementById('Search');
-        searchInput.value = "";
-        document.getElementById('SearchBtn').click();
 
         const videoContainer = document.getElementById('Video-Container');
 
@@ -116,6 +124,7 @@ function initTagMenu(tags){
             return bLikes - aLikes;
         });
         allVideos.forEach(videoItem=>{
+            videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
         });
     });
@@ -123,9 +132,6 @@ function initTagMenu(tags){
     //태그에 대한 기능 추가 (날짜 순으로 노출)
     dateButton.addEventListener("click", function(e){
         e.preventDefault();
-        const searchInput = document.getElementById('Search');
-        searchInput.value = "";
-        document.getElementById('SearchBtn').click();
 
         const videoContainer = document.getElementById('Video-Container');
 
@@ -140,6 +146,7 @@ function initTagMenu(tags){
             return btime - atime;
         });
         allVideos.forEach(videoItem=>{
+            videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
         });
     });
@@ -147,9 +154,6 @@ function initTagMenu(tags){
     //태그에 대한 기능 추가 (조회수 순으로 노출)
     viewButton.addEventListener("click", function(e){
         e.preventDefault();
-        const searchInput = document.getElementById('Search');
-        searchInput.value = "";
-        document.getElementById('SearchBtn').click();
 
         const videoContainer = document.getElementById('Video-Container');
 
@@ -162,6 +166,7 @@ function initTagMenu(tags){
             return bLikes - aLikes;
         });
         allVideos.forEach(videoItem=>{
+            videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
         });
     });
