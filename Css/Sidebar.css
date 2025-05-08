@@ -20,7 +20,7 @@
         visibility: hidden;
     }
 
-    span{
+    .nav-text{
         display: none;
     }
 }

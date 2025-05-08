@@ -46,13 +46,15 @@ button:hover{
 @media (max-width:1024px){
     .main-container{
         flex-direction: column;
-        width: 768px;
+        width: 100%;
         align-items: center;
     }
 
-    .side-Info{
-        width: 400px !important;
+    .video-list{
+        width: 640px;
     }
+
+    
 }
 
 @media (max-width:768px){
@@ -60,7 +62,67 @@ button:hover{
         flex-direction: column;
         align-items: center;
 
-        min-width: 640px;
+        width: 425px;
+    }
+
+    .comment-box{
+        width: 640px !important;
+    }
+}
+
+@media (max-width:425px){
+    #Video-Container{
+        grid-template-columns: repeat(1,1fr);
+        min-width: 320px;
+    }
+    
+    .video-container{
+        width: 320px;
+    }
+
+    .Video-Item{
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .Video-Description{
+        width: 226px !important;
+    }
+
+    #video-player{
+        width: 320px !important;
+    }
+
+    .video-box{
+        width: 320px !important;
+    }
+
+    .info-container{
+        width: 320px !important;
+    }
+
+    .comment-box{
+        width: 320px !important;
+    }
+
+    .desc-box{
+        width: 320px !important;
+    }
+
+    #commentInput{
+        width: 256px !important;
+    }
+
+    .comment-container {
+        width: 320px !important;
+    }
+
+    .comment-block{
+        width: 320px !important;
+    }
+
+    .comment-list{
+        width: 320px !important;
     }
 }
 
@@ -68,7 +130,7 @@ button:hover{
 /*======== 비디오 공간 ========*/
 .video-box{
     width: 640px;
-    height: 455px;
+    height: 100%;
 }
 
 #video-player{
@@ -88,8 +150,10 @@ button:hover{
 .info-container{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    font-size: 12px;
     width: 640px;
     height: 40px;
 }
@@ -365,6 +429,10 @@ button:hover{
     display: flex;
     flex-direction: column;
     width: 640px;
+}
+
+.commentProfile{
+    border-radius: 50%;
 }
 
 /*======== 새로운 코멘트 리스트 ========*/

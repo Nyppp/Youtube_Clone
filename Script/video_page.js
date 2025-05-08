@@ -81,6 +81,9 @@ function parseJsonchanneldata(channelData) {
   const channelProfileImg = document.getElementById('channelProfile');
   channelProfileImg.src = channelData.channel_profile;
 
+  const profileLink = document.getElementsByClassName('profileLink')[0];
+  profileLink.href = `?channel_id=${channelData.id}`;
+
   document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
   
   // 구독버튼 설정
