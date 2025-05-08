@@ -1,6 +1,5 @@
 import * as common from "./commonModule.js";
 
-
 const videoTags = []; // 전체 태그를 담는 변수
 let uniqueTag; //전체 태그 > 중복 제거 값
 let simTags = []; //유사도 계산용
@@ -191,7 +190,7 @@ async function setSameTagVideo(){
 
   sameTagVideos = [... new Set(videos)];
 
-  await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
+  simTags = await common.getSimilarity(currentVideoId[1], window.videoListRes, sameTagVideos);
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수
@@ -268,6 +267,12 @@ function initTagMenu(tags){
       if(sameTagVideos.indexOf(video.getElementsByClassName('videoId')[0].textContent) >= 0){
         video.style.display = 'flex';
       }
+
+      simTags.forEach(tag=>{
+        if(video.getElementsByClassName('videoTag')[0].textContent.indexOf(tag) > 0){
+          video.style.display = 'flex';
+        }
+      });
     })
 
     

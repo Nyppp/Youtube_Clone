@@ -264,7 +264,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
             continue;
         }
 
-        await delay(20);
+        await delay(50);
         let sim = await calcSimilarity(firstTags[0], secondTag);
         if (sim > 0){
             simTags.push(secondTag);

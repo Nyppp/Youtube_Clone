@@ -164,84 +164,46 @@ function parseJsondata(results) {
         const interval = setInterval(()=>{
             if(videoList){
                 clearInterval(interval);
-                common.drawList(videoList, results);
+                common.drawList(videoList, window.videoListRes);
             }
             videoList = document.getElementById('Video-Container');
+            drawSearchList(videoList);
         }, 100);
     }
     else{
         common.drawList(videoList, results);
+        drawSearchList(videoList);
     }
 }
 
+function drawSearchList(videoList){
+    videoList.style.gridTemplateColumns = "repeat(1, 1fr)";
 
+    const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
-// 채널 정보 가져오기 함수
-function getChannelInfo(channelId, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
-    
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            callback(response.channel_name, response.channel_profile);
-        } else {
-            console.error('Error:', xhr.status);
-        }
-    };
-    
-    xhr.onerror = function() {
-        console.error('Network Error');
-    };
-    
-    xhr.send();
-}
+    allVideos.forEach(video=>{
+        video.style.flexDirection = 'row';
+        video.style.justifySelf = 'left';
+        video.style.width = '100%';
 
-// 조회수 표기 함수
-function setViewUnit(viewCount) {
-    if (viewCount > 1000) {
-        viewCount = Math.floor(viewCount / 1000);
-        return viewCount + "K";
-    }
-    return viewCount;
-}
+        const profileElement = video.getElementsByClassName('Video-Profile')[0];
+        const discElement = video.getElementsByClassName('Video-Description')[0];
 
-// 상대 시간 계산 함수
-function timeAgo(dateString) {
-    const now = new Date();
-    const past = new Date(dateString);
-    const diffInSeconds = Math.floor((now - past) / 1000);
-    
-    const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
-    if (diffInSeconds < 60) {
-        return rtf.format(-diffInSeconds, "second");
-    }
-    
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
-    if (diffInMinutes < 60) {
-        return rtf.format(-diffInMinutes, "minute");
-    }
-    
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) {
-        return rtf.format(-diffInHours, "hour");
-    }
-    
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) {
-        return rtf.format(-diffInDays, "day");
-    }
-    
-    const diffInWeeks = Math.floor(diffInDays / 7);
-    if (diffInWeeks < 5) {
-        return rtf.format(-diffInWeeks, "week");
-    }
-    
-    const diffInMonths = Math.floor(diffInDays / 30);
-    if (diffInMonths < 12) {
-        return rtf.format(-diffInMonths, "month");
-    }
-    
-    const diffInYears = Math.floor(diffInDays / 365);
-    return rtf.format(-diffInYears, "year");
+        profileElement.firstChild.style.width="20px";
+        profileElement.firstChild.style.height="20px";
+
+        const discBox = document.createElement('div');
+
+        discBox.appendChild(profileElement);
+        discBox.appendChild(discElement.getElementsByClassName('Video-Channel')[0]);
+
+        discBox.style.display = 'flex';
+        discBox.style.gap = '5px';
+        discBox.style.alignItems = 'center';
+
+        discElement.insertBefore(discBox, discElement.lastChild);
+    })
+
+    document.getElementsByClassName('Top-Menu')[0].style.display = 'none';
+
 }
