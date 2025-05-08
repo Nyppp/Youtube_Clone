@@ -25,15 +25,46 @@ a{
 #main-sidebar{
     width: 270px;
     flex-shrink: 0;
+    transition: width 0.3s ease-in-out;
 }
 
 #main-contentbox{
     width: 100%;
 }
 
+#main-sidebar.collapsed {
+    width: 80px !important; /* !important로 우선순위 확보 */
+}
+
+#main-contentbox {
+    width: calc(100% - 270px); /* 기본적으로 사이드바 크기를 뺀 값 */
+    transition: width 0.3s ease-in-out;
+}
+
+#main-contentbox.expanded {
+    width: calc(100% - 80px) !important; /* 축소된 사이드바 크기를 뺀 값 */
+}
+
+/* 햄버거 토글 시 메인 콘텐츠 영역 조정 */
+#main-contentbox {
+    transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+}
+
+#main-contentbox.expanded {
+    width: calc(100% - 80px);
+}
+
 @media(max-width : 1024px){
     #main-sidebar{
         width: 80px;
+    }
+
+    #main-sidebar.collapsed {
+        width: 80px;
+    }
+    
+    #main-contentbox.expanded {
+        width: calc(100% - 80px);
     }
 }
 
