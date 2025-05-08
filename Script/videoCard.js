@@ -103,6 +103,7 @@ function initTagMenu(tags){
 
             return aId - bId;
         });
+
         allVideos.forEach(videoItem=>{
             videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
@@ -204,6 +205,8 @@ function initTagMenu(tags){
 
         topMenu.appendChild(tagButton);
     });
+
+    console.log(topMenu[1]);
 }
 
 getVideoList();
