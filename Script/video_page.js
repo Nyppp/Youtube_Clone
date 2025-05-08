@@ -50,7 +50,7 @@ function parseJsondata(data) {
   document.getElementById('likes').textContent = data.likes;
   document.getElementById('hates').textContent = data.dislikes;
 
-  document.getElementById('descText').textContent = data.tags.map(tag => `#${tag}`).join(' ');
+  document.getElementById('descText').textContent = data.description;
 }
 
 // 메인 비디오용 채널 정보 가져오기

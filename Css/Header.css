@@ -69,7 +69,7 @@ nav {
     letter-spacing: 0%;
 }
 #SearchBtn {
-    background-color: #303030;
+    background-color: transparent;
     border: 1px solid #303030;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
