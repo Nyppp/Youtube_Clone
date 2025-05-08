@@ -22,23 +22,65 @@ a{
     gap:1px;
 }
 
-#main-sidebar{
-    width: 270px;
+#main-sidebar {
+    width: 270px !important; /* !important 추가 */
     flex-shrink: 0;
+    position: relative; /* 포지셔닝 추가 */
+    z-index: 10; 
 }
 
 #main-contentbox{
     width: 100%;
 }
 
-@media(max-width : 1024px){
-    #main-sidebar{
-        width: 80px;
+#main-sidebar.collapsed {
+    width: 80px !important;
+}
+
+#main-contentbox {
+    width: calc(100% - 270px) !important; 
+    position: relative; 
+    z-index: 1; 
+}
+
+#main-contentbox.expanded {
+    width: calc(100% - 80px) !important; /* 축소된 사이드바 크기를 뺀 값 */
+}
+
+/* 햄버거 토글 시 메인 콘텐츠 영역 조정 */
+#main-contentbox {
+    transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+}
+
+#main-contentbox.expanded {
+    width: calc(100% - 80px);
+}
+
+/* 사이드바 축소 상태 */
+body.sidebar-collapsed #main-sidebar {
+    width: 80px !important;
+}
+
+body.sidebar-collapsed #main-contentbox {
+    width: calc(100% - 80px) !important;
+}
+
+@media(max-width: 1024px) {
+    #main-sidebar {
+        width: 80px !important;
+    }
+    
+    #main-contentbox {
+        width: calc(100% - 80px) !important;
     }
 }
 
-@media(max-width : 425px){
-    #main-sidebar{
-        display: none;
+@media(max-width: 425px) {
+    #main-sidebar {
+        display: none !important;
+    }
+    
+    #main-contentbox {
+        width: 100% !important;
     }
 }

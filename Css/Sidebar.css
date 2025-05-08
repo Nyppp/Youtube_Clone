@@ -90,3 +90,32 @@
 .sidebar::-webkit-scrollbar {
     display: none;
 }
+/* 사이드바 토글 햄버거 효과 */
+.sidebar {
+    transition: width 0.3s ease-in-out;
+    overflow-x: hidden;
+}
+
+/* 접힌 상태의 사이드바 스타일 */
+.sidebar.collapsed {
+    width: 80px !important;
+}
+
+.sidebar.collapsed h3 {
+    visibility: hidden;
+}
+
+.sidebar.collapsed .nav-text {
+    display: none;
+}
+
+/* 사이드바 토글 애니메이션 */
+@media (min-width: 1025px) {
+    #main-sidebar.collapsed {
+        width: 80px !important;
+    }
+    
+    #main-sidebar {
+        transition: width 0.3s ease-in-out;
+    }
+}

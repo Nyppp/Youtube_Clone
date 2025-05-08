@@ -11,6 +11,7 @@
     border-bottom: 1px solid #303030;
 
     width: calc(100vw - 270px);
+    transition: width 0.3s ease-in-out;
     overflow-x: auto;
 }
 
@@ -22,6 +23,10 @@
 
 .Top-Menu::-webkit-scrollbar-thumb{
     background: #aaa;
+}
+
+body.sidebar-collapsed .Top-Menu {
+    width: calc(100vw - 80px);
 }
 
 @media (max-width : 1024px) {
