@@ -225,6 +225,7 @@
   align-items: center;
   margin: 24px 0 16px;
   background-color: #0f0f0f;
+  z-index: 98;
 }
 
 .section-header h3 {

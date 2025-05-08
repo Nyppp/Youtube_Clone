@@ -11,3 +11,208 @@ body.light-mode p {
 body.light-mode h1 {
     color: black;
 }
+body.light-mode div {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode div div {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode header {
+    background-color: #f9f9f9;
+    color: black;
+}
+
+/* index */
+body.light-mode #Video-Container {
+    background-color: #f9f9f9;
+}
+
+/* Header */
+body.light-mode #Hamburger {
+    filter: invert(100%);
+}
+body.light-mode #Logo {
+    filter: invert(100%);
+}
+body.light-mode form {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode input {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode #Search {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode #Search::placeholder {
+    color: black;
+}
+body.light-mode #SearchBtn {
+    filter: invert(100%);
+}
+body.light-mode #VoiceSearch {
+    filter: invert(100%);
+}
+body.light-mode #VoiceSearch:hover {
+    filter: invert(100%);
+}
+body.light-mode #Create {
+    filter: invert(100%);
+}
+body.light-mode #Apps {
+    filter: invert(100%);
+}
+body.light-mode #Notifications {
+    filter: invert(100%);
+}
+
+/* Top-Menu */
+body.light-mode .Top-Menu-All {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode .Top-Menu-All:focus {
+    background-color: #303030;
+    color: #f9f9f9;
+}
+body.light-mode .Top-Menu-Item {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode .Top-Menu-Item:focus {
+    background-color: #303030;
+    color: #f9f9f9;
+}
+
+/* Sidebar */
+body.light-mode .sidebar {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode .sidebar h3 {
+    color: black;
+}
+body.light-mode .sidebar hr {
+    border-top: 1px solid rgba(20, 20, 20, 0.1);
+}
+body.light-mode .nav-item:hover {
+    background-color: rgba(100, 100, 100, 0.1);
+}
+body.light-mode .imgIcon {
+    filter: invert(100%);
+}
+
+/* Channel */
+body.light-mode .content {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode .channel-info {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode .channel-navigation {
+    background-color: #f9f9f9;
+}
+body.light-mode .nav-tab {
+    color: black;
+}
+body.light-mode .nav-tab.active {
+    color: black;
+    border-bottom: 2px solid black;
+}
+body.light-mode .nav-tab:hover {
+    color: rgb(131, 129, 129);
+}
+body.light-mode .main-video-meta {
+    color : #303030;
+}
+body.light-mode .main-video {
+    background-color: #f9f9f9;
+}
+body.light-mode .video-section {
+    background-color: #f9f9f9;
+}
+
+/* VideoPage */
+body.light-mode .likes-button {
+    filter: invert(100%);
+}
+body.light-mode .hates-button {
+    filter: invert(100%);
+}
+body.light-mode .reply-button {
+    background-color: #f9f9f9;
+}
+body.light-mode .hates-button {
+    filter: invert(100%);
+}
+body.light-mode .share-button {
+    filter: invert(100%);
+}
+body.light-mode .save-button {
+    filter: invert(100%);
+}
+body.light-mode .more-button {
+    filter: invert(100%);
+}
+body.light-mode .like-button {
+    filter: invert(100%);
+}
+body.light-mode .hate-button {
+    filter: invert(100%);
+}
+body.light-mode #subscribtionText {
+    color: #303030;
+}
+body.light-mode #descOpenButton {
+    background-color: #f9f9f9;
+    color: #303030;
+}
+body.light-mode #sortIcon {
+    filter: invert(100%);
+}
+body.light-mode #sortText {
+    color: #303030;
+}
+body.light-mode #commentInput {
+    background-color: #f9f9f9;
+    color: black;
+}
+body.light-mode #commentInput::placeholder {
+    color: #303030;
+}
+body.light-mode .commentTimeClass {
+    color: #303030;
+}
+body.light-mode .likeBtnClass {
+    filter: invert(100%);
+}
+body.light-mode .hateBtnClass {
+    filter: invert(100%);
+}
+body.light-mode .likeCountClass {
+    color: #303030;
+}
+body.light-mode .hateCountClass {
+    color: #303030;
+}
+body.light-mode .replyBtnClass {
+    color: #303030;
+}
+body.light-mode .comment-time {
+    color: #303030;
+}
+body.light-mode .likeCount {
+    color: #303030;
+}
+body.light-mode .hateCount {
+    color: #303030;
+}
+body.light-mode .reply-button {
+    color: #303030;
+}

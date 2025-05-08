@@ -69,7 +69,7 @@ nav {
     letter-spacing: 0%;
 }
 #SearchBtn {
-    background-color: #303030;
+    background-color: transparent;
     border: 1px solid #303030;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -159,7 +159,6 @@ nav {
     background-image: url(../resources/images/nav/profile/user.png);
     background-size: cover;
 }
-#toggle-theme {}
 
 @media (max-width : 425px){
     #Hamburger{

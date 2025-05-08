@@ -123,7 +123,7 @@ button:hover{
 .hates-button, .share-button,
 .save-button,.more-button,
 .like-button, .hate-button{
-    background-color: #181818;
+    background-color: transparent;
     border: none;
     background-repeat: no-repeat;
     background-size: contain;
@@ -277,7 +277,7 @@ button:hover{
     width: 120px;
     height: 24px;
     display: flex;
-    background-color: #181818;
+    background-color: transparent;
     border: none;
 }
 
@@ -287,6 +287,7 @@ button:hover{
     padding-right: 8px;
     box-sizing: border-box;
     gap:10px;
+    background-color: transparent;
     background-image: url(../resources/images/video_page/Dropdown.svg);
     background-size: contain;
     background-repeat: no-repeat;
