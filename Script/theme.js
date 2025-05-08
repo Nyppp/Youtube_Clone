@@ -1,4 +1,5 @@
 let toggleBtn;
+const body = document.body;
 
 //토글 버튼이 유효할 때 까지 반복
 const interval = setInterval(()=>{
@@ -17,11 +18,13 @@ const interval = setInterval(()=>{
       clearInterval(interval);
   }
   toggleBtn = document.getElementById('toggle-theme');
-  const body = document.body;
+  
 }, 100);
 
 
 // 페이지 로드 시 localStorage에서 테마 상태 불러오기
 if (localStorage.getItem("theme") === "light") {
     body.classList.add("light-mode");
+
+    console.log(localStorage.getItem("theme"));
 }
