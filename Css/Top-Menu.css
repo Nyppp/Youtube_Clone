@@ -15,7 +15,13 @@
 }
 
 .Top-Menu::-webkit-scrollbar{
-    display: block;
+    background: #303030;
+
+    height: 10px;
+}
+
+.Top-Menu::-webkit-scrollbar-thumb{
+    background: #aaa;
 }
 
 @media (max-width : 1024px) {

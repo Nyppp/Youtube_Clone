@@ -274,28 +274,6 @@ function initTagMenu(tags){
         }
       });
     })
-
-    
-
-    // if(simTags){
-    //   allVideos.forEach(video=>{
-    //     const videoTag = video.getElementsByClassName('videoTag')[0];
-        
-    //     let isSim = false;
-    //     simTags.forEach(tag=>{
-    //       if(videoTag.textContent.indexOf(tag) > 0){
-    //         isSim = true;
-    //       }
-    //     });
-
-    //     if(!isSim){
-    //       video.style.display = 'none';
-    //     }
-    //   });
-    // } else{
-    //   console.log('유사도 배열 로드 중...');
-    // }
-
   });
 
   //태그에 대한 기능 추가 (좋아요 순으로 노출)

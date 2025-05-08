@@ -265,8 +265,10 @@ async function getSimilarity(videoId, allVideos, skipVideos){
         }
 
         await delay(50);
+        //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
         if (sim > 0){
+            //유사도가 0 이상인 경우, 유사 태그로 지정한다
             simTags.push(secondTag);
         }
     }
@@ -301,12 +303,13 @@ async function calcSimilarity(firstWord, secondWord){
                     const responseData = JSON.parse(xhr.responseText);
                     const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;
 
-                    
+                    //각 모델들의 유사도 값을 단순 합산 후 평균화
                     wordRelInfo.forEach(sim => {
                         sum += sim.SimScore;
                         count++;
                     });
 
+                    //결과값을 내려줄 때 까지 대기 > promise객체 처리
                     resolve((sum / count));
                     } catch(e){
                         reject(e);
