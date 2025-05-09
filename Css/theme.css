@@ -78,7 +78,7 @@ body.light-mode .Top-Menu-All {
     background-color: #f9f9f9;
     color: black;
 }
-body.light-mode .Top-Menu-All:focus {
+body.light-mode .Top-Menu-All.active {
     background-color: #303030;
     color: #f9f9f9;
 }
@@ -86,7 +86,7 @@ body.light-mode .Top-Menu-Item {
     background-color: #f9f9f9;
     color: black;
 }
-body.light-mode .Top-Menu-Item:focus {
+body.light-mode .Top-Menu-Item.active {
     background-color: #303030;
     color: #f9f9f9;
 }
