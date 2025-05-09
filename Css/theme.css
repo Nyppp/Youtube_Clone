@@ -1,3 +1,4 @@
+/* 라이트 모드 구현 */
 html.light-mode {
     background-color: #f9f9f9;
 }
@@ -37,7 +38,11 @@ body.light-mode #Hamburger {
     filter: invert(100%);
 }
 body.light-mode #Logo {
-    filter: invert(100%);
+    width: 120px;
+    height: 20px;
+    background-image: url(../resources/images/nav/yt/logo_light.png);
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 body.light-mode form {
     background-color: #f9f9f9;
@@ -62,6 +67,9 @@ body.light-mode #VoiceSearch {
 }
 body.light-mode #VoiceSearch:hover {
     filter: invert(100%);
+}
+body.light-mode #toggle-theme {
+    filter: invert(0%);
 }
 body.light-mode #Create {
     filter: invert(100%);
