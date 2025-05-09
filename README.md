@@ -24,24 +24,136 @@
 ---
 ## 🛠️ 사용 기술
 
-- **사용 언어**: HTML, CSS, JavaScript
-- **API**: techfree-oreumi-api (교육용 API)
+- **사용 언어**: HTML, CSS, JavaScript(vanilla JS)
+- **API**: techfree-oreumi-api(비디오 정보 API), 어휘 간 유사도 분석 API
 - **사용 툴**: VScode, Github
 ---
 
 ## 🌐 주요 구현 기능
-- 비디오 리스트 페이지
-  - 그리드 + 미디어 쿼리를 사용한 반응형 페이지 구현
-  - 상단 메뉴 버튼 > 비디오 리스트 정렬 기능 구현
-  - 검색 기능 > 비디오 제목, 태그에 맞춰 키워드 검색 구현
-  - 마우스 이벤트를 통해 비디오 미리보기 기능 구현
-    
-- 비디오 플레이어 페이지
-  - API 연동 및 비디오 재생 기능 구현
-  - 댓글 작성 및 좋아요 , 싫어요 기능 구현(서버 없이 로컬에서만 돌아가는 부분이기에, 로컬 상호작용 정도로 구현)
+<details>
+  <summary>비디오 리스트 페이지</summary>
+  <div align="center">
+    <img src=https://github.com/user-attachments/assets/a0455ba0-178f-4711-ac35-f52cda401525 width="600px" hegiht="600px" alt="비디오 리스트 페이지">
+  </div>
+  
+  ---
+  <details><summary>그리드 + 미디어 쿼리를 사용한 반응형 페이지 구현</summary>
+    <ul>
+      <li>개발 담당자 : 노윤표</li>
+      <li>코드 요약 : 단말 규격에 맞춰 전체적인 페이지 반응형처리 구현 </li>
+      <li><a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Css/Video-Container.css#L29">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>상단 태그 버튼 > 비디오 리스트 정렬 기능 구현</summary>
+    <ul>
+      <li>개발 담당자 : 노윤표</li>
+      <li>코드 요약 : 비디오 속성으로 가지고 있는 id, 조회수, 좋아요, 게시 날짜, 비디오 태그를 기준으로 정렬해주는 기능 구현 </li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/videoCard.js#L66">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>검색 기능 > 비디오 제목, 태그에 맞춰 키워드 검색 구현</summary>
+    <ul>
+      <li>개발 담당자 : 김진욱</li>
+      <li>코드 요약 : 쿼리 파라미터를 이용해 비디오 제목, 태그를 기반으로 검색 후 결과를 화면에 렌더링 처리</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/Search.js#L53">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
 
-- 채널 페이지
-  - 해당 채널의 id를 통해 API 연동하여 해당 채널이 올린 비디오만 노출되도록 구현
-  - 조회수가 가장 높은 영상 탐색하여 메인 비디오 노출 구현
-  - 구독, 구독 해제 기능 구현
+---
+
+</details>
+
+<details><summary>비디오 플레이어 페이지</summary>
+<div align="center">
+    <img src=https://github.com/user-attachments/assets/ef845287-0efb-48c1-8f5e-35fed8cc3a9d width="600px" hegiht="600px" alt="비디오 리스트 페이지">
+</div>
+  
+---
+  <details><summary>API 연동 및 비디오 재생 기능 구현</summary>
+    <ul>
+      <li>개발 담당자 : 방준철</li>
+      <li>코드 요약 : techfree-oreumi-api에 연결하여 비디오 정보를 가져오고, 이를 페이지 내 비디오 태그에 정보를 연결해주는 기능 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/video_page.js#L9C1-L75C2">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+
+  <details><summary>ai API 연동 및 비디오 추천 기능 구현</summary>
+    <ul>
+      <li>개발 담당자 : 노윤표</li>
+      <li>코드 요약 : 어휘 간 유사도 분석 API에 연결하여 태그 - 태그 간 유사도를 계산 후, 이를 바탕으로 비디오 플레이어 페이지 우측 추천 비디오 리스트를 호출하는 기능 구현 </li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/commonModule.js#L222">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+
+  <details><summary>댓글 작성 및 상호작용 기능 구현</summary>
+    <ul>
+      <li>개발 담당자 : 방준철</li>
+      <li>코드 요약 : 현재 보고있는 비디오에 대해 코멘트 작성 및 좋아요, 싫어요 인터렉션 기능 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/main/Script/comment.js#L4">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+
+---
+</details>
+
+<details><summary>채널 페이지</summary>
+<div align="center">
+    <img src=https://github.com/user-attachments/assets/da5eb13c-df93-44f4-b11c-291f10efd526 width="600px" hegiht="600px" alt="비디오 리스트 페이지">
+</div>
+
+  ---
+  <details><summary>API 연동 및 채널 정보 렌더링 구현</summary>
+    <ul>
+      <li>개발 담당자 : 김진욱</li>
+      <li>코드 요약 : 채널 정보 + 채널 내 비디오 리스트를 불러와서 화면에 렌더링</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/main/Script/channel.js">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>구독 추가 / 해제 기능 구현</summary>
+    <ul>
+      <li>개발 담당자 : 김진욱</li>
+      <li>코드 요약 : 채널에 대해 구독 버튼 클릭 시, 로컬 스토리지에 구독 한 채널을 저장하며 해당 리스트를 사이드바에 노출시키는 동작 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/main/Script/subscription.js">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+
+  ---
+</details>
+<details>
+  <summary>추가 구현 기능</summary>
+  <details><summary>구현 내용</summary>
+    <ul>
+      <li>개발 담당자 : </li>
+      <li>코드 요약 : </li>
+      <li>
+        <a href="">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>구현 내용</summary>
+    <ul>
+      <li>개발 담당자 : </li>
+      <li>코드 요약 : </li>
+      <li>
+        <a href="">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+</details>
+
 ---
