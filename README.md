@@ -31,7 +31,7 @@
 
 ## 🌐 주요 구현 기능
 <details>
-  <summary>비디오 리스트 페이지</summary>
+  <summary>비디오 리스트 페이지(메인 담당 : 노윤표)</summary>
   <div align="center">
     <img src=https://github.com/user-attachments/assets/a0455ba0-178f-4711-ac35-f52cda401525 width="600px" hegiht="600px" alt="비디오 리스트 페이지">
   </div>
@@ -54,23 +54,15 @@
       </li>
     </ul>
   </details>
-  <details><summary>검색 기능 > 비디오 제목, 태그에 맞춰 키워드 검색 구현</summary>
-    <ul>
-      <li>개발 담당자 : 김진욱</li>
-      <li>코드 요약 : 쿼리 파라미터를 이용해 비디오 제목, 태그를 기반으로 검색 후 결과를 화면에 렌더링 처리</li>
-      <li>
-        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/Search.js#L53">코드 바로가기</a>
-      </li>
-    </ul>
-  </details>
+  
 
 ---
 
 </details>
 
-<details><summary>비디오 플레이어 페이지</summary>
+<details><summary>비디오 플레이어 페이지(메인 담당 : 방준철)</summary>
 <div align="center">
-    <img src=https://github.com/user-attachments/assets/ef845287-0efb-48c1-8f5e-35fed8cc3a9d width="600px" hegiht="600px" alt="비디오 리스트 페이지">
+    <img src=https://github.com/user-attachments/assets/ef845287-0efb-48c1-8f5e-35fed8cc3a9d width="600px" hegiht="600px" alt="비디오 플레이어 페이지">
 </div>
   
 ---
@@ -107,9 +99,9 @@
 ---
 </details>
 
-<details><summary>채널 페이지</summary>
+<details><summary>채널 페이지(메인 담당 : 김진욱)</summary>
 <div align="center">
-    <img src=https://github.com/user-attachments/assets/da5eb13c-df93-44f4-b11c-291f10efd526 width="600px" hegiht="600px" alt="비디오 리스트 페이지">
+    <img src=https://github.com/user-attachments/assets/da5eb13c-df93-44f4-b11c-291f10efd526 width="600px" hegiht="600px" alt="채널 페이지">
 </div>
 
   ---
@@ -122,7 +114,69 @@
       </li>
     </ul>
   </details>
+
+  ---
+</details>
+<details>
+  <summary>사이드, 헤더(메인 담당 : 김진욱)</summary>
+
+  ---
+  <details><summary>사이드 바 토글 애니메이션 처리</summary>
+    <div align="center">
+      <img src= "" width="600px" hegiht="600px">
+    </div>
+    <ul>
+      <li>개발 담당자 : 김진욱</li>
+      <li>코드 요약 : 사이드바 햄버거 버튼 상호작용 - 숨기기, 펼치기 기능 및 애니메이션 처리 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/index.js#L108">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>검색 기능 > 비디오 제목, 태그에 맞춰 키워드 검색 구현</summary>
+    <ul>
+      <li>개발 담당자 : 김진욱</li>
+      <li>코드 요약 : 쿼리 파라미터를 이용해 비디오 제목, 태그를 기반으로 검색 후 결과를 화면에 렌더링 처리</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/Search.js#L53">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  
+  ---
+</details>
+<details>
+  <summary>추가 구현 기능(팀원 당 1개 이상의 추가 기능 구현)</summary>
+
+  ---
+  <details><summary>비디오 프리뷰 기능</summary>
+    <div align="center">
+      <img src=https://github.com/user-attachments/assets/433fc1c3-908e-4af2-9223-d6f54436fd3a width="600px" hegiht="600px" alt="비디오 프리뷰">
+    </div>
+    <ul>
+      <li>개발 담당자 : 노윤표</li>
+      <li>코드 요약 : 마우스 enter, leave 이벤트에 맞춰 비디오 썸네일 이미지 / 비디오 재생 서로 변경 되는 동작 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/cf21bf096de551dfa77ffab58719f5b788214f34/Script/commonModule.js#L197">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
+  <details><summary>다크 - 라이트 모드 토글 기능</summary>
+    <div align="center">
+      <img src="https://github.com/user-attachments/assets/492db45a-39a8-474f-9b4f-502989042c84" width="600px" hegiht="600px" alt="">
+    </div>
+    <ul>
+      <li>개발 담당자 : 방준철</li>
+      <li>코드 요약 : 모든 페이지에 대응되는 다크, 라이트 테마 스타일 전환 기능 구현</li>
+      <li>
+        <a href="https://github.com/Nyppp/Youtube_Clone/blob/main/Script/theme.js">코드 바로가기</a>
+      </li>
+    </ul>
+  </details>
   <details><summary>구독 추가 / 해제 기능 구현</summary>
+    <div align="center">
+      <img src="https://github.com/user-attachments/assets/25676c51-dc9c-4bd5-8c61-2ddeceb33e0d" width="600px" hegiht="600px" alt="">
+    </div>
     <ul>
       <li>개발 담당자 : 김진욱</li>
       <li>코드 요약 : 채널에 대해 구독 버튼 클릭 시, 로컬 스토리지에 구독 한 채널을 저장하며 해당 리스트를 사이드바에 노출시키는 동작 구현</li>
@@ -133,27 +187,6 @@
   </details>
 
   ---
-</details>
-<details>
-  <summary>추가 구현 기능</summary>
-  <details><summary>구현 내용</summary>
-    <ul>
-      <li>개발 담당자 : </li>
-      <li>코드 요약 : </li>
-      <li>
-        <a href="">코드 바로가기</a>
-      </li>
-    </ul>
-  </details>
-  <details><summary>구현 내용</summary>
-    <ul>
-      <li>개발 담당자 : </li>
-      <li>코드 요약 : </li>
-      <li>
-        <a href="">코드 바로가기</a>
-      </li>
-    </ul>
-  </details>
 </details>
 
 ---
