@@ -205,10 +205,19 @@
   margin-bottom: 12px;
 }
 
-.video-description {
+.main-video-description {
   font-size: 14px;
   line-height: 1.4;
   color: #aaa;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+    
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 /* 비디오 목록 섹션 스타일 */

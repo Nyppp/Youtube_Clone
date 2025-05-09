@@ -103,7 +103,7 @@ function displayMainVideo(video){
     mainVideoMeta.textContent = video.views + " views . " + common.timeAgo(video.created_dt);
 
     const mainVideoDesc = document.getElementsByClassName('main-video-description')[0];
-    mainVideoDesc.textContent = video.tags;
+    mainVideoDesc.textContent = video.description;
 }
 
 getChannelInfo();
