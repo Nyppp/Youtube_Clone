@@ -94,8 +94,12 @@ function parseJsonchanneldata(channelData) {
     subscribeButton.dataset.channelName = channelData.channel_name;
     subscribeButton.dataset.channelProfile = channelData.channel_profile;
     
-    // 구독 상태에 따라 버튼 텍스트와 스타일 설정
-    if (isChannelSubscribed(channelData.id)) {
+    // 직접 로컬 스토리지 확인
+    const subscribedChannels = localStorage.getItem('subscribedChannels');
+    const channels = subscribedChannels ? JSON.parse(subscribedChannels) : [];
+    const isSubscribed = channels.some(channel => channel.id === channelData.id);
+    
+    if (isSubscribed) {
       subscribeButton.textContent = 'SUBSCRIBED';
       subscribeButton.classList.add('subscribed');
     } else {
@@ -103,9 +107,10 @@ function parseJsonchanneldata(channelData) {
       subscribeButton.classList.remove('subscribed');
     }
     
-    // 클릭 이벤트 설정
-    subscribeButton.removeEventListener('click', handleSubscribeButtonClick);
-    subscribeButton.addEventListener('click', handleSubscribeButtonClick);
+    // 구독 버튼 초기화 함수가 전역에 있다면 호출
+    if (typeof window.initSubscribeButtons === 'function') {
+      window.initSubscribeButtons();
+    }
   }
 }
 
