@@ -5,8 +5,14 @@ header {
     z-index: 99;
 }
 
-@media(max-width:848px){
+@media(max-width:425px){
     .SearchBox{
+        display: none !important;
+    }
+}
+
+@media(max-width:768px){
+    #Create, #Apps, #Notifications {
         display: none !important;
     }
 }
