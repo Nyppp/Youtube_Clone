@@ -282,7 +282,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
 async function calcSimilarity(firstWord, secondWord){
     return new Promise((resolve, reject)=> {
         const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
-        const access_key = '';
+        const access_key = '34f8f74f-733c-4b95-b8a4-2998d4580dbd';
         const requestJson = {
             argument: {
                 first_word: firstWord,
