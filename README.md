@@ -32,11 +32,11 @@
 ## 🌐 주요 구현 기능
 <details>
   <summary>비디오 리스트 페이지(메인 담당 : 노윤표)</summary>
+  
+  ---
   <div align="center">
     <img src=https://github.com/user-attachments/assets/a0455ba0-178f-4711-ac35-f52cda401525 width="600px" hegiht="600px" alt="비디오 리스트 페이지">
   </div>
-  
-  ---
   <details><summary>그리드 + 미디어 쿼리를 사용한 반응형 페이지 구현</summary>
     <ul>
       <li>개발 담당자 : 노윤표</li>
@@ -61,11 +61,12 @@
 </details>
 
 <details><summary>비디오 플레이어 페이지(메인 담당 : 방준철)</summary>
+    
+---
 <div align="center">
     <img src=https://github.com/user-attachments/assets/ef845287-0efb-48c1-8f5e-35fed8cc3a9d width="600px" hegiht="600px" alt="비디오 플레이어 페이지">
 </div>
-  
----
+
   <details><summary>API 연동 및 비디오 재생 기능 구현</summary>
     <ul>
       <li>개발 담당자 : 방준철</li>
@@ -100,11 +101,11 @@
 </details>
 
 <details><summary>채널 페이지(메인 담당 : 김진욱)</summary>
+    
+---
 <div align="center">
     <img src=https://github.com/user-attachments/assets/da5eb13c-df93-44f4-b11c-291f10efd526 width="600px" hegiht="600px" alt="채널 페이지">
 </div>
-
-  ---
   <details><summary>API 연동 및 채널 정보 렌더링 구현</summary>
     <ul>
       <li>개발 담당자 : 김진욱</li>
@@ -119,10 +120,10 @@
 </details>
 <details>
   <summary>사이드, 헤더(메인 담당 : 김진욱)</summary>
-
+      
   ---
   <details><summary>사이드 바 토글 애니메이션 처리</summary>
-    <div align="center">
+  <div align="center">
       <img src= "" width="600px" hegiht="600px">
     </div>
     <ul>
