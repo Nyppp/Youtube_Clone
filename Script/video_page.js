@@ -107,6 +107,21 @@ function parseJsonchanneldata(channelData) {
     subscribeButton.removeEventListener('click', handleSubscribeButtonClick);
     subscribeButton.addEventListener('click', handleSubscribeButtonClick);
   }
+
+  //설명 더보기 버튼 설정
+  const showmoreBtn = document.getElementById('descOpenButton');
+
+  showmoreBtn.addEventListener('click', function(e){
+    const descText = document.getElementById('descText');
+
+    if(descText.style.webkitLineClamp == 'none'){
+      descText.style.webkitLineClamp = 2;
+    }else{
+      descText.style.webkitLineClamp = 'none';
+    }
+
+    
+  });
 }
 
 // 사이드 비디오 리스트 가져오기
