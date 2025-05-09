@@ -127,6 +127,48 @@ function parseJsonchanneldata(channelData) {
 
     
   });
+
+  const likeBtn = document.getElementsByClassName('likes-button')[0];
+  const hateBtn = document.getElementsByClassName('hates-button')[0];
+
+  const likeCount = document.getElementById('likes');
+  const hateCount = document.getElementById('hates');
+
+  // 토글 상태 저장
+  let liked = false;
+  let hated = false;
+
+  // 좋아요 버튼 클릭
+  likeBtn.addEventListener("click", function() {
+    if (!liked) {
+      likeCount.textContent = parseInt(likeCount.textContent) + 1;
+      liked = true;
+      // 싫어요가 눌려있다면 초기화
+      if (hated) {
+        hateCount.textContent = parseInt(hateCount.textContent) - 1;
+        hated = false;
+      }
+    } else {
+      likeCount.textContent = parseInt(likeCount.textContent) - 1;
+      liked = false;
+    }
+  });
+
+  // 싫어요 버튼 클릭
+  hateBtn.addEventListener("click", function() {
+    if (!hated) {
+      hateCount.textContent = parseInt(hateCount.textContent) + 1;
+      hated = true;
+      // 좋아요가 눌려있다면 초기화
+      if (liked) {
+        likeCount.textContent = parseInt(likeCount.textContent) - 1;
+        liked = false;
+      }
+    } else {
+      hateCount.textContent = parseInt(hateCount.textContent) - 1;
+      hated = false;
+    }
+  });
 }
 
 // 사이드 비디오 리스트 가져오기
