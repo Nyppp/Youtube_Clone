@@ -108,6 +108,22 @@ nav {
     align-items: center;
     justify-content: space-evenly;
 }
+#toggle-theme {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    filter: invert(100%);
+    background-image: url(../resources/images/nav/profile/brightness-high-fill.svg);
+    background-size: 20px 20px;
+}
+#toggle-theme:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 32px;
+}
 #Create {
     width: 40px;
     height: 40px;
