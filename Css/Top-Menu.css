@@ -57,7 +57,7 @@ body.sidebar-collapsed .Top-Menu {
     font-size: 14px;
     flex-shrink: 0;
 }
-.Top-Menu-All:focus {
+.Top-Menu-All.active {
     background-color: #ffffff;
     color: #030303;
 }
@@ -77,7 +77,7 @@ body.sidebar-collapsed .Top-Menu {
     font-size: 14px;
     flex-shrink: 0;
 }
-.Top-Menu-Item:focus {
+.Top-Menu-Item.active {
     background-color: #ffffff;
     color: #030303;
 }

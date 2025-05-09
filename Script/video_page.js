@@ -203,6 +203,7 @@ function initTagMenu(tags){
   // 전체 선택 버튼 추가
   const allButton = document.createElement('a');
   allButton.classList.add('Top-Menu-All');
+  allButton.classList.add('active');
   allButton.textContent = 'All';
   allButton.href = "";
 
@@ -346,6 +347,16 @@ function initTagMenu(tags){
   topMenu.appendChild(likesButton);
   topMenu.appendChild(dateButton);
   topMenu.appendChild(viewButton);
+
+  for(const btn of topMenu.children){
+    btn.addEventListener('click', function(e){
+        for(const otherBtn of topMenu.children){
+            otherBtn.classList.remove('active');
+        }
+        btn.classList.add('active');
+        
+    });
+}
 }
 
 getVideoData();
