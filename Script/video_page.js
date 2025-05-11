@@ -10,7 +10,7 @@ function getVideoData(){
   const videoId = window.location.search.split('=');
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=${videoId[1]}`, true);
+  xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getVideoInfo?video_id=${videoId[1]}`, true);
 
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -56,7 +56,7 @@ function parseJsondata(data) {
 // 메인 비디오용 채널 정보 가져오기
 function fetchChannelInfo(channelId) {
   const xhrChannel = new XMLHttpRequest();
-  xhrChannel.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+  xhrChannel.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channelId}`, true);
 
   xhrChannel.onload = function () {
     if (xhrChannel.status === 200) {
@@ -181,7 +181,7 @@ async function getVideoList() {
   }
 
   const xhrVideoList = new XMLHttpRequest();
-  xhrVideoList.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
+  xhrVideoList.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getVideoList`, true);
 
   xhrVideoList.onload = async function () {
     if (xhrVideoList.status === 200) {

@@ -54,7 +54,7 @@ function setViewUnit(viewCount){
 //채널 정보 가져오기
 function getChannelInfo(channelId, callback){
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+    xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channelId}`, true);
 
     xhr.onload = function(){
         if(xhr.status === 200){

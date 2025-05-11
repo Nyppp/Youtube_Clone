@@ -38,8 +38,6 @@
         grid-template-columns: repeat(2,1fr);
         min-width: 425px;
     }
-
-    
 }
 
 @media (max-width:425px){
