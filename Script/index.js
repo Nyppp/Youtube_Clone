@@ -108,7 +108,7 @@ window.onload = function(){
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar'); 
     const mainSidebar = document.getElementById('main-sidebar'); 
-     const mainContent = document.getElementById('main-contentbox'); 
+    const mainContent = document.getElementById('main-contentbox'); 
     
     // 두 요소 모두에 클래스 토글 적용
     sidebar.classList.toggle('collapsed');

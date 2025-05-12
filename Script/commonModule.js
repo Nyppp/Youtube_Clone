@@ -54,7 +54,7 @@ function setViewUnit(viewCount){
 //채널 정보 가져오기
 function getChannelInfo(channelId, callback){
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+    xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channelId}`, true);
 
     xhr.onload = function(){
         if(xhr.status === 200){
@@ -264,7 +264,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
             continue;
         }
 
-        await delay(50);
+        await delay(100);
         //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
         if (sim > 0){
@@ -281,8 +281,8 @@ async function getSimilarity(videoId, allVideos, skipVideos){
 
 async function calcSimilarity(firstWord, secondWord){
     return new Promise((resolve, reject)=> {
-        const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
-        const access_key = '';
+        const openApiURL = 'https://www.techfree-oreumi-api.ai.kr/WiseWWN/WordRel';
+        const access_key = '34f8f74f-733c-4b95-b8a4-2998d4580dbd';
         const requestJson = {
             argument: {
                 first_word: firstWord,
@@ -295,22 +295,14 @@ async function calcSimilarity(firstWord, secondWord){
         xhr.setRequestHeader('Authorization', access_key);
 
         xhr.onreadystatechange = function () {
-            let sum = 0;
-            let count = 0;
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     try{
                     const responseData = JSON.parse(xhr.responseText);
-                    const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Similarity;
-
-                    //각 모델들의 유사도 값을 단순 합산 후 평균화
-                    wordRelInfo.forEach(sim => {
-                        sum += sim.SimScore;
-                        count++;
-                    });
+                    const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Distance;
 
                     //결과값을 내려줄 때 까지 대기 > promise객체
-                    resolve((sum / count));
+                    resolve(wordRelInfo);
                     } catch(e){
                         reject(e);
                     }

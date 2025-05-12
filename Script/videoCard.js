@@ -11,7 +11,7 @@ function getVideoList(callback){
         return;
     }
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
+    xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getVideoList`, true);
 
     xhr.onload = function(){
         if(xhr.status === 200){

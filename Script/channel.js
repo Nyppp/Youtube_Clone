@@ -4,7 +4,7 @@ function getChannelInfo(){
     //url 파라미터 가져오고, id값만 추출( = 우측에 오는 값만 사용 > channel_id[1])
     const channel_id = window.location.search.split('=');
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channel_id[1]}`, true);
+    xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channel_id[1]}`, true);
 
     xhr.onload = function(){
         if(xhr.status === 200){
@@ -29,7 +29,7 @@ function getChannelVideoList(){
     //url 파라미터 가져오고, id값만 추출( = 우측에 오는 값만 사용 > channel_id[1])
     const channel_id = window.location.search.split('=');
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getChannelVideoList?channel_id=${channel_id[1]}`, true);
+    xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getChannelVideoList?channel_id=${channel_id[1]}`, true);
 
     xhr.onload = function(){
         if(xhr.status === 200){

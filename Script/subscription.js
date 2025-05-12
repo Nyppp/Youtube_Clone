@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 클릭 이벤트 등록
                     subscribeButton.addEventListener('click', handleSubscribeButtonClick);
                 }
-            }, 500);
+            }, 1000);
         }
     }
 });

@@ -10,7 +10,7 @@ function getVideoData(){
   const videoId = window.location.search.split('=');
 
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=${videoId[1]}`, true);
+  xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getVideoInfo?video_id=${videoId[1]}`, true);
 
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -56,7 +56,7 @@ function parseJsondata(data) {
 // 메인 비디오용 채널 정보 가져오기
 function fetchChannelInfo(channelId) {
   const xhrChannel = new XMLHttpRequest();
-  xhrChannel.open('GET', `http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelId}`, true);
+  xhrChannel.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channelId}`, true);
 
   xhrChannel.onload = function () {
     if (xhrChannel.status === 200) {
@@ -127,6 +127,48 @@ function parseJsonchanneldata(channelData) {
 
     
   });
+
+  const likeBtn = document.getElementsByClassName('likes-button')[0];
+  const hateBtn = document.getElementsByClassName('hates-button')[0];
+
+  const likeCount = document.getElementById('likes');
+  const hateCount = document.getElementById('hates');
+
+  // 토글 상태 저장
+  let liked = false;
+  let hated = false;
+
+  // 좋아요 버튼 클릭
+  likeBtn.addEventListener("click", function() {
+    if (!liked) {
+      likeCount.textContent = parseInt(likeCount.textContent) + 1;
+      liked = true;
+      // 싫어요가 눌려있다면 초기화
+      if (hated) {
+        hateCount.textContent = parseInt(hateCount.textContent) - 1;
+        hated = false;
+      }
+    } else {
+      likeCount.textContent = parseInt(likeCount.textContent) - 1;
+      liked = false;
+    }
+  });
+
+  // 싫어요 버튼 클릭
+  hateBtn.addEventListener("click", function() {
+    if (!hated) {
+      hateCount.textContent = parseInt(hateCount.textContent) + 1;
+      hated = true;
+      // 좋아요가 눌려있다면 초기화
+      if (liked) {
+        likeCount.textContent = parseInt(likeCount.textContent) - 1;
+        liked = false;
+      }
+    } else {
+      hateCount.textContent = parseInt(hateCount.textContent) - 1;
+      hated = false;
+    }
+  });
 }
 
 // 사이드 비디오 리스트 가져오기
@@ -139,7 +181,7 @@ async function getVideoList() {
   }
 
   const xhrVideoList = new XMLHttpRequest();
-  xhrVideoList.open('GET', `http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`, true);
+  xhrVideoList.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getVideoList`, true);
 
   xhrVideoList.onload = async function () {
     if (xhrVideoList.status === 200) {
@@ -227,11 +269,13 @@ function initTagMenu(tags){
   allButton.textContent = 'All';
   allButton.href = "";
 
-  // 조회수 순 선택 버튼 추가
+  // 추천 선택 버튼 추가
   const recommendButton = document.createElement('a');
   recommendButton.classList.add('Top-Menu-All');
   recommendButton.textContent = 'Recommend';
   recommendButton.href = "";
+
+  recommendButton.style.width = "100px";
 
   // 좋아요 기준 버튼 추가
   const likesButton = document.createElement('a');
