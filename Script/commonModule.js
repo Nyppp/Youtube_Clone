@@ -267,8 +267,9 @@ async function getSimilarity(videoId, allVideos, skipVideos){
         await delay(100);
         //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
-        if (sim > 0){
-            //유사도가 0 이상인 경우, 유사 태그로 지정한다
+        
+        if (sim <= 5){
+            console.log(secondTag + "와 유사도 distance : " + sim);
             simTags.push(secondTag);
         }
     }
