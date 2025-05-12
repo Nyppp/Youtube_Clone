@@ -269,11 +269,13 @@ function initTagMenu(tags){
   allButton.textContent = 'All';
   allButton.href = "";
 
-  // 조회수 순 선택 버튼 추가
+  // 추천 선택 버튼 추가
   const recommendButton = document.createElement('a');
   recommendButton.classList.add('Top-Menu-All');
   recommendButton.textContent = 'Recommend';
   recommendButton.href = "";
+
+  recommendButton.style.width = "100px";
 
   // 좋아요 기준 버튼 추가
   const likesButton = document.createElement('a');
