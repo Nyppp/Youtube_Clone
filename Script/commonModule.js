@@ -264,7 +264,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
             continue;
         }
 
-        await delay(50);
+        await delay(100);
         //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
         if (sim > 0){
