@@ -268,6 +268,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
         //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
         
+        //두 단어 사이 distance가 5 이하인 경우 추천 영상으로 선정
         if (sim <= 5){
             console.log(secondTag + "와 유사도 distance : " + sim);
             simTags.push(secondTag);
