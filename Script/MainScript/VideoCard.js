@@ -31,12 +31,15 @@ function getVideoList(){
 
 //영상 제목, 영상 아이디, 날짜, 게시자, 썸네일 등등을 가져와서 처리
 function parseJsondata(results){
-    const videoList = document.getElementById('Video-Container');
-
-    if(!results || results.length ===0){
-        videoList.textContent = "No videos found.";
-        return;
-    }
+    let videoList = document.getElementById('Video-Container');
+    const interval = setInterval(()=>{
+            if(videoList){
+                clearInterval(interval);
+                
+                common.drawList(videoList, results);
+            }
+            videoList = document.getElementById('Video-Container');
+        }, 100);
 
     common.drawList(videoList, results);
 
