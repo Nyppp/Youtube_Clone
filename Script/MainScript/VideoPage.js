@@ -1,9 +1,10 @@
-import * as common from "./commonModule.js";
+import * as common from "/Script/CommonPage/CommonModule.js";
+import('../SubScript/Comment.js');
 
-const videoTags = []; // 전체 태그를 담는 변수
-let uniqueTag; //전체 태그 > 중복 제거 값
-let simTags = []; //유사도 계산용
-let sameTagVideos = []; //동일 태그 비디오들 id 저장
+const videoTags = [];
+let uniqueTag;
+let simTags = [];
+let sameTagVideos = [];
 
 //현재 보고 있는 비디오 정보 가져오기
 function getVideoData(){
@@ -17,8 +18,8 @@ function getVideoData(){
       const response = JSON.parse(xhr.responseText);
       parseJsondata(response);
 
-      const channelId = response.channel_id; // 채널 ID 가져오기
-      fetchChannelInfo(channelId); // 메인 채널 정보 가져오기
+      const channelId = response.channel_id;
+      fetchChannelInfo(channelId);
     } else {
       console.error('Error', xhr.status);
     }
@@ -86,15 +87,12 @@ function parseJsonchanneldata(channelData) {
 
   document.getElementById('subscribtionText').textContent = `${channelData.subscribers.toLocaleString()} subscribers`;
   
-  // 구독버튼 설정
   const subscribeButton = document.getElementById('subscribe-button');
   if (subscribeButton) {
-    // 필수 data 속성 설정
     subscribeButton.dataset.channelId = channelData.id;
     subscribeButton.dataset.channelName = channelData.channel_name;
     subscribeButton.dataset.channelProfile = channelData.channel_profile;
     
-    // 직접 로컬 스토리지 확인
     const subscribedChannels = localStorage.getItem('subscribedChannels');
     const channels = subscribedChannels ? JSON.parse(subscribedChannels) : [];
     const isSubscribed = channels.some(channel => channel.id === channelData.id);
@@ -107,13 +105,11 @@ function parseJsonchanneldata(channelData) {
       subscribeButton.classList.remove('subscribed');
     }
     
-    // 구독 버튼 초기화 함수가 전역에 있다면 호출
     if (typeof window.initSubscribeButtons === 'function') {
       window.initSubscribeButtons();
     }
   }
 
-  //설명 더보기 버튼 설정
   const showmoreBtn = document.getElementById('descOpenButton');
 
   showmoreBtn.addEventListener('click', function(e){
@@ -134,16 +130,13 @@ function parseJsonchanneldata(channelData) {
   const likeCount = document.getElementById('likes');
   const hateCount = document.getElementById('hates');
 
-  // 토글 상태 저장
   let liked = false;
   let hated = false;
 
-  // 좋아요 버튼 클릭
   likeBtn.addEventListener("click", function() {
     if (!liked) {
       likeCount.textContent = parseInt(likeCount.textContent) + 1;
       liked = true;
-      // 싫어요가 눌려있다면 초기화
       if (hated) {
         hateCount.textContent = parseInt(hateCount.textContent) - 1;
         hated = false;
@@ -154,12 +147,10 @@ function parseJsonchanneldata(channelData) {
     }
   });
 
-  // 싫어요 버튼 클릭
   hateBtn.addEventListener("click", function() {
     if (!hated) {
       hateCount.textContent = parseInt(hateCount.textContent) + 1;
       hated = true;
-      // 좋아요가 눌려있다면 초기화
       if (liked) {
         likeCount.textContent = parseInt(likeCount.textContent) - 1;
         liked = false;
@@ -218,7 +209,6 @@ function parseJsonVideoListdata(videoListData) {
     });
   })
 
-  //태그들 가져오기
   uniqueTag = [... new Set(videoTags)];
   initTagMenu(uniqueTag);
 
@@ -233,14 +223,12 @@ async function setSameTagVideo(){
   let currentTags = [];
   let videos = [];
 
-  //모든 영상 리스트를 보이지 않음 설정 후, 현재 보고있는 영상 태그 저장
   allVideos.forEach(videoItem=>{
     if(videoItem.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
       currentTags = videoItem.getElementsByClassName('videoTag')[0].textContent.split(',');
     }
   });
   
-  //전체 영상 중, 현재 보고있는 영상 태그를 가지고 있는 비디오는 모두 추천 리스트로 등록
   allVideos.forEach(videoItem=>{
     const videoTags = videoItem.getElementsByClassName('videoTag')[0].textContent;
 
@@ -262,40 +250,33 @@ async function setSameTagVideo(){
 function initTagMenu(tags){
   const topMenu = document.getElementsByClassName('recommend-topMenu')[0];
   
-  // 전체 선택 버튼 추가
   const allButton = document.createElement('a');
   allButton.classList.add('Top-Menu-All');
   allButton.classList.add('active');
   allButton.textContent = 'All';
   allButton.href = "";
 
-  // 추천 선택 버튼 추가
   const recommendButton = document.createElement('a');
   recommendButton.classList.add('Top-Menu-All');
   recommendButton.textContent = 'Recommend';
   recommendButton.href = "";
-
   recommendButton.style.width = "100px";
 
-  // 좋아요 기준 버튼 추가
   const likesButton = document.createElement('a');
   likesButton.classList.add('Top-Menu-All');
   likesButton.textContent = 'Likes';
   likesButton.href = "";
 
-  // 최신 순 선택 버튼 추가
   const dateButton = document.createElement('a');
   dateButton.classList.add('Top-Menu-All');
   dateButton.textContent = 'Date';
   dateButton.href = "";
 
-  // 조회수 순 선택 버튼 추가
   const viewButton = document.createElement('a');
   viewButton.classList.add('Top-Menu-All');
   viewButton.textContent = 'Views';
   viewButton.href = "";
 
-  //태그에 대한 기능 추가 (전체 보기 > id 순서로 정렬)
   allButton.addEventListener("click", function(e){
       e.preventDefault();
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
@@ -314,10 +295,8 @@ function initTagMenu(tags){
       allVideos.forEach(videoItem=>{
         videoContainer.appendChild(videoItem);
     });
-
   });
 
-  //추천 탭에 대한 이벤트 추가
   recommendButton.addEventListener("click", async function(e){
     e.preventDefault();
     const currentVideoId = window.location.search.split('=');
@@ -327,7 +306,6 @@ function initTagMenu(tags){
     allVideos.forEach(video=>{
       video.style.display = 'none';
 
-      //자신 제외
       if(video.getElementsByClassName('videoId')[0].textContent == currentVideoId[1]){
         return;
       }
@@ -364,7 +342,6 @@ function initTagMenu(tags){
       });
   });
 
-  //태그에 대한 기능 추가 (날짜 순으로 노출)
   dateButton.addEventListener("click", function(e){
       e.preventDefault();
       const videoContainer = document.getElementById('video-list');
@@ -385,7 +362,6 @@ function initTagMenu(tags){
       });
   });
 
-  //태그에 대한 기능 추가 (조회수 순으로 노출)
   viewButton.addEventListener("click", function(e){
       e.preventDefault();
       const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
@@ -405,7 +381,6 @@ function initTagMenu(tags){
       });
   });
 
-  //기본 정렬버튼 추가 (전체 ~ 조회수 순)
   topMenu.appendChild(allButton);
   topMenu.appendChild(recommendButton);
   topMenu.appendChild(likesButton);
@@ -423,5 +398,8 @@ function initTagMenu(tags){
 }
 }
 
-getVideoData();
-getVideoList();
+//비디오 데이터 가져오고 > 리스트 출력 수행
+if(window.location.search.indexOf('video_id=') > 0){
+  getVideoData();
+  getVideoList();
+}

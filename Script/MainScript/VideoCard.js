@@ -1,11 +1,11 @@
-import * as common from "./commonModule.js";
+import * as common from "/Script/CommonPage/CommonModule.js";
 
 // 전체 태그를 담는 변수
 const videoTags = [];
 let uniqueTag;
 
 //비디오 리스트 가져오기
-function getVideoList(callback){
+function getVideoList(){
     if(window.videoListRes != null){
         parseJsondata(window.videoListRes);
         return;
@@ -17,10 +17,6 @@ function getVideoList(callback){
         if(xhr.status === 200){
             window.videoListRes = JSON.parse(xhr.responseText);
             parseJsondata(window.videoListRes);
-
-            //페이지 호출 이후 추가 작업 필요할 때 콜백 사용
-            if(callback) callback();
-
         } else{
             console.error('Error:', xhr.status);
         }
@@ -36,9 +32,6 @@ function getVideoList(callback){
 //영상 제목, 영상 아이디, 날짜, 게시자, 썸네일 등등을 가져와서 처리
 function parseJsondata(results){
     const videoList = document.getElementById('Video-Container');
-    // if(!videoList){
-    //     return;
-    // }
 
     if(!results || results.length ===0){
         videoList.textContent = "No videos found.";
@@ -53,7 +46,6 @@ function parseJsondata(results){
         });
     })
 
-    //태그들 가져오기
     uniqueTag = [... new Set(videoTags)];
     initTagMenu(uniqueTag);
 }
@@ -66,45 +58,37 @@ function changeImgToVideo(img){
 function initTagMenu(tags){
     const topMenu = document.getElementsByClassName('Top-Menu')[0];
     
-    // 전체 선택 버튼 추가
     const allButton = document.createElement('a');
     allButton.classList.add('Top-Menu-All');
     allButton.classList.add('active');
     allButton.textContent = 'All';
     allButton.href = "";
 
-    // 좋아요 기준 버튼 추가
     const likesButton = document.createElement('a');
     likesButton.classList.add('Top-Menu-All');
     likesButton.textContent = 'Likes';
     likesButton.href = "";
 
-    // 최신 순 선택 버튼 추가
     const dateButton = document.createElement('a');
     dateButton.classList.add('Top-Menu-All');
     dateButton.textContent = 'Date';
     dateButton.href = "";
 
-    // 조회수 순 선택 버튼 추가
     const viewButton = document.createElement('a');
     viewButton.classList.add('Top-Menu-All');
     viewButton.textContent = 'Views';
     viewButton.href = "";
 
-    //태그에 대한 기능 추가 (전체 보기 -> id 정렬)
     allButton.addEventListener("click", function(e){
         e.preventDefault();
         const videoContainer = document.getElementById('Video-Container');
         const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
         
-
         allVideos.sort((a,b) => {
             const aId = parseInt(a.getElementsByClassName('videoId')[0].textContent);
             const bId = parseInt(b.getElementsByClassName('videoId')[0].textContent);
-
             return aId - bId;
         });
-
 
         allVideos.forEach(videoItem=>{
             videoItem.style.display = 'block';
@@ -112,18 +96,14 @@ function initTagMenu(tags){
         });
     });
 
-    //태그에 대한 기능 추가 (좋아요 순으로 노출)
     likesButton.addEventListener("click", function(e){
         e.preventDefault();
-
         const videoContainer = document.getElementById('Video-Container');
-
         const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
         allVideos.sort((a,b) => {
             const aLikes = parseInt(a.getElementsByClassName('likesCount')[0].textContent);
             const bLikes = parseInt(b.getElementsByClassName('likesCount')[0].textContent);
-
             return bLikes - aLikes;
         });
         allVideos.forEach(videoItem=>{
@@ -135,12 +115,8 @@ function initTagMenu(tags){
     //태그에 대한 기능 추가 (날짜 순으로 노출)
     dateButton.addEventListener("click", function(e){
         e.preventDefault();
-
         const videoContainer = document.getElementById('Video-Container');
-
         const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
-        const now = new Date();
-        
 
         allVideos.sort((a,b) => {
             const atime = new Date(a.getElementsByClassName('timeData')[0].textContent);
@@ -148,6 +124,7 @@ function initTagMenu(tags){
 
             return btime - atime;
         });
+
         allVideos.forEach(videoItem=>{
             videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
@@ -157,17 +134,15 @@ function initTagMenu(tags){
     //태그에 대한 기능 추가 (조회수 순으로 노출)
     viewButton.addEventListener("click", function(e){
         e.preventDefault();
-
         const videoContainer = document.getElementById('Video-Container');
-
         const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
 
         allVideos.sort((a,b) => {
             const aLikes = parseInt(a.getElementsByClassName('viewsCount')[0].textContent);
             const bLikes = parseInt(b.getElementsByClassName('viewsCount')[0].textContent);
-
             return bLikes - aLikes;
         });
+
         allVideos.forEach(videoItem=>{
             videoItem.style.display = 'block';
             videoContainer.appendChild(videoItem);
@@ -191,21 +166,17 @@ function initTagMenu(tags){
             e.preventDefault();
             const tagKey = tagButton.textContent;
             const allVideos = Array.from(document.getElementsByClassName("Video-Item"));
-            
-            
             allVideos.forEach(videoItem=>{
                 videoItem.style.display = 'block';
             });
 
             allVideos.forEach(videoItem=>{
                 const videoTag = videoItem.getElementsByClassName('videoTag')[0];
-                
                 if(videoTag.textContent.indexOf(tagKey) < 0){
                     videoItem.style.display = 'none';
                 }
             });
         });
-
         topMenu.appendChild(tagButton);
     });
 
@@ -220,4 +191,6 @@ function initTagMenu(tags){
     }
 }
 
-getVideoList();
+if((window.location.search.indexOf('video_id=') < 0) && (window.location.search.indexOf('channel_id=') < 0)  && (window.location.search.indexOf('q=') < 0)){
+    getVideoList();
+}

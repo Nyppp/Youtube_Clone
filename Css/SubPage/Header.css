@@ -33,7 +33,7 @@ nav {
 #Hamburger {
     width: 40px;
     height: 40px;
-    background-image: url(../resources/images/nav/yt/hamburger.png);
+    background-image: url(/Resources/Images/Nav/Logo/Hamburger.png);
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -44,7 +44,7 @@ nav {
 #Logo {
     width: 120px;
     height: 20px;
-    background-image: url(../resources/images/nav/yt/logo.png);
+    background-image: url(/Resources/Images/Nav/Logo/LogoDark.png);
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -83,7 +83,7 @@ nav {
     width: 64px;
     height: 40px;
     cursor: pointer;
-    background-image: url(../resources/images/nav/searchbox/search.png);
+    background-image: url(/Resources/Images/Nav/Searchbox/Search.png);
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -95,7 +95,7 @@ nav {
     height: 40px;
     cursor: pointer;
     background-color: #000000;
-    background-image: url(../resources/images/nav/searchbox/mic.png);
+    background-image: url(/Resources/Images/Nav/Searchbox/Mic.png);
     background-position: center center;
     background-repeat: no-repeat;
     border: none;
@@ -123,7 +123,7 @@ nav {
     border: none;
     background-color: transparent;
     filter: invert(100%);
-    background-image: url(../resources/images/nav/profile/brightness-high-fill.svg);
+    background-image: url(/Resources/Images/Nav/Profile/brightness-high-fill.svg);
     background-size: 20px 20px;
 }
 #toggle-theme:hover {
@@ -137,7 +137,7 @@ nav {
     background-position: center center;
     background-repeat: no-repeat;
     border: none;
-    background-image: url(../resources/images/nav/profile/create.png);
+    background-image: url(/Resources/Images/Nav/Profile/Create.png);
     background-size: 20px 14px;
 }
 #Create:hover {
@@ -151,7 +151,7 @@ nav {
     background-position: center center;
     background-repeat: no-repeat;
     border: none;
-    background-image: url(../resources/images/nav/profile/apps.png);
+    background-image: url(/Resources/Images/Nav/Profile/Apps.png);
 }
 #Apps:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -164,7 +164,7 @@ nav {
     background-position: center center;
     background-repeat: no-repeat;
     border: none;
-    background-image: url(../resources/images/nav/profile/notifications.png);
+    background-image: url(/Resources/Images/Nav/Profile/Notifications.png);
 }
 #Notifications:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -178,7 +178,7 @@ nav {
     background-repeat: no-repeat;
     border: none;
     border-radius: 32px;
-    background-image: url(../resources/images/nav/profile/user.png);
+    background-image: url(/Resources/Images/Nav/Profile/User.png);
     background-size: cover;
 }
 
