@@ -9,22 +9,20 @@ let commentCountDiv;
 let commentCount = 3;
 
 function initSearchElement(){
-  window.onload = function(){
-    inputComment = document.getElementById("commentInput");
-    buttonComment = document.getElementById("enterBtn");
-    newComment = document.getElementById("newComment");
-    commentCountDiv = document.getElementById("commentCount");
+  inputComment = document.getElementById("commentInput");
+  buttonComment = document.getElementById("enterBtn");
+  newComment = document.getElementById("newComment");
+  commentCountDiv = document.getElementById("commentCount");
 
-    inputComment.addEventListener("keyup", function(e) {
-        responseBtn();
-        
-        if (e.key === "Enter" && !buttonComment.disabled) {
-          addComment(e);
-        }
-    });
+  inputComment.addEventListener("keyup", function(e) {
+      responseBtn();
+      
+      if (e.key === "Enter" && !buttonComment.disabled) {
+        addComment(e);
+      }
+  });
 
-    buttonComment.addEventListener("click", addComment);
-  }
+  buttonComment.addEventListener("click", addComment);
 }
 
 // 버튼 활성화 함수
@@ -201,6 +199,4 @@ for (let i = 0; i < oldLikeBtns.length; i++) {
   });
 }
 
-setTimeout(() => {
-  initSearchElement();
-}, 2000);
+initSearchElement();

@@ -63,7 +63,6 @@ function displayChannelInfo(info){
 //비디오 리스트 출력 함수
 function displayChannelVideoList(results){
     const videoGrid = document.getElementsByClassName('video-grid')[0];
-    console.log(videoGrid);
     videoGrid.innerHTML = "";
 
     let maxView = -1;

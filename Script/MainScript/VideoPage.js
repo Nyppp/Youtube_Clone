@@ -1,5 +1,4 @@
 import * as common from "/Script/CommonPage/CommonModule.js";
-import('../SubScript/Comment.js');
 
 const videoTags = [];
 let uniqueTag;
@@ -193,15 +192,14 @@ async function getVideoList() {
 
 // 사이드 비디오 리스트 출력
 function parseJsonVideoListdata(videoListData) {
-  const videoList = document.getElementById('video-list');
-  videoList.innerHTML = '';
-
-  if (!videoListData || videoListData.length === 0) {
-    videoList.textContent = "No videos found.";
-    return;
-  }
-
-  common.drawList(videoList, videoListData);
+  let videoList = document.getElementById('video-list');
+  const interval = setInterval(()=>{
+    if(videoList){
+        clearInterval(interval);
+        common.drawList(videoList, videoListData);
+    }
+    videoList = document.getElementById('video-list');
+  }, 100);
 
   videoListData.forEach(function(video){
     video.tags.forEach(function(tag){

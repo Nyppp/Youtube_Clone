@@ -41,8 +41,6 @@ function parseJsondata(results){
             videoList = document.getElementById('Video-Container');
         }, 100);
 
-    common.drawList(videoList, results);
-
     results.forEach(function(video){
         video.tags.forEach(function(tag){
             videoTags.push(tag);
@@ -51,10 +49,6 @@ function parseJsondata(results){
 
     uniqueTag = [... new Set(videoTags)];
     initTagMenu(uniqueTag);
-}
-
-function changeImgToVideo(img){
-    console.log('프리뷰 재생');
 }
 
 // 비디오 카드 페이지 상단 > 태그 버튼 초기화 함수

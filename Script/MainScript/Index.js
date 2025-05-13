@@ -1,7 +1,5 @@
 
-import('./VideoCard.js');
-import('./VideoPage.js');
-import('./Channel.js');
+
 
 // 비디오 리스트 정보를 담는 글로벌 변수
 window.videoListRes = null;
@@ -36,7 +34,7 @@ function setVideoCardPage(){
     .then(res => res.text())
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
-        
+        import('./VideoCard.js');
     });
 }
 
@@ -46,7 +44,8 @@ function setVideoPlayerPage(){
     .then(res => res.text())
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
-        
+        import('./VideoPage.js');
+        import('../SubScript/Comment.js');
     });
 }
 
@@ -56,7 +55,7 @@ function setChannelPage(){
     .then(res => res.text())
     .then(html=>{
         document.getElementById('main-contentbox').innerHTML = html;
-        
+        import('./Channel.js');
     });
 }
 
