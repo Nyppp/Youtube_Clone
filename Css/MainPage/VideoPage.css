@@ -395,7 +395,7 @@ button:hover{
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
-    background-image: url(../resources/images/nav/profile/user.png);
+    background-image: url(/Resources/Images/VideoPage/user.png);
 }
 
 .input-wrapper {
