@@ -196,31 +196,31 @@ button:hover{
 .buttonArea > .likes-button{
     width: 18px;
     height: 17px;
-    background-image: url(../resources/images/video_page/Liked.svg);
+    background-image: url(/Resources/Images/VideoPage/Liked.svg);
 }
 
 .buttonArea > .hates-button{
     width: 18px;
     height: 17px;
-    background-image: url(../resources/images/video_page/Hates.svg);
+    background-image: url(/Resources/Images/VideoPage/Hates.svg);
 }
 
 .buttonArea > .share-button{
     width: 20px;
     height: 18px;
-    background-image: url(../resources/images/video_page/Share.svg);
+    background-image: url(/Resources/Images/VideoPage/Share.svg);
 }
 
 .buttonArea > .save-button{
     width: 20px;
     height: 10px;
-    background-image: url(../resources/images/video_page/Save.svg);
+    background-image: url(/Resources/Images/VideoPage/Save.svg);
 }
 
 .buttonArea > .more-button{
     width: 15px;
     height: 3px;
-    background-image: url(../resources/images/video_page/More.svg);
+    background-image: url(/Resources/Images/VideoPage/More.svg);
 }
 
 /*======== 비디오 설명 공간 ========*/
@@ -360,7 +360,7 @@ button:hover{
     box-sizing: border-box;
     gap:10px;
     background-color: transparent;
-    background-image: url(../resources/images/video_page/Dropdown.svg);
+    background-image: url(/Resources/Images/VideoPage/Dropdown.svg);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -387,6 +387,8 @@ button:hover{
     width: 48px;
     height: 48px;
     gap:10px;
+    background-image: url(/Resources/Images/VideoPage/User-Avatar.svg);
+    border-radius: 40px;
     border-radius: 32px;
     overflow: hidden;
     background-position: center center;
@@ -460,6 +462,7 @@ button:hover{
 .profileImgClass {
     width: 48px;
     height: 48px;
+    background-image: url(/Resources/Images/VideoPage/User-Avatar.svg);
     gap:10px;
     border-radius: 32px;
     overflow: hidden;
@@ -467,7 +470,6 @@ button:hover{
     background-repeat: no-repeat;
     background-size: cover;
     border: none;
-    background-image: url(../resources/images/nav/profile/user.png);
 }
 
 .commentBoxClass {
@@ -525,10 +527,10 @@ button:hover{
     cursor: pointer;
 }
 .likeBtnClass {
-    background-image: url(../resources/images/video_page/Liked.svg);
+    background-image: url(/Resources/Images/VideoPage/Liked.svg);
 }
 .hateBtnClass {
-    background-image: url(../resources/images/video_page/Hates.svg);
+    background-image: url(/Resources/Images/VideoPage/Hates.svg);
 }
 
 .likeCountClass, .hateCountClass {
@@ -626,13 +628,13 @@ button:hover{
 .toolbar-container > .like-button{
     width: 16px;
     height: 16px;
-    background-image: url(../resources/images/video_page/Liked.svg);
+    background-image: url(/Resources/Images/VideoPage/Liked.svg);
 }
 
 .toolbar-container > .hate-button{
     width: 16px;
     height: 16px;
-    background-image: url(../resources/images/video_page/Hates.svg);
+    background-image: url(/Resources/Images/VideoPage/Hates.svg);
 }
 
 .likeCount, .hateCount{

@@ -1,7 +1,6 @@
-import * as common from "./commonModule.js";
-//비디오 리스트 가져오기
+import * as common from "../CommonPage/CommonModule.js";
+
 function getChannelInfo(){
-    //url 파라미터 가져오고, id값만 추출( = 우측에 오는 값만 사용 > channel_id[1])
     const channel_id = window.location.search.split('=');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channel_id[1]}`, true);
@@ -11,7 +10,6 @@ function getChannelInfo(){
             let response = JSON.parse(xhr.responseText);
 
             displayChannelInfo(response);
-            //다음 api 호출 동작 중, 채널 이름 가져오는 부분 위해 첫 api 처리 완료된 시점에 수행
             getChannelVideoList();
         } else{
             console.error('Error:', xhr.status);
@@ -26,7 +24,6 @@ function getChannelInfo(){
 }
 
 function getChannelVideoList(){
-    //url 파라미터 가져오고, id값만 추출( = 우측에 오는 값만 사용 > channel_id[1])
     const channel_id = window.location.search.split('=');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', `https://www.techfree-oreumi-api.ai.kr/video/getChannelVideoList?channel_id=${channel_id[1]}`, true);
@@ -106,4 +103,6 @@ function displayMainVideo(video){
     mainVideoDesc.textContent = video.description;
 }
 
-getChannelInfo();
+if(window.location.search.indexOf('channel_id=') > 0){
+    getChannelInfo();
+}

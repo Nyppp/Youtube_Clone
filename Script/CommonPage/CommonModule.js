@@ -39,7 +39,6 @@ function timeAgo(dateString) {
     return rtf.format(-diffInYears, "year");
 }
 
-
 // 조회수 표기 > 1000을 넘기면 K 붙이기
 function setViewUnit(viewCount){
     if(viewCount > 1000){
@@ -60,7 +59,6 @@ function getChannelInfo(channelId, callback){
         if(xhr.status === 200){
             const response = JSON.parse(xhr.responseText);
             
-            //페이지 호출 이후 추가 작업 필요할 때 콜백 사용
             if(callback) callback(response.channel_name, response.channel_profile);
             
         } else{
@@ -76,7 +74,6 @@ function getChannelInfo(channelId, callback){
 
 // 검색 결과 > 렌더링 하는 함수 (비디오 카드 형식으로 렌더링 하는 곳에서 사용)
 function drawList(videoList, results){
-    // 기존 비디오 목록 비우기
     videoList.innerHTML = '';
     
     if (!results || results.length === 0) {
@@ -85,14 +82,12 @@ function drawList(videoList, results){
     }
     
     results.forEach(function(video) {
-        // 비디오 박스 전체영역
         const videoItem = document.createElement('div');
         videoItem.classList.add('Video-Item');
         
-        // 썸네일 영역
         const thumbnailBox = document.createElement('a');
         thumbnailBox.classList.add('Thumbnail');
-        thumbnailBox.href = `?video_id=${video.id}`; // 링크 추가
+        thumbnailBox.href = `?video_id=${video.id}`;
         
         const thumbnailImg = document.createElement('img');
         thumbnailImg.classList.add('Thumbnail-Image');
@@ -109,13 +104,12 @@ function drawList(videoList, results){
         const videoTime = document.createElement('p');
         videoTime.classList.add('VideoTime');
         
-        // 비디오 정보 영역
         const videoInfoBox = document.createElement('div');
         videoInfoBox.classList.add('Video-Info');
         
         const videoProfile = document.createElement('a');
         videoProfile.classList.add('Video-Profile');
-        videoProfile.href = `?channel_id=${video.channel_id}`; // 링크 추가
+        videoProfile.href = `?channel_id=${video.channel_id}`;
         
         const profileImg = document.createElement('img');
         profileImg.classList.add('Video-Profile_image');
@@ -125,12 +119,12 @@ function drawList(videoList, results){
         
         const videoTitle = document.createElement('a');
         videoTitle.classList.add('Video-Title');
-        videoTitle.href = `?video_id=${video.id}`; // 링크 추가
+        videoTitle.href = `?video_id=${video.id}`;
         videoTitle.textContent = video.title;
         
         const videoChannel = document.createElement('a');
         videoChannel.classList.add('Video-Channel');
-        videoChannel.href = `?channel_id=${video.channel_id}`; // 링크 추가
+        videoChannel.href = `?channel_id=${video.channel_id}`;
         
         const uploadDate = document.createElement('a');
         uploadDate.classList.add('Time');
@@ -141,7 +135,6 @@ function drawList(videoList, results){
             profileImg.src = channelProfile;
         });
 
-        // 정렬을 위한 데이터 삽입
         const videoIdData = document.createElement('p');
         videoIdData.textContent = video.id;
         videoIdData.style.display = "none";
@@ -178,18 +171,14 @@ function drawList(videoList, results){
         videoItem.appendChild(videoTags);
         videoItem.appendChild(videoId);
 
-        // 비디오 설명 영역
         videoDesc.appendChild(videoTitle);
         videoDesc.appendChild(videoChannel);
         videoDesc.appendChild(uploadDate);
         
-        // 비디오 설명 + 채널 프로필 이미지 영역
         videoProfile.appendChild(profileImg);
-        
         videoInfoBox.appendChild(videoProfile);
         videoInfoBox.appendChild(videoDesc);
         
-        // 썸네일 영역
         thumbnailBox.appendChild(thumbnailImg);
         thumbnailBox.appendChild(videoIdData);
         thumbnailBox.appendChild(videoPreview);
@@ -206,7 +195,6 @@ function drawList(videoList, results){
             thumbnailBox.lastChild.style.display = "none";
         });
         
-        // 전체 구조
         videoItem.appendChild(thumbnailBox);
         videoItem.appendChild(videoInfoBox);
         
@@ -220,24 +208,15 @@ function delay(ms) {
 
 //유사도 계산 함수 (api 호출 + 유사도 계산)
 async function getSimilarity(videoId, allVideos, skipVideos){
-
-    let startTime = window.performance.now();
     let firstTags;
-
     let allTags = [];
     let allUniqueTags
-
     let targetVideos = [];
 
-    //현재 보고있는 비디오의 태그와, 다른 비디오들 태그 유사도 계산
-    //태그 중 단 한개라도 일치하는 비디오는 이미 추천 리스트 올라갔으니 계산 제외(skipVideos)
-
     allVideos.forEach(video=>{
-        //현재 보고있는 비디오의 태그들 추출
         if(video.id == videoId){
             firstTags = video.tags;
         }
-
         if(!skipVideos.includes(String(video.id))){
             targetVideos.push(video);
         }
@@ -249,7 +228,6 @@ async function getSimilarity(videoId, allVideos, skipVideos){
         })
     })
 
-    //전체 태그 중복제거
     allUniqueTags = [... new Set(allTags)];
     console.log(allUniqueTags);
 
@@ -265,19 +243,11 @@ async function getSimilarity(videoId, allVideos, skipVideos){
         }
 
         await delay(100);
-        //api 호출 + 유사도 평균값 계산하여 출력
         let sim = await calcSimilarity(firstTags[0], secondTag);
-        
-        //두 단어 사이 distance가 5 이하인 경우 추천 영상으로 선정
         if (sim <= 5){
-            console.log(secondTag + "와 유사도 distance : " + sim);
             simTags.push(secondTag);
         }
     }
-    let endTime = window.performance.now();
-
-    console.log("유사도 계산 완료, 걸린 시간 : " + (endTime - startTime) + "\n" + simTags);
-
     return simTags;
 }
 
@@ -303,7 +273,6 @@ async function calcSimilarity(firstWord, secondWord){
                     const responseData = JSON.parse(xhr.responseText);
                     const wordRelInfo = responseData.return_object['WWN WordRelInfo'].WordRelInfo.Distance;
 
-                    //결과값을 내려줄 때 까지 대기 > promise객체
                     resolve(wordRelInfo);
                     } catch(e){
                         reject(e);

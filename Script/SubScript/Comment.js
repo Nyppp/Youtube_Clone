@@ -1,22 +1,31 @@
 // 댓글 추가
-import { timeAgo } from "./commonModule.js";
+import { timeAgo } from "/Script/CommonPage/CommonModule.js";
 
-const inputComment = document.getElementById("commentInput");
-const buttonComment = document.getElementById("enterBtn");
-const newComment = document.getElementById("newComment");
-const commentForm = document.getElementsByClassName("comment-addArea")[0];
-const commentCountDiv = document.getElementById("commentCount");
+
+let inputComment;
+let buttonComment;
+let newComment;
+let commentCountDiv;
 let commentCount = 3;
 
-inputComment.addEventListener("keyup", function(e) {
-    responseBtn();
-    
-    if (e.key === "Enter" && !buttonComment.disabled) {
-      addComment(e);
-    }
-});
+function initSearchElement(){
+  window.onload = function(){
+    inputComment = document.getElementById("commentInput");
+    buttonComment = document.getElementById("enterBtn");
+    newComment = document.getElementById("newComment");
+    commentCountDiv = document.getElementById("commentCount");
 
-buttonComment.addEventListener("click", addComment);
+    inputComment.addEventListener("keyup", function(e) {
+        responseBtn();
+        
+        if (e.key === "Enter" && !buttonComment.disabled) {
+          addComment(e);
+        }
+    });
+
+    buttonComment.addEventListener("click", addComment);
+  }
+}
 
 // 버튼 활성화 함수
 function responseBtn() {
@@ -36,7 +45,6 @@ function responseBtn() {
 function addComment(e) {
     e.preventDefault();
 
-    // 태그 추가
     const comment = document.createElement("div");
     const profileImg = document.createElement("div");
     const commentBox = document.createElement("div");
@@ -54,7 +62,6 @@ function addComment(e) {
     const replyBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
 
-    // 태그 클래스 추가
     comment.classList.add("commentClass");
     profileImg.classList.add("profileImgClass");
     commentBox.classList.add("commentBoxClass");
@@ -80,7 +87,6 @@ function addComment(e) {
   replyBtn.innerHTML = "REPLY";
   deleteBtn.innerHTML = "DELETE";
 
-  // 요소 추가
   newComment.insertBefore(comment, newComment.firstChild);
   comment.appendChild(profileImg);
   comment.appendChild(commentBox);
@@ -103,29 +109,24 @@ function addComment(e) {
   hateContainer.appendChild(hateBtn);
   hateContainer.appendChild(hateCount);
 
-// 댓글 등록 후 입력창 리셋, 버튼 비활성화
   inputComment.value = "";
   buttonComment.style.backgroundColor = "#181818";
   buttonComment.disabled = true;
 
-  updateCommentCount(1); // 댓글 수 증가
+  updateCommentCount(1);
 
-  // 삭제 기능
   deleteBtn.addEventListener("click", function() {
     comment.remove();
-    updateCommentCount(-1); // 댓글 수 감소
+    updateCommentCount(-1);
   });
 
-  // 토글 상태 저장
   let liked = false;
   let hated = false;
 
-  // 좋아요 버튼 클릭
   likeBtn.addEventListener("click", function() {
     if (!liked) {
       likeCount.innerText = parseInt(likeCount.innerText) + 1;
       liked = true;
-      // 싫어요가 눌려있다면 초기화
       if (hated) {
         hateCount.innerText = parseInt(hateCount.innerText) - 1;
         hated = false;
@@ -136,12 +137,10 @@ function addComment(e) {
     }
   });
 
-  // 싫어요 버튼 클릭
   hateBtn.addEventListener("click", function() {
     if (!hated) {
       hateCount.innerText = parseInt(hateCount.innerText) + 1;
       hated = true;
-      // 좋아요가 눌려있다면 초기화
       if (liked) {
         likeCount.innerText = parseInt(likeCount.innerText) - 1;
         liked = false;
@@ -201,3 +200,7 @@ for (let i = 0; i < oldLikeBtns.length; i++) {
     }
   });
 }
+
+setTimeout(() => {
+  initSearchElement();
+}, 2000);
