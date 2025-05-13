@@ -386,19 +386,26 @@ button:hover{
 .userProfile{
     width: 48px;
     height: 48px;
-    padding-right: 16px;
     gap:10px;
     background-image: url(/Resources/Images/VideoPage/User-Avatar.svg);
     border-radius: 40px;
+    border-radius: 32px;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    background-image: url(../resources/images/nav/profile/user.png);
 }
 
 .input-wrapper {
+    width: 564px;
     position: relative;
     flex-grow: 1;
 }
 
 #commentInput{
-    width: 584px;
+    width: 564px;
     background-color: #181818;
     color: #ffffff;
     border: none;
@@ -441,7 +448,9 @@ button:hover{
 }
 
 .commentProfile{
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 40px;
 }
 
 /*======== 새로운 코멘트 리스트 ========*/
@@ -453,14 +462,20 @@ button:hover{
 .profileImgClass {
     width: 48px;
     height: 48px;
-    border-radius: 40px;
     background-image: url(/Resources/Images/VideoPage/User-Avatar.svg);
+    gap:10px;
+    border-radius: 32px;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
 }
 
 .commentBoxClass {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 564px;
     height: 100%;
 }
 
@@ -483,7 +498,7 @@ button:hover{
 }
 
 .commentTextClass {
-    width: 100%;
+    width: 564px;
     padding: 2px 0px 2px 0px;
     gap: 10px;
 }

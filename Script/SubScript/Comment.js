@@ -46,7 +46,7 @@ function addComment(e) {
     e.preventDefault();
 
     const comment = document.createElement("div");
-    const profileImg = document.createElement("img");
+    const profileImg = document.createElement("div");
     const commentBox = document.createElement("div");
     const commentInfo = document.createElement("div");
     const userID = document.createElement("span");

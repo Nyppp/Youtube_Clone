@@ -22,6 +22,14 @@
 </table>
 
 ---
+## 📺 프로젝트 한눈에 보기
+
+- 시연 영상 링크 : https://youtu.be/8xqlqtgY2LY
+- 배포 페이지 링크 : https://youtube-clone-xl00.onrender.com/
+
+---
+
+---
 ## 🛠️ 사용 기술
 
 - **사용 언어**: HTML, CSS, JavaScript(vanilla JS)
