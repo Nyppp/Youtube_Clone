@@ -734,41 +734,41 @@ button:hover{
     font-weight: 400;
 }
 
-.Thumbnail{
+#video-list .Thumbnail{
     display: block;
 }
 
 
-.Thumbnail, .Thumbnail-Image {
+#video-list .Thumbnail, .Thumbnail-Image {
     width: 168px;
     height: 94px;
 }
 
-.Video-Profile_image {
+#video-list .Video-Profile_image {
     display: none;
 }
 
-.Video-Item{
+#video-list .Video-Item{
     display: flex;  
 
     gap: 10px;
 }
 
-.Video-Description{
+#video-list .Video-Description{
     display: flex;
     flex-direction: column;
 }
 
-.Video-Info{
+#video-list .Video-Info{
     width: 226px;
 }
 
-.video-preview{
+#video-list .video-preview{
     width: 168px;
     height: 94px;
 }
 
-.Video-Title{
+#video-list .Video-Title{
     color: #fff;
     font-size: 14px;
     font-weight: 400;
@@ -780,7 +780,7 @@ button:hover{
     overflow: hidden;
 }
 
-.Video-Channel, .Time{
+#video-list .Video-Channel, .Time{
     color: #aaaaaa;
     font-size: 12px;
     line-height: 18px;

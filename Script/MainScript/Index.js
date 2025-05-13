@@ -1,11 +1,8 @@
 
-
-
 // 비디오 리스트 정보를 담는 글로벌 변수
 window.videoListRes = null;
 
-
-function initDisplay(callback){
+function initDisplay(){
     setHeaderPage();
     setSidePage();
 }

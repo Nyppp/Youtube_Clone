@@ -46,17 +46,17 @@
         min-width: 320px;
     }
 
-    .Video-Item{
+    #Video-Container .Video-Item{
         flex-direction: column !important;
         align-items: center !important;
     }
 
-    .Video-Description{
+    #Video-Container .Video-Description{
         width: 226px !important;
     }
 }
 
-.Video-Item {
+#Video-Container .Video-Item {
     display: flex;
     flex-direction: column;
 
@@ -66,15 +66,15 @@
     width: 276px;
     gap : 10px;
 }
-.Thumbnail {
+#Video-Container .Thumbnail {
     text-decoration: none;
 }
-.Thumbnail-Image {
+#Video-Container .Thumbnail-Image {
     width: 276px;
     height: 155px;
     object-fit: content;
 }
-.VideoTime {
+#Video-Container .VideoTime {
     position: relative;
     display: flex;
     align-items: center;
@@ -89,18 +89,18 @@
     height: 18px;
     margin: 0px;
 }
-.Video-Info {
+#Video-Container .Video-Info {
     display: flex;
     gap: 10px;
     margin-top: 13px;
 }
-.Video-Profile {
+#Video-Container .Video-Profile {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 }
 
-.Video-Profile_image{
+#Video-Container .Video-Profile_image{
     border-radius: 24px;
     width: 40px;
     height: 40px;
@@ -108,28 +108,28 @@
     object-fit: content;
 }
 
-.Video-Description {
+#Video-Container .Video-Description {
     display: flex;
     flex-direction: column;
     gap: 5px;
     width: 100%;
 }
-.Video-Title {
+#Video-Container .Video-Title {
     color: #ffffff;
     font-size: 15px;
     text-decoration: none;
 }
-.Video-Channel {
+#Video-Container .Video-Channel {
     color: #AAAAAA;
     font-size: 14px;
     text-decoration: none;
     display: block;
     line-height: 1;
 }
-.Video-Channel:hover {
+#Video-Container .Video-Channel:hover {
     color: #ffffff;
 }
-.Time {
+#Video-Container .Time {
     color: #AAAAAA;
     font-size: 14px;
     text-decoration: none;
@@ -137,7 +137,7 @@
     line-height: 0.4;
 }
 
-.video-preview{
+#Video-Container .video-preview{
     width: 276px;
     height: 155px;
 }
