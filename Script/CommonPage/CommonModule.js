@@ -254,7 +254,7 @@ async function getSimilarity(videoId, allVideos, skipVideos){
 async function calcSimilarity(firstWord, secondWord){
     return new Promise((resolve, reject)=> {
         const openApiURL = 'https://www.techfree-oreumi-api.ai.kr/WiseWWN/WordRel';
-        const access_key = '34f8f74f-733c-4b95-b8a4-2998d4580dbd';
+        const access_key = '';
         const requestJson = {
             argument: {
                 first_word: firstWord,
